@@ -1,0 +1,22 @@
+$asideWidth:220px;
+main{
+    .aside{
+        width : $asideWidth;
+        height : 100vh;
+        padding : 15px;
+
+        position:absolute;
+        left:0;
+        top:0;
+        border : 1px solid;
+        background-color: #052563;
+    }
+
+    .main-section{
+        width:calc(100vw - $asideWidth);
+        height :100vh;
+        background-color: red;
+        position:relative;
+        left:$asideWidth;
+    }
+}
