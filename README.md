@@ -1,27 +1,11 @@
-# LMS FN
+# CCTV_WEATHER_PROJECT
 
----
-DOCUMENT
----
+도시침수시스템을 벤치마킹한 싸이트개발(TITLE 미정)
 
+|참고링크|
 |-|
-|-|
-|[DROW.io](https://app.diagrams.net/#G13sbkqpnw1ia5TnyOE14dqBs5GXnf9gmr#%7B%22pageId%22%3A%22Jf6DyvONHcGiREtb4FtZ%22%7D)|
-|[FIGMA STROYBOARD](https://www.figma.com/board/WL2cw6ZWMttQlnUG6mwiW7/LMS_PROJECT_BOARD?node-id=0-1&node-type=canvas&t=CAAckVbGQqnmAJVj-0)|
-|[FIGMA DISIGN](https://www.figma.com/design/QciU2qXGtsO0GYLazdOdoX/TEAM_PROJECT_LMS?node-id=0-1&node-type=canvas&t=aTYUvSXsC1SnEM13-0)|
-
-
----
-벤치마킹 LIST
----
-
----
-추가할 것들
----
-
-```
---
-```
-
-
-
+|[도시침수 통합시스템 SITE](https://safecity.busan.go.kr/#/)|
+|[요구사항정의서](https://docs.google.com/spreadsheets/d/13ftdJABGOCcfgqyZmVb6ACPewhKZQpx-vGIe2M-YJes/edit?gid=0#gid=0)|
+|[USECASE]()|
+|[스토리보드_FIGMA](https://www.figma.com/design/7nj56nXh7WCqTeXafuID8p/%EC%8A%A4%ED%86%A0%EB%A6%AC%EB%B3%B4%EB%93%9C?node-id=0-1&node-type=canvas&t=sThSTZrrdrVUGQBb-0)|
+|[프로토타입_FIGMA]()|
