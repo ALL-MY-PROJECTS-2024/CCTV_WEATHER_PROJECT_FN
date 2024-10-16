@@ -37,9 +37,16 @@ const Home = () => {
 
   return (
     <Layout>
-      <div className="aside"></div>
+      <div className="aside">
+        <div className="top"></div>
+        <div className="main"></div>
+        <div className="bottom"></div>
+
+      </div>
       <div className="main-section">
-       
+        <div className="controller">
+
+        </div>
        
         {/* Leaflet 지도 추가 */}
         <MapContainer center={position} zoom={13} style={{ height: "100vh", width: "100%" }}>
