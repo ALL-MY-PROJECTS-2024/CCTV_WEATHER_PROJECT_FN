@@ -2,7 +2,7 @@
   "name": "01",
   "version": "0.1.0",
   "private": true,
-  "homepage" : "https://all-my-projects-2024.github.io/CCTV_WEATHER_PROJECT_FN/",
+  "homepage": "https://all-my-projects-2024.github.io/CCTV_WEATHER_PROJECT_FN",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
