@@ -9,7 +9,7 @@ import Home from "./components/page/Home";
 import "./styles/App.scss";
 
 //ROUTE
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter  as Router, Routes, Route } from "react-router-dom";
 
 import Join from "./components/page/auth/Join";
 import Login from "./components/page/auth/Login";

@@ -39,6 +39,8 @@ const Home = () => {
     <Layout>
       <div className="aside"></div>
       <div className="main-section">
+       
+       
         {/* Leaflet 지도 추가 */}
         <MapContainer center={position} zoom={13} style={{ height: "100vh", width: "100%" }}>
           <TileLayer
@@ -54,9 +56,8 @@ const Home = () => {
               <Popup>여기에 마커를 추가했습니다! <br /> 위치: {marker.lat}, {marker.lng}</Popup>
             </Marker>
           ))}          
-
-          
         </MapContainer>
+        
       </div>
     </Layout>
   );
