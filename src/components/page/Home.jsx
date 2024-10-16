@@ -44,8 +44,8 @@ const Home = () => {
 
       </div>
       <div className="main-section">
-        <div className="controller">
-
+        <div className="controller" >
+          
         </div>
        
         {/* Leaflet 지도 추가 */}

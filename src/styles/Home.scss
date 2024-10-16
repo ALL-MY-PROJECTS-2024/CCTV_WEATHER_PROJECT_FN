@@ -5,7 +5,7 @@ main {
   .aside {
     width: $asideWidth;
     height: 100vh;
-    padding: 15px;
+    padding: 20px;
     position: absolute;
     left: 0;
     top: 0;
@@ -58,7 +58,10 @@ main {
 
 
 
-  /* 모바일 (최대 너비 768px 이하) */
+
+  /* 
+    모바일 (최대 너비 768px 이하) 
+  */
   @media screen and (max-width: 768px) {
     .aside {
       width: 100%;
