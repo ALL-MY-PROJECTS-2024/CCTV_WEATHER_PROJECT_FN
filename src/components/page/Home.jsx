@@ -12,21 +12,29 @@ import HLSPlayer from './HLSPlayer';
 import Layout from "../layout/Layout";
 import "../../styles/Home.scss";
 
-
-// 기본 아이콘 설정 (Leaflet 기본 마커 아이콘 대신 커스텀 아이콘 사용 가능)
-const markerIcon = new L.Icon({
-  iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
-  shadowSize: [41, 41]
-});
+// 마커 크기를 동적으로 계산하는 함수
+const getMarkerIconSize = () => {
+  const isMobile = window.innerWidth <= 768; // 화면 너비가 768px 이하인 경우를 모바일로 간주
+  return isMobile ? { iconSize: [30, 30], shadowSize: [30, 30] } : { iconSize: [40, 40], shadowSize: [50, 50] };
+};
+// 마커 아이콘 생성 함수
+const createMarkerIcon = () => {
+  const { iconSize, shadowSize } = getMarkerIconSize();  // 마커와 그림자의 크기를 모두 가져옴
+  return new L.Icon({
+    iconUrl: 'https://safecity.busan.go.kr/vue/img/gis_picker_cctv_its.9994bd52.png',
+    iconSize: iconSize,  // 동적으로 마커 크기 설정
+    iconAnchor: [iconSize[0] / 2, iconSize[1]],  // 아이콘의 중심이 앵커에 맞도록 설정
+    popupAnchor: [0, -iconSize[1]],  // 팝업이 아이콘 위로 적절하게 뜨도록 설정
+    shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
+    shadowSize: shadowSize,  // 동적으로 그림자 크기 설정
+  });
+};
 
 
 const Home = () => {
-  const position = [35.1796, 129.0756];  // 지도에 표시할 기본 위치 (부산 예시)
+  const position = [35.120696, 129.0411816];  // 지도에 표시할 기본 위치 (부산 예시)
   const [markers, setMarkers] = useState([]); // 마커 상태 관리
+  
   // 고정된 CCTV 데이터 저장
   const items = [
     { instlPos: "충무교차로", hlsAddr: "https://its-stream3.busan.go.kr:8443/rtplive/cctv_1.stream/playlist.m3u8", lot: 129.024297, lat: 35.096521 },
@@ -41,7 +49,7 @@ const Home = () => {
     { instlPos: "범내골교차로", hlsAddr: "https://its-stream3.busan.go.kr:8443/rtplive/cctv_10.stream/playlist.m3u8", lot: 129.059051, lat: 35.147345 },
     // 필요한 만큼 데이터를 추가
   ];
-
+//------------------------------------------
 
   // 지도에서 클릭한 위치에 마커 추가하는 이벤트
   const MapClickHandler = () => {
@@ -53,7 +61,7 @@ const Home = () => {
       });
       return null;
     };
-
+  //------------------------------------------
   return (
     <Layout>
       <div className="aside">
@@ -68,7 +76,7 @@ const Home = () => {
         </div>
        
         {/* Leaflet 지도 추가 */}
-        <MapContainer center={position} zoom={13} style={{ height: "100vh", width: "100%" }}>
+        <MapContainer center={position} zoom={14} style={{ height: "100vh", width: "100%" }}>
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -77,7 +85,7 @@ const Home = () => {
           
           {/* 고정된 CCTV 데이터를 지도에 마커로 표시 */}
           {items.map((item, idx) => (
-            <Marker key={idx} position={[item.lat, item.lot]} icon={markerIcon}>
+            <Marker key={idx} position={[item.lat, item.lot]} icon={createMarkerIcon()}>
               <Popup minWidth={300} maxWidth={400}> {/* 팝업 크기 지정 */}
                 <div style={{ width: "300px", height: "100%" }}> {/* 팝업 내부 크기 지정 */}
                   <h4>{item.instlPos}</h4>
