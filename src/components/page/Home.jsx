@@ -72,7 +72,14 @@ const Home = () => {
       </div>
       <div className="main-section">
         <div className="controller" >
-          
+            <ul>
+              <li><a href="">재난감시 CCTV</a></li>
+              <li><a href="">인명피해 우려지역</a></li>
+              <li><a href="">과거 침수이력</a></li>
+            </ul>
+            <div className="layerBtn">
+              <img src="https://safecity.busan.go.kr/vue/img/ico-layer.8967d7f4.svg" alt="" />
+            </div>
         </div>
        
         {/* Leaflet 지도 추가 */}
