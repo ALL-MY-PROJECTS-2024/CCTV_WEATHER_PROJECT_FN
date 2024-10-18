@@ -1,238 +1,251 @@
-// $asideWidth: 220px;
+$asideWidth: 220px;
 
-// $mobileAsideHeight: 100px; /* 모바일에서 사이드바 높이 */
+$mobileAsideHeight: 100px; /* 모바일에서 사이드바 높이 */
 
 
-// @font-face {
-//   font-family: 'Pretendard-Regular';
-//   src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-//   font-weight: 400;
-//   font-style: normal;
-// }
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
 
-// *{
-//   font-family: Pretendard-Regular;
-// }
+*{
+  font-family: Pretendard-Regular;
+}
 
-// main {
-//   .aside {
-//     width: $asideWidth;
-//     height: 100vh;
-//     padding: 20px;
-//     position: absolute;
-//     left: 0;
-//     top: 0;
-//     // border: 1px solid;
-//     background-color: #052563;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     flex-direction: column;
-//     z-index:9999;
+main {
+  .aside {
+    width: $asideWidth;
+    height: 100vh;
+    padding: 20px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    // border: 1px solid;
+    background-color: #052563;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index:9999;
 
     
-//     & > * {
-//       // border: 1px solid white;
-//       width: 100%;
-//     }
+    & > * {
+      // border: 1px solid white;
+      width: 100%;
+    }
 
-//     .top {
-//       flex-grow: 1;
-//     }
+    .top {
+      flex-grow: 1;
+    }
 
-//     .main {
-//       flex-grow: 2;
-//     }
+    .main {
+      flex-grow: 2;
+    }
 
-//     .bottom {
-//       flex-grow: 1;
-//     }
-//   }
+    .bottom {
+      flex-grow: 1;
+    }
+  }
 
-//   .main-section {
-//     width: calc(100vw - $asideWidth);
-//     height: 100vh;
-//     background-color: red;
-//     position: relative;
-//     left: $asideWidth;
+  .main-section {
+    width: calc(100vw - $asideWidth);
+    height: 100vh;
+    background-color: red;
+    position: relative;
+    left: $asideWidth;
 
-//     .leaflet-control-zoom{
-//       position:fixed;
-//       right:20px;
-//       top:30px;
-//       border : 1px solid;
+    .leaflet-control-zoom{
+      position:fixed;
+      right:20px;
+      top:30px;
+      border : 1px solid;
       
 
-//     }
-//     .controller {
-//       position: absolute;
-//       top: 40px;
-//       left: 40px;
-//       width: 500px;
-//       height: 50px;
-//       z-index: 8888;
-//       border-radius: 5px;
-//       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-//       background-color: white;
+    }
+    .controller {
+      position: absolute;
+      top: 40px;
+      left: 40px;
+      width: 500px;
+      height: 50px;
+      z-index: 8888;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      background-color: white;
 
 
       
 
-//       ul{
-//         list-style: none;
-//         margin:0;padding:5px;
-//         display:flex;
-//         justify-content: space-between;
-//         align-items: center;
-//         width : 100%;
-//         height : 100%;
-//         font-size : 1.2rem;
-//         li{
+      ul{
+        list-style: none;
+        margin:0;padding:5px;
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+        width : 100%;
+        height : 100%;
+        font-size : 1.2rem;
+        li{
           
-//           width : 100%;
-//           height : 100%;
+          width : 100%;
+          height : 100%;
           
           
           
-//           a{
-//             border-radius: 5px;
-//             color:#6C6C6C !important;
-//             display:block;
-//             width : 100%;
-//             height : 100%;
-//             display:flex;
-//             justify-content: center;
-//             align-items: center;
-//             font-weight:400;
+          a{
+            border-radius: 5px;
+            color:#6C6C6C !important;
+            display:block;
+            width : 100%;
+            height : 100%;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            font-weight:400;
             
-//           }
-//           a:hover{
-//             background-color:  #ED0C0C;
-//             color : white !important;
-//           }
-//         }
-//       }
+          }
+          a:hover{
+            background-color:  #ED0C0C;
+            color : white !important;
+          }
+        }
+      }
 
-//       .layerBtn{
+      @keyframes moving {
+        from{right:-150px;}
+        to{right:-180px;}
+      }
+
+      .layerBtn{
         
-//         width : 50px;
-//         height: 50px;
-//         background-color: white;
-//         position:absolute;
-//         right: -70px;
-//         top:0;
-//         z-index: 9999;
-//         border-radius: 5px;
-//         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-//         display:flex;
-//         justify-content: center;
-//         align-items: center;
+        width : 50px;
+        height: 50px;
+        background-color: white;
+        position:absolute;
+        right: -70px;
+        top:0;
+        z-index: 9999;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        display:flex;
+        justify-content: center;
+        align-items: center;
 
         
-//         &:after{
-//           content: '침수위험지도 확인하기';
-//           width : 160px;
-//           height : 35px;
-//           position:absolute;
-//           right:-180px;
-//           top:0;  
-//           z-index: 99999;
-//           background-color:#052563;
-//           display:flex;
-//           justify-content: center;
-//           align-items: center;
-//           font-size : 1.2rem;
-//           font-weight: 400;
-//           color:white;
-//           border-radius: 20px;
-          
-//         }
-//         &:before{
-//           content:"";
-//           width : 0;
-//           height : 0;
-//           border-left:10px solid #052563;;
-//           border-right:10px solid #052563;
-//           border-top:10px solid transparent;
-//           border-bottom:10px solid transparent;
-//           position:absolute;
-//           right:-30px;
-//           top:8px;
+        &:after{
+          content: '침수위험지도 확인하기';
+          width : 160px;
+          height : 35px;
+          position:absolute;
+          right:-180px;
+          top:0;  
+          z-index: 99999;
+          background-color:#052563;
+          display:flex;
+          justify-content: center;
+          align-items: center;
+          font-size : 1.2rem;
+          font-weight: 400;
+          color:white;
+          border-radius: 20px;
+         
+     
+        }
+        &:before{
+          content:"";
+          width : 0;
+          height : 0;
+          // border-left:10px solid #052563;;
+          // border-right:10px solid #052563;
+          // border-top:10px solid #052563;;
+          // border-bottom:10px solid#052563;;
+          position:absolute;
+          right:-31.5px;
+          top:10px;
 
-//           z-index: 99999;
-//         }
-//       }
+          width : 15px;
+          height :15px;
+          background-color: #052563;
+          z-index: 99999;
+          transform : rotate(45deg);
+  
+
+    
+        }
+      }
       
 
-//     }
+    }
 
-//     // CCTV POPUP
-//     .custom-popup {
+    // CCTV POPUP
+    .custom-popup {
 
-//     }
+    }
     
-//     .custom-popup h4 {
+    .custom-popup h4 {
    
-//     }
+    }
     
-//     .custom-popup div {
+    .custom-popup div {
      
-//     }
+    }
 
-//   }
-
-
+  }
 
 
-//   /* 
-//     모바일 (최대 너비 768px 이하) 
-//   */
-//   @media screen and (max-width: 768px) {
+
+
+  /* 
+    모바일 (최대 너비 768px 이하) 
+  */
+  @media screen and (max-width: 768px) {
     
 
-//     .aside {
-//       width: 100%;
-//       height: $mobileAsideHeight;
-//       bottom: 0;
-//       left: 0;
-//       top: auto; /* 사이드바를 하단에 고정 */
-//       padding: 5px;
-//       flex-direction: row; /* 내부 요소 가로 배열 */
-//       justify-content: space-around;
-//       // border: 1px solid;
-//       background-color: white;
-//       border : 0;
+    .aside {
+      width: 100%;
+      height: $mobileAsideHeight;
+      bottom: 0;
+      left: 0;
+      top: auto; /* 사이드바를 하단에 고정 */
+      padding: 5px;
+      flex-direction: row; /* 내부 요소 가로 배열 */
+      justify-content: space-around;
+      // border: 1px solid;
+      background-color: white;
+      border : 0;
         
-//     }
+    }
 
-//     .top,
-//     .main,
-//     .bottom {
-//       flex-grow: 1;
-//       border: none;
-//       text-align: center;
-//     }
+    .top,
+    .main,
+    .bottom {
+      flex-grow: 1;
+      border: none;
+      text-align: center;
+    }
 
-//     .main-section {
-//       width: 100vw;
-//       height: calc(100vh - $mobileAsideHeight ); /* 사이드바 높이 제외한 나머지 부분 */
-//       left: 0;
-//       top : 0;
+    .main-section {
+      width: 100vw;
+      height: calc(100vh - $mobileAsideHeight ); /* 사이드바 높이 제외한 나머지 부분 */
+      left: 0;
+      top : 0;
 
-//       .controller {
-//         top: auto;
-//         bottom: 0px; /* 사이드바 위에 컨트롤러 위치 */
-//         left: 0px;
-//         right:auto;
-//         width:80%;
-//         border-radius: 20px;
-//         height: 40px;
-//         left: 50%;
-//         transform: translateX(-50%); /* 가로 중앙 정렬 */
-//       }
-//     }
-//   }
-// }
+      .controller {
+        top: auto;
+        bottom: 0px; /* 사이드바 위에 컨트롤러 위치 */
+        left: 0px;
+        right:auto;
+        width:80%;
+        border-radius: 20px;
+        height: 40px;
+        left: 50%;
+        transform: translateX(-50%); /* 가로 중앙 정렬 */
+      }
+    }
+  }
+}
 
 
 
