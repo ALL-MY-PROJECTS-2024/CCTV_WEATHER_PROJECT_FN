@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/CCTV_WEATHER_PROJECT_FN/static/css/main.3858d154.css",
-    "main.js": "/CCTV_WEATHER_PROJECT_FN/static/js/main.f68332cd.js",
+    "main.css": "/CCTV_WEATHER_PROJECT_FN/static/css/main.8af7dd2c.css",
+    "main.js": "/CCTV_WEATHER_PROJECT_FN/static/js/main.de0628c5.js",
     "static/js/453.1332818c.chunk.js": "/CCTV_WEATHER_PROJECT_FN/static/js/453.1332818c.chunk.js",
     "static/media/logo.svg": "/CCTV_WEATHER_PROJECT_FN/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/CCTV_WEATHER_PROJECT_FN/index.html",
-    "main.3858d154.css.map": "/CCTV_WEATHER_PROJECT_FN/static/css/main.3858d154.css.map",
-    "main.f68332cd.js.map": "/CCTV_WEATHER_PROJECT_FN/static/js/main.f68332cd.js.map",
+    "main.8af7dd2c.css.map": "/CCTV_WEATHER_PROJECT_FN/static/css/main.8af7dd2c.css.map",
+    "main.de0628c5.js.map": "/CCTV_WEATHER_PROJECT_FN/static/js/main.de0628c5.js.map",
     "453.1332818c.chunk.js.map": "/CCTV_WEATHER_PROJECT_FN/static/js/453.1332818c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3858d154.css",
-    "static/js/main.f68332cd.js"
+    "static/css/main.8af7dd2c.css",
+    "static/js/main.de0628c5.js"
   ]
 }
