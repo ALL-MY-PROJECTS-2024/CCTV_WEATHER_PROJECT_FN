@@ -1,4 +1,4 @@
-$asideWidth: 220px;
+$asideWidth: 250px;
 
 $mobileAsideHeight: 100px; /* 모바일에서 사이드바 높이 */
 
@@ -16,19 +16,7 @@ $mobileAsideHeight: 100px; /* 모바일에서 사이드바 높이 */
 
 main {
   .aside {
-    width: $asideWidth;
-    height: 100vh;
-    padding: 20px;
-    position: absolute;
-    left: 0;
-    top: 0;
-    // border: 1px solid;
-    background-color: #052563;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    z-index:9999;
+
 
     
     & > * {
@@ -50,33 +38,86 @@ main {
   }
 
   .main-section {
-    width: calc(100vw - $asideWidth);
+    width: 100vw;
     height: 100vh;
     background-color: red;
     position: relative;
-    left: $asideWidth;
+    left: 0;
 
     .leaflet-control-zoom{
       position:fixed;
       right:20px;
       top:30px;
       border : 1px solid;
-      
-
+    
     }
+    .show-contents{
+      position:fixed;
+      top: 105px;
+      left: calc($asideWidth + 20px);
+      border-radius: 5px;
+      z-index:99999;
+      width :250px;
+      height : 100px;        
+      background-color: white;         
+      font-size : 1.2rem;  
+      padding : 10px;
+      
+      
+      .item{
+        display:flex;
+        justify-content: space-between;
+        text-align:center;
+        color:#6C6C6C !important;
+        height:50%;
+        div{
+          width : 100%;
+          // border : 1px solid;
+          display:flex;
+          justify-content: space-around;
+          align-items: center;
+
+          span{
+            width : 50px;
+            height : 25px;
+            border : 1px solid;
+            border-radius: 20px;;
+            cursor: pointer;
+          }
+
+          &:nth-child(2){
+            display:flex;
+            justify-content: right;
+          }
+        }
+      }                                                                                   
+    }
+
+
+    .flooding-status{
+      position:fixed;
+      top: 220px;
+      left: calc($asideWidth + 20px);
+      border-radius: 5px;
+      z-index:99999;
+      width :250px;
+      height : 200px;        
+      background-color: white;         
+      font-size : 1.2rem;  
+      padding : 10px;
+    }
+
+
     .controller {
       position: absolute;
       top: 40px;
-      left: 40px;
+      left: calc($asideWidth + 20px);
       width: 500px;
       height: 50px;
       z-index: 8888;
       border-radius: 5px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-      background-color: white;
-
-
-      
+      // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      background-color: white;  
 
       ul{
         list-style: none;
@@ -94,7 +135,7 @@ main {
           
           
           
-          a{
+          button{
             border-radius: 5px;
             color:#6C6C6C !important;
             display:block;
@@ -104,19 +145,18 @@ main {
             justify-content: center;
             align-items: center;
             font-weight:400;
-            
+            background-color: white;
+            outline:none;
+            border : 0;
           }
-          a:hover{
+          button:hover{
             background-color:  #ED0C0C;
             color : white !important;
           }
         }
       }
 
-      @keyframes moving {
-        from{right:-150px;}
-        to{right:-180px;}
-      }
+   
 
       .layerBtn{
         
@@ -128,7 +168,7 @@ main {
         top:0;
         z-index: 9999;
         border-radius: 5px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
         display:flex;
         justify-content: center;
         align-items: center;
@@ -192,7 +232,13 @@ main {
      
     }
 
+ 
+
+    
+ 
   }
+
+
 
 
 
@@ -218,32 +264,30 @@ main {
         
     }
 
-    .top,
-    .main,
-    .bottom {
-      flex-grow: 1;
-      border: none;
-      text-align: center;
-    }
-
     .main-section {
       width: 100vw;
       height: calc(100vh - $mobileAsideHeight ); /* 사이드바 높이 제외한 나머지 부분 */
       left: 0;
       top : 0;
 
+      // controller
       .controller {
         top: auto;
         bottom: 0px; /* 사이드바 위에 컨트롤러 위치 */
-        left: 0px;
         right:auto;
         width:80%;
         border-radius: 20px;
         height: 40px;
         left: 50%;
-        transform: translateX(-50%); /* 가로 중앙 정렬 */
+        transform: translateX(-50%); /* 가로 중앙 정렬 */   
       }
+
+  
+
+
     }
+
+
   }
 }
 

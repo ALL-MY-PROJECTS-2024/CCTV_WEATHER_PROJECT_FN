@@ -1,3 +1,5 @@
+
+import Aside from "./Aside.jsx"
 import React, { useState, useRef, useEffect } from 'react';
 
 //leaflet
@@ -34,28 +36,36 @@ const createMarkerIcon = () => {
     shadowSize: shadowSize,  // 동적으로 그림자 크기 설정
   });
 };
+// 고정된 CCTV 데이터 저장
+const items = [
+  { instlPos: "충무교차로", hlsAddr: "https://its-stream3.busan.go.kr:8443/rtplive/cctv_1.stream/playlist.m3u8", lot: 129.024297, lat: 35.096521 },
+  { instlPos: "남포동", hlsAddr: "https://its-stream3.busan.go.kr:8443/rtplive/cctv_2.stream/playlist.m3u8", lot: 129.029273, lat: 35.097858 },
+  { instlPos: "옛시청", hlsAddr: "https://its-stream3.busan.go.kr:8443/rtplive/cctv_3.stream/playlist.m3u8", lot: 129.035343, lat: 35.097879 },
+  { instlPos: "부산우체국", hlsAddr: "https://its-stream3.busan.go.kr:8443/rtplive/cctv_4.stream/playlist.m3u8", lot: 129.036658, lat: 35.103092 },
+  { instlPos: "영주사거리", hlsAddr: "https://its-stream3.busan.go.kr:8443/rtplive/cctv_5.stream/playlist.m3u8", lot: 129.037914, lat: 35.11186 },
+  { instlPos: "부산역", hlsAddr: "https://its-stream3.busan.go.kr:8443/rtplive/cctv_6.stream/playlist.m3u8", lot: 129.039353, lat: 35.114967 },
+  { instlPos: "초량교차로", hlsAddr: "https://its-stream3.busan.go.kr:8443/rtplive/cctv_7.stream/playlist.m3u8", lot: 129.042203, lat: 35.120005 },
+  { instlPos: "좌천삼거리", hlsAddr: "https://its-stream3.busan.go.kr:8443/rtplive/cctv_8.stream/playlist.m3u8", lot: 129.052554, lat: 35.132734 },
+  { instlPos: "자유시장", hlsAddr: "https://its-stream3.busan.go.kr:8443/rtplive/cctv_9.stream/playlist.m3u8", lot: 129.059168, lat: 35.141795 },
+  { instlPos: "범내골교차로", hlsAddr: "https://its-stream3.busan.go.kr:8443/rtplive/cctv_10.stream/playlist.m3u8", lot: 129.059051, lat: 35.147345 },
+  // 필요한 만큼 데이터를 추가
+];
+//------------------------------------------
+
 
 
 const Home = () => {
+  
+
   const position = [35.120696, 129.0411816];  // 지도에 표시할 기본 위치 (부산 예시)
   const [markers, setMarkers] = useState([]); // 마커 상태 관리
   
-  // 고정된 CCTV 데이터 저장
-  const items = [
-    { instlPos: "충무교차로", hlsAddr: "https://its-stream3.busan.go.kr:8443/rtplive/cctv_1.stream/playlist.m3u8", lot: 129.024297, lat: 35.096521 },
-    { instlPos: "남포동", hlsAddr: "https://its-stream3.busan.go.kr:8443/rtplive/cctv_2.stream/playlist.m3u8", lot: 129.029273, lat: 35.097858 },
-    { instlPos: "옛시청", hlsAddr: "https://its-stream3.busan.go.kr:8443/rtplive/cctv_3.stream/playlist.m3u8", lot: 129.035343, lat: 35.097879 },
-    { instlPos: "부산우체국", hlsAddr: "https://its-stream3.busan.go.kr:8443/rtplive/cctv_4.stream/playlist.m3u8", lot: 129.036658, lat: 35.103092 },
-    { instlPos: "영주사거리", hlsAddr: "https://its-stream3.busan.go.kr:8443/rtplive/cctv_5.stream/playlist.m3u8", lot: 129.037914, lat: 35.11186 },
-    { instlPos: "부산역", hlsAddr: "https://its-stream3.busan.go.kr:8443/rtplive/cctv_6.stream/playlist.m3u8", lot: 129.039353, lat: 35.114967 },
-    { instlPos: "초량교차로", hlsAddr: "https://its-stream3.busan.go.kr:8443/rtplive/cctv_7.stream/playlist.m3u8", lot: 129.042203, lat: 35.120005 },
-    { instlPos: "좌천삼거리", hlsAddr: "https://its-stream3.busan.go.kr:8443/rtplive/cctv_8.stream/playlist.m3u8", lot: 129.052554, lat: 35.132734 },
-    { instlPos: "자유시장", hlsAddr: "https://its-stream3.busan.go.kr:8443/rtplive/cctv_9.stream/playlist.m3u8", lot: 129.059168, lat: 35.141795 },
-    { instlPos: "범내골교차로", hlsAddr: "https://its-stream3.busan.go.kr:8443/rtplive/cctv_10.stream/playlist.m3u8", lot: 129.059051, lat: 35.147345 },
-    // 필요한 만큼 데이터를 추가
-  ];
-//------------------------------------------
+  useEffect(()=>{
 
+
+  },[])
+
+  
   // 지도에서 클릭한 위치에 마커 추가하는 이벤트
   const MapClickHandler = () => {
       useMapEvents({
@@ -69,24 +79,46 @@ const Home = () => {
   //------------------------------------------
   return (
     <Layout>
-      <div className="aside">
-        <div className="top"></div>
-        <div className="main"></div>
-        <div className="bottom"></div>
 
-      </div>
       <div className="main-section">
+        
+        {/* ASIDE */}
+        <Aside />
+
         <div className="controller" >
             <ul>
-              <li><a href="">재난감시 CCTV</a></li>
-              <li><a href="">인명피해 우려지역</a></li>
-              <li><a href="">과거 침수이력</a></li>
+              <li><button  onClick={e=>{console.log("test")}}>재난감시 CCTV</button></li>
+              <li><button >인명피해 우려지역</button></li>
+              <li><button >과거 침수이력</button></li>
             </ul>
+
             <div className="layerBtn">
               <img src="https://safecity.busan.go.kr/vue/img/ico-layer.8967d7f4.svg" alt="" />
             </div>
         </div>
-       
+
+        <div className="show-contents">
+          <div className="item">
+            <div>재난감시 CCTV</div>
+            <div>
+              <span>ON</span>
+            </div>
+          </div>
+          <div className="item">
+            <div>교통정보 CCTV</div>
+            <div>
+              <span>ON</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="flooding-status">
+        
+        </div>
+        
+
+
+
         {/* Leaflet 지도 추가 */}
         <MapContainer center={position} zoom={14} style={{ height: "100vh", width: "100%" }}>
           <TileLayer
@@ -95,7 +127,6 @@ const Home = () => {
             
           />
 
-          
           {/* 고정된 CCTV 데이터를 지도에 마커로 표시 */}
           {items.map((item, idx) => (
             <Marker key={idx} position={[item.lat, item.lot]} icon={createMarkerIcon()}>
