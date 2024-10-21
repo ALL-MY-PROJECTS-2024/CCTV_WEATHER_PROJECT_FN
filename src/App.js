@@ -5,12 +5,14 @@ import "bootstrap/dist/css/bootstrap.css";
 
 
 import Home from "./components/page/Home";
+import Test from "./components/page/Test";
+
 
 // STYLING
 import "./styles/App.scss";
 
 //ROUTE
-import {HashRouter  as Router, Routes, Route } from "react-router-dom";
+import {BrowserRouter   as Router, Routes, Route } from "react-router-dom";
 
 
 
@@ -23,6 +25,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/Test" element={<Test />} />
         </Routes>
       </Router>
     </GlobalContextProvider>

@@ -1,9 +1,9 @@
-$asideWidth: 250px;
+$asideWidth: 220px;
 
 .controller {
     position: absolute;
     top: 40px;
-    left: calc($asideWidth + 20px);
+    left: calc($asideWidth + 30px);
     width: 500px;
     height: 50px;
     z-index: 8888;
@@ -116,7 +116,7 @@ $asideWidth: 250px;
 .show-contents{
     position:fixed;
     top: 105px;
-    left: calc($asideWidth + 20px);
+    left: calc($asideWidth + 30px);
     border-radius: 5px;
     z-index:99999;
     width :250px;
