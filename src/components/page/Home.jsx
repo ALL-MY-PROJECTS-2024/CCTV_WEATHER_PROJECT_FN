@@ -2,6 +2,18 @@
 import Aside from "./Aside.jsx"
 import React, { useState, useRef, useEffect } from 'react';
 
+//TopController
+import TopController from "./TopController.jsx";
+
+//HLS
+import HLSPlayer from './HLSPlayer';
+
+//
+import Layout from "../layout/Layout";
+import "../../styles/Home.scss";
+
+
+
 //leaflet
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet'; // 클릭 이벤트 추가를 위해 useMapEvents import
 import 'leaflet/dist/leaflet.css'; // Leaflet CSS import
@@ -12,12 +24,9 @@ import 'leaflet.markercluster/dist/MarkerCluster.css';
 import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 
 
-//HLS
-import HLSPlayer from './HLSPlayer';
 
-//
-import Layout from "../layout/Layout";
-import "../../styles/Home.scss";
+
+
 
 // 마커 크기를 동적으로 계산하는 함수
 const getMarkerIconSize = () => {
@@ -85,38 +94,8 @@ const Home = () => {
         {/* ASIDE */}
         <Aside />
 
-        <div className="controller" >
-            <ul>
-              <li><button  onClick={e=>{console.log("test")}}>재난감시 CCTV</button></li>
-              <li><button >인명피해 우려지역</button></li>
-              <li><button >과거 침수이력</button></li>
-            </ul>
-
-            <div className="layerBtn">
-              <img src="https://safecity.busan.go.kr/vue/img/ico-layer.8967d7f4.svg" alt="" />
-            </div>
-        </div>
-
-        <div className="show-contents">
-          <div className="item">
-            <div>재난감시 CCTV</div>
-            <div>
-              <span>ON</span>
-            </div>
-          </div>
-          <div className="item">
-            <div>교통정보 CCTV</div>
-            <div>
-              <span>ON</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="flooding-status">
-        
-        </div>
-        
-
+        {/* TOP CONTROLLER */}
+        <TopController />
 
 
         {/* Leaflet 지도 추가 */}
