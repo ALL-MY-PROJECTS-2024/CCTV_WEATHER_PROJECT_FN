@@ -9,8 +9,6 @@ object-assign
  * (c) 2010-2023 Vladimir Agafonkin, (c) 2010-2011 CloudMade
  */
 
-/*! js-cookie v3.0.5 | MIT */
-
 /**
  * @license React
  * react-dom.production.min.js
@@ -53,17 +51,6 @@ object-assign
 
 /**
  * @remix-run/router v1.19.2
- *
- * Copyright (c) Remix Software Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.md file in the root directory of this source tree.
- *
- * @license MIT
- */
-
-/**
- * React Router DOM v6.26.2
  *
  * Copyright (c) Remix Software Inc.
  *
