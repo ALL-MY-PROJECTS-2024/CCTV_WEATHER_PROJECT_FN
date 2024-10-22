@@ -12,9 +12,9 @@ import Test from "./components/page/Test";
 import "./styles/App.scss";
 
 //ROUTE
-import {BrowserRouter   as Router, Routes, Route } from "react-router-dom";
+// import {BrowserRouter   as Router, Routes, Route } from "react-router-dom";
 
-
+import {HashRouter   as Router, Routes, Route } from "react-router-dom";
 
 // 전역 설정
 import { GlobalContextProvider } from "./contexts/GlobalContextProvider";
