@@ -2,11 +2,10 @@
 import {useState,useEffect} from "react";
 import "../../styles/TopController.scss"
 
-const TopController = ()=>{
+const TopController = (props)=>{
     const [activeMenu,setActiveMenu] = useState();
     const [activeSubMenu,setActiveSubMenu] = useState();
-    const [CCTV01State,setCCTV01State] = useState();
-    const [CCTV02State,setCCTV02State] = useState();
+
 
     const activeMenuHandler = (e)=>{
         //기본메뉴 음영주기
@@ -32,7 +31,36 @@ const TopController = ()=>{
     }
 
     const 재난CCTV = (e)=>{
+        
+        if(!props.CCTV01State){
+            //ON
+            e.target.style.backgroundColor="royalblue";
+            e.target.style.color="white";
+            e.target.innerHTML="ON"
 
+        }else{
+            e.target.style.backgroundColor="white";
+            e.target.style.color="gray";
+            e.target.innerHTML="OFF";
+
+        }
+
+        props.setCCTV01State(!props.CCTV01State);
+    }       
+
+    const 교통CCTV = (e)=>{
+        if(!props.CCTV02State){
+            //ON
+            e.target.style.backgroundColor="royalblue";
+            e.target.style.color="white";
+            e.target.innerHTML="ON"
+        }else{
+            e.target.style.backgroundColor="white";
+            e.target.style.color="gray";
+            e.target.innerHTML="OFF"
+
+        }
+        props.setCCTV02State(!props.CCTV02State);
     }       
 
     return (
@@ -56,13 +84,13 @@ const TopController = ()=>{
                 <div className="item">
                     <div>재난감시 CCTV</div>
                     <div>
-                    <span onClick={e=>{console.log(e)}}>ON</span>
+                    <span onClick={재난CCTV}>OFF</span>
                     </div>
                 </div>
                 <div className="item">
                     <div>교통정보 CCTV</div>
                     <div>
-                    <span>ON</span>
+                    <span onClick={교통CCTV}>OFF</span>
                     </div>
                 </div>
             </div>

@@ -46,7 +46,7 @@ const createMarkerIcon = () => {
   });
 };
 // 고정된 CCTV 데이터 저장
-const items = [
+const CCTV02items = [
   { instlPos: "충무교차로", hlsAddr: "https://its-stream3.busan.go.kr:8443/rtplive/cctv_1.stream/playlist.m3u8", lot: 129.024297, lat: 35.096521 },
   { instlPos: "남포동", hlsAddr: "https://its-stream3.busan.go.kr:8443/rtplive/cctv_2.stream/playlist.m3u8", lot: 129.029273, lat: 35.097858 },
   { instlPos: "옛시청", hlsAddr: "https://its-stream3.busan.go.kr:8443/rtplive/cctv_3.stream/playlist.m3u8", lot: 129.035343, lat: 35.097879 },
@@ -68,11 +68,21 @@ const Home = () => {
 
   const position = [35.120696, 129.0411816];  // 지도에 표시할 기본 위치 (부산 예시)
   const [markers, setMarkers] = useState([]); // 마커 상태 관리
+  const [CCTV01State,setCCTV01State] = useState(false);
+  const [CCTV02State,setCCTV02State] = useState(false);
   
   useEffect(()=>{
 
 
-  },[])
+    if(CCTV02State){
+
+    }else{
+
+    }
+
+
+    console.log("!");
+  },[CCTV01State,CCTV02State])
 
   
   // 지도에서 클릭한 위치에 마커 추가하는 이벤트
@@ -95,7 +105,12 @@ const Home = () => {
         <Aside />
 
         {/* TOP CONTROLLER */}
-        <TopController />
+        <TopController  
+          CCTV01State={CCTV01State} 
+          CCTV02State={CCTV02State} 
+          setCCTV01State={setCCTV01State}  
+          setCCTV02State={setCCTV02State} 
+        />
 
 
         {/* Leaflet 지도 추가 */}
@@ -107,7 +122,7 @@ const Home = () => {
           />
 
           {/* 고정된 CCTV 데이터를 지도에 마커로 표시 */}
-          {items.map((item, idx) => (
+          {CCTV02State && CCTV02items.map((item, idx) => (
             <Marker key={idx} position={[item.lat, item.lot]} icon={createMarkerIcon()}>
               <Popup minWidth={300} maxWidth={400}> {/* 팝업 크기 지정 */}
                 <div style={{ width: "300px", height: "100%" }}> {/* 팝업 내부 크기 지정 */}

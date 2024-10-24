@@ -10,12 +10,12 @@ const Aside = () => {
                 <img src="" alt="" />
             </div>
             <div className="title_01">
-                타이틀
+                - 
             </div>
         </div>
         
         <div className="title_02">
-            타이틀
+            -
         </div>
       </div>
 
