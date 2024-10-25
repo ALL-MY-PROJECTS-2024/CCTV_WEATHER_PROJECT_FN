@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://all-my-projects-2024.github.io/CCTV_WEATHER_PROJECT_FN",
   "dependencies": {
+    "@react-leaflet/core": "^2.1.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -12,6 +13,7 @@
     "hls.js": "^1.5.16",
     "js-cookie": "^3.0.5",
     "leaflet": "^1.9.4",
+    "leaflet.markercluster": "^1.5.3",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.4",
     "react-dom": "^18.3.1",
