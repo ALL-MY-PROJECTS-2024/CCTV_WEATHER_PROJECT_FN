@@ -1,15 +1,13 @@
 import logo from "./logo.svg";
-import "./App.css";
 
 import "bootstrap/dist/css/bootstrap.css";
 
 
-import Home from "./components/page/Home";
+import Home from "./components/Home";
 
 
+import "./App.scss"
 
-// STYLING
-import "./styles/App.scss";
 
 //ROUTE
 // import {BrowserRouter   as Router, Routes, Route } from "react-router-dom";

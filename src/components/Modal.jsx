@@ -1,6 +1,6 @@
 // Modal.jsx
 import React from 'react';
-import './Modal.css';
+import './Modal.scss';
 
 const Modal = ({ isOpen, onClose, hlsAddr }) => {
   if (!isOpen) return null;

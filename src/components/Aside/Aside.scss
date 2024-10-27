@@ -17,6 +17,8 @@ $asideWidth: 220px;
 
     .top{
         border : 1px solid white;
+        width : 100%;
+        height : 100%;
          .one{
             display:flex;
             justify-content: center;
@@ -46,9 +48,14 @@ $asideWidth: 220px;
          }
     }
     .main{
+        width : 100%;
+        height : 100%;
         border : 1px solid white;
     }
+
     .bottom{
+        width : 100%;
+        height : 100%;
         border : 1px solid white;
     }
 }

@@ -1,5 +1,4 @@
-
-import "../../styles/Aside.scss"
+import "./Aside.scss"
 
 const Aside = () => {
   return (

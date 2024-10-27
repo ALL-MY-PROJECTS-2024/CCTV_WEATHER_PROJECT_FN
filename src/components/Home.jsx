@@ -1,17 +1,17 @@
 //[임시] JSON 파일을 `import`로 가져오기
-import cctv1Data from '../../dataSet/CCTV1.json'
-import cctv2Data from '../../dataSet/CCTV2.json'
+import cctv1Data from '../dataSet/CCTV1.json'
+import cctv2Data from '../dataSet/CCTV2.json'
 
 
-import Aside from "./Aside.jsx"
+import Aside from "./Aside/Aside.jsx"
 import React, { useState, useRef, useEffect } from 'react';
+import ReactDOM from 'react-dom/client';
 
 //TopController
-import TopController from "./TopController.jsx";
+import TopController from "./Header/TopController.jsx";
 
-//
-import Layout from "../layout/Layout";
-import "../../styles/Home.scss";
+
+import "./Home.scss";
 
 import axios from 'axios';
 
@@ -54,8 +54,48 @@ const createCCTV2MarkerIcon = () => {
 };
 
 
+// 새 창에서 CCTV 정보를 표시하는 컴포넌트
+const CCTVInfoPopup = ({ lat, lon, type, hlsAddr,instl_pos }) => {
+  return (
+    <div style={{ fontFamily: 'Arial, sans-serif', padding: '10px', backgroundColor: '#f3f3f3' }}>
+      
+      <div >
+        <div style={{
+          marginTop: '10px', width: '100%', height: '550px', border: '1px solid #ccc'
+        }}>
+          <iframe src={hlsAddr} width="100%" height="100%" allowFullScreen></iframe>
+        </div>
+        
+        <div className="weather" style={{marginTop:"20px"}}>
+           <h2>날씨예보 - UPDATE예정</h2>
+           <ul style={{listStyle:"none",margin:"0",padding:"0",display:"flex",flexWrap:"wrap"}}>
+              <li style={{width:"80px",height:"100px",border:"1px solid",margin:"5px"}}></li>
+              <li style={{width:"80px",height:"100px",border:"1px solid",margin:"5px"}}></li>
+              <li style={{width:"80px",height:"100px",border:"1px solid",margin:"5px"}}></li>
+              <li style={{width:"80px",height:"100px",border:"1px solid",margin:"5px"}}></li>
+              <li style={{width:"80px",height:"100px",border:"1px solid",margin:"5px"}}></li>
+              <li style={{width:"80px",height:"100px",border:"1px solid",margin:"5px"}}></li>
+              <li style={{width:"80px",height:"100px",border:"1px solid",margin:"5px"}}></li>
+              <li style={{width:"80px",height:"100px",border:"1px solid",margin:"5px"}}></li>
+              <li style={{width:"80px",height:"100px",border:"1px solid",margin:"5px"}}></li>
+              <li style={{width:"80px",height:"100px",border:"1px solid",margin:"5px"}}></li>
+              <li style={{width:"80px",height:"100px",border:"1px solid",margin:"5px"}}></li>
+              <li style={{width:"80px",height:"100px",border:"1px solid",margin:"5px"}}></li>
+              <li style={{width:"80px",height:"100px",border:"1px solid",margin:"5px"}}></li>
+
+           </ul>
+
+        </div>
+
+
+      </div>
+    </div>
+  );
+};
+
 //-----------------
 // MarkerClusterGroup 컴포넌트
+//-----------------
 const MarkerClusterGroup = ({ markers, type }) => {
   const map = useMap();
 
@@ -86,7 +126,13 @@ const MarkerClusterGroup = ({ markers, type }) => {
       const leafletMarker = L.marker([marker.lat, marker.lon], {
         icon: marker.type === 'CCTV1' ? createCCTV1MarkerIcon() : createCCTV2MarkerIcon()
       }).on('click', () => {
-        window.open(marker.hlsAddr, '_blank', 'noopener,noreferrer,width=1200px,height=800px');
+          
+        const newWindow = window.open('', '_blank', 'width=1000,height=800');
+        const containerDiv = newWindow.document.createElement('div');
+        newWindow.document.body.appendChild(containerDiv);
+
+        const root = ReactDOM.createRoot(containerDiv);
+        root.render(<CCTVInfoPopup lat={marker.lat} lon={marker.lon} type={marker.type} hlsAddr={marker.hlsAddr} />);
       });
       markersCluster.addLayer(leafletMarker);
     });
@@ -152,7 +198,7 @@ const Home = () => {
 
   //------------------------------------------
   return (
-    <Layout>
+   
 
       <div className="main-section">
         
@@ -184,7 +230,7 @@ const Home = () => {
         </MapContainer>
         
       </div>
-    </Layout>
+  
 
   );
 

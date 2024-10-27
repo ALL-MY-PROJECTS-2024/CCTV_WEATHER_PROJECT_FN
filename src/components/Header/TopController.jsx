@@ -1,7 +1,7 @@
 
 import {useState,useEffect} from "react";
 
-import "../../styles/TopController.scss"
+import "./TopController.scss"
 import GaugeChart from "./GaugeChart"
 
 const TopController = (props)=>{
