@@ -1,12 +1,13 @@
+//[임시] JSON 파일을 `import`로 가져오기
+import cctv1Data from '../../dataSet/CCTV1.json'
+import cctv2Data from '../../dataSet/CCTV2.json'
+
 
 import Aside from "./Aside.jsx"
 import React, { useState, useRef, useEffect } from 'react';
 
 //TopController
 import TopController from "./TopController.jsx";
-
-//HLS
-import HLSPlayer from './HLSPlayer';
 
 //
 import Layout from "../layout/Layout";
@@ -53,36 +54,39 @@ const createCCTV2MarkerIcon = () => {
 };
 
 
-const MarkerClusterGroup = ({ markers }) => {
+//-----------------
+// MarkerClusterGroup 컴포넌트
+const MarkerClusterGroup = ({ markers, type }) => {
   const map = useMap();
 
   useEffect(() => {
     const markersCluster = L.markerClusterGroup({
-      showCoverageOnHover: false, // 마커가 모여 있는 범위 표시
-      spiderfyOnMaxZoom: true,    // 최대 줌 시 마커 펼치기
+      showCoverageOnHover: false,
+      spiderfyOnMaxZoom: true,
       iconCreateFunction: (cluster) => {
-        const count = cluster.getChildCount(); // 클러스터 안에 있는 마커 개수
+        const count = cluster.getChildCount(); // 클러스터 내 마커 개수
+        let clusterClass = 'custom-cluster-icon-small'; // 기본 클러스터 아이콘 클래스
+        const backgroundColor = type === 'CCTV1' ? 'rgba(144, 43, 34, 0.7)' : 'rgba(65, 105, 225, .7)'; // CCTV1은 빨강, CCTV2는 파랑
+
+        if (count >= 10 && count < 50) {
+          clusterClass = 'custom-cluster-icon-medium';
+        } else if (count >= 50) {
+          clusterClass = 'custom-cluster-icon-large';
+        }
+
         return new L.DivIcon({
-          html: `<div style="background-color: rgba(0, 123, 255, 0.8); border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px;">${count}</div>`,
-          className: 'custom-cluster-icon',
+          html: `<div class="${clusterClass}" style="background-color: ${backgroundColor}">${count}</div>`,
+          className: 'custom-cluster-icon', // 공통 트랜지션 클래스
           iconSize: L.point(40, 40),
         });
       }
     });
 
-    // 클러스터 클릭 시 중앙으로 설정하고 마커 확산
-    markersCluster.on('clusterclick', (e) => {
-      const clusterLatLng = e.latlng;
-      map.setView(clusterLatLng, map.getZoom(), { animate: true }); // 클러스터 위치로 중앙 설정
-      e.layer.spiderfy(); // 클러스터 내부 마커를 펼침
-    });
-
-    // 마커 추가
     markers.forEach((marker) => {
       const leafletMarker = L.marker([marker.lat, marker.lon], {
         icon: marker.type === 'CCTV1' ? createCCTV1MarkerIcon() : createCCTV2MarkerIcon()
       }).on('click', () => {
-        window.open(marker.hlsAddr, '_blank', 'noopener,noreferrer,width=900,height=600');
+        window.open(marker.hlsAddr, '_blank', 'noopener,noreferrer,width=1200px,height=800px');
       });
       markersCluster.addLayer(leafletMarker);
     });
@@ -92,62 +96,60 @@ const MarkerClusterGroup = ({ markers }) => {
     return () => {
       map.removeLayer(markersCluster);
     };
-  }, [markers, map]);
+  }, [markers, map, type]);
 
   return null;
 };
 
 
-const Home = () => {
-  
+//----------------------------------
 
+
+//----------------------------------
+const Home = () => {
   const position = [35.120696, 129.0411816];  // 지도에 표시할 기본 위치 (부산 예시)
-  const [markers, setMarkers] = useState([]); // 마커 상태 관리
   const [CCTV01State,setCCTV01State] = useState(false);
   const [CCTV02State,setCCTV02State] = useState(false);
-  
   const [CCTV01Items,setCCTV01Items] = useState([]);
   const [CCTV02Items,setCCTV02Items] = useState([]);
+  const [clusterCCTV1,setClusterCCTV1] = useState([]);
+  const [clusterCCTV2,setClusterCCTV2] = useState([]);
 
 
 
+
+  
   useEffect(()=>{
 
    const reqCCTV =  async ()=>{
       try{
         const response = await axios.get("http://localhost:8080/get/cctv1");
         console.log(response);
-        setCCTV01Items(response.data);
+        setClusterCCTV1([...response.data.map(item => ({ ...item, type: 'CCTV1' })),]);
         
         const response2 = await axios.get("http://localhost:8080/get/cctv2");
         console.log(response2);
-        setCCTV02Items(response2.data);
+        setClusterCCTV2([...response2.data.map(item => ({ ...item, type: 'CCTV2' })),]);
 
       }catch(e){
         console.log(e);
+        //axios 연결 실패시 있던거에 연결
+        setClusterCCTV1(cctv1Data.map(item => ({ ...item, type: 'CCTV1' })));
+        setClusterCCTV2(cctv2Data.map(item => ({ ...item, type: 'CCTV2' })));
+
       }     
    }
    reqCCTV();
 
 
-  },[CCTV01State,CCTV02State])
+   
+
+  },[])
 
   
-  const allMarkers = [
-    ...CCTV01Items.map(item => ({ ...item, type: 'CCTV1' })),
-    ...CCTV02Items.map(item => ({ ...item, type: 'CCTV2' }))
-  ];
-  // 지도에서 클릭한 위치에 마커 추가하는 이벤트
-  const MapClickHandler = ({ markers }) => {
-     
-    useMapEvents({
-        click(e) {
-          const { lat, lng } = e.latlng;
-          setMarkers([...markers, { lat, lng }]); // 클릭한 위치에 마커 추가
-        }
-      });
-      return null;
-  };
+  
+
+
   //------------------------------------------
   return (
     <Layout>
@@ -173,46 +175,12 @@ const Home = () => {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             
           />
-
-        
-      
-          {/* 고정된 CCTV 데이터를 지도에 마커로 표시 */}
-          {CCTV01State && CCTV01Items.map((item, idx) => (
-            <Marker
-              key={idx}
-              position={[item.lat, item.lon]}
-              icon={createCCTV1MarkerIcon()}
-              eventHandlers={{
-                click: () => {
-                  // 마커 클릭 시 새 창 열기
-                  window.open(item.hlsAddr, '_blank', 'noopener,noreferrer,width=900,height=600');
-                }
-              }}
-            >
-              {/* 팝업이 아닌, 새 창을 여는 방식으로 처리하므로 Popup 태그는 제거했습니다. */}
-            </Marker>
-          ))}      
           
-           {/* 고정된 CCTV 데이터를 지도에 마커로 표시 */}
-           {CCTV02State && CCTV02Items.map((item, idx) => (
-            <Marker
-              key={idx}
-              position={[item.lat, item.lon]}
-              icon={createCCTV2MarkerIcon()}
-              eventHandlers={{
-                click: () => {
-                  // 마커 클릭 시 새 창 열기
-                  window.open(item.hlsAddr, '_blank', 'noopener,noreferrer,width=900,height=600');
-                }
-              }}
-            >
-              {/* 팝업이 아닌, 새 창을 여는 방식으로 처리하므로 Popup 태그는 제거했습니다. */}
-            </Marker>
-          ))}      
-      
-
-          <MarkerClusterGroup markers={allMarkers} />
-
+          {/* 클러스터형 마커 추가 */}
+          {CCTV01State && <MarkerClusterGroup markers={clusterCCTV1} type="CCTV1" />}
+          {CCTV02State && <MarkerClusterGroup markers={clusterCCTV2} type="CCTV2" />}
+       
+       
         </MapContainer>
         
       </div>

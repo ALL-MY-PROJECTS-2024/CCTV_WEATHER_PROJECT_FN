@@ -133,3 +133,43 @@ main {
 
 
 
+
+
+/* Home.scss 또는 별도의 CSS 파일에 추가 */
+.custom-cluster-icon {
+  transition: all 0.3s ease; /* 트랜지션 효과 설정 */
+}
+
+.custom-cluster-icon-small {
+  width: 30px;
+  height: 30px;
+  color: white;
+  display: flex;
+   background-color:  rgba(144, 43, 34, 0.7);
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.custom-cluster-icon-medium {
+  width: 40px;
+  height: 40px;
+  color: white;
+  display: flex;
+  background-color:  rgba(144, 43, 34, 0.7);
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.custom-cluster-icon-large {
+  width: 50px;
+  height: 50px;
+  color: white;
+  display: flex;
+  background-color:  rgba(144, 43, 34, 0.7);
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+

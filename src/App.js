@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.css";
 
 
 import Home from "./components/page/Home";
-import Test from "./components/page/Test";
+
 
 
 // STYLING
@@ -25,7 +25,6 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/Test" element={<Test />} />
         </Routes>
       </Router>
     </GlobalContextProvider>

@@ -1,0 +1,236 @@
+[
+    {
+        "id": 10,
+        "category": "교통",
+        "instlPos": "058_월평교차로",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.20.5.44%3A556%2FSUQtMDU4&sensorName=058_%EC%9B%94%ED%8F%89%EA%B5%90%EC%B0%A8%EB%A1%9C",
+        "lat": 35.18113957351869,
+        "lon": 129.07549381256106,
+        "lastUpdateAt": "2024-10-26T02:10:32.429656"
+    },
+    {
+        "id": 11,
+        "category": "교통",
+        "instlPos": "059_정관좌천사거리",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.20.5.44%3A556%2FSUQtMDU5&sensorName=059_%EC%A0%95%EA%B4%80%EC%A2%8C%EC%B2%9C%EC%82%AC%EA%B1%B0%EB%A6%AC",
+        "lat": 35.168581325443455,
+        "lon": 129.094033241272,
+        "lastUpdateAt": "2024-10-26T02:10:33.720047"
+    },
+    {
+        "id": 12,
+        "category": "교통",
+        "instlPos": "105_다대포",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.20.5.44%3A557%2FSUQtMTA1&sensorName=105_%EB%8B%A4%EB%8C%80%ED%8F%AC",
+        "lat": 35.17657954015638,
+        "lon": 129.05167579650882,
+        "lastUpdateAt": "2024-10-26T02:10:35.004929"
+    },
+    {
+        "id": 13,
+        "category": "교통",
+        "instlPos": "260_연화터널입구",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.20.5.43%3A556%2FSUQtMjYw&sensorName=260_%EC%97%B0%ED%99%94%ED%84%B0%EB%84%90%EC%9E%85%EA%B5%AC",
+        "lat": 35.16647640132904,
+        "lon": 129.07948493957522,
+        "lastUpdateAt": "2024-10-26T02:11:17.540633"
+    },
+    {
+        "id": 14,
+        "category": "교통",
+        "instlPos": "060_교리삼거리",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.20.5.44%3A554%2FSUQtMDYwXw%3D%3D&sensorName=060_%EA%B5%90%EB%A6%AC%EC%82%BC%EA%B1%B0%EB%A6%AC",
+        "lat": 35.17279101021372,
+        "lon": 129.10441875457767,
+        "lastUpdateAt": "2024-10-26T02:11:18.926336"
+    },
+    {
+        "id": 15,
+        "category": "교통",
+        "instlPos": "204_청강사거리",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.20.5.43%3A556%2FSUQtMjA0&sensorName=204_%EC%B2%AD%EA%B0%95%EC%82%AC%EA%B1%B0%EB%A6%AC",
+        "lat": 35.17237005154443,
+        "lon": 129.05918598175052,
+        "lastUpdateAt": "2024-10-26T02:11:20.307891"
+    },
+    {
+        "id": 16,
+        "category": "교통",
+        "instlPos": "054_민락교",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.20.5.43%3A555%2FSUQtMDU0&sensorName=054_%EB%AF%BC%EB%9D%BD%EA%B5%90",
+        "lat": 35.18422622013723,
+        "lon": 129.10549163818362,
+        "lastUpdateAt": "2024-10-26T02:11:21.596267"
+    },
+    {
+        "id": 17,
+        "category": "교통",
+        "instlPos": "124_경부TG",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.20.5.44%3A554%2FSUQtMTI0&sensorName=124_%EA%B2%BD%EB%B6%80TG",
+        "lat": 35.18583964785137,
+        "lon": 129.05163288116458,
+        "lastUpdateAt": "2024-10-26T02:11:22.979974"
+    },
+    {
+        "id": 18,
+        "category": "교통",
+        "instlPos": "122_반여",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.20.5.44%3A554%2FSUQtMTIy&sensorName=122_%EB%B0%98%EC%97%AC",
+        "lat": 35.193660810754935,
+        "lon": 129.08587932586673,
+        "lastUpdateAt": "2024-10-26T02:11:34.384524"
+    },
+    {
+        "id": 19,
+        "category": "교통",
+        "instlPos": "259_롯데몰동부산점",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.20.5.43%3A556%2FSUQtMjU5&sensorName=259_%EB%A1%AF%EB%8D%B0%EB%AA%B0%EB%8F%99%EB%B6%80%EC%82%B0%EC%A0%90",
+        "lat": 35.19864071048873,
+        "lon": 129.07103061676028,
+        "lastUpdateAt": "2024-10-26T02:14:47.57401"
+    },
+    {
+        "id": 20,
+        "category": "교통",
+        "instlPos": "258_송정1호교",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.20.5.43%3A556%2FSUQtMjU4&sensorName=258_%EC%86%A1%EC%A0%951%ED%98%B8%EA%B5%90",
+        "lat": 35.17331720548532,
+        "lon": 129.0723824501038,
+        "lastUpdateAt": "2024-10-26T02:14:48.843794"
+    },
+    {
+        "id": 21,
+        "category": "교통",
+        "instlPos": "257_송정삼거리",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.20.5.43%3A556%2FSUQtMjU3&sensorName=257_%EC%86%A1%EC%A0%95%EC%82%BC%EA%B1%B0%EB%A6%AC",
+        "lat": 35.1729839488754,
+        "lon": 129.08665180206302,
+        "lastUpdateAt": "2024-10-26T02:14:50.151908"
+    },
+    {
+        "id": 22,
+        "category": "교통",
+        "instlPos": "068_광어골",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.20.5.44%3A554%2FSUQtMDY4Xw%3D%3D&sensorName=068_%EA%B4%91%EC%96%B4%EA%B3%A8",
+        "lat": 35.17878943442445,
+        "lon": 129.10476207733157,
+        "lastUpdateAt": "2024-10-26T02:14:51.451995"
+    },
+    {
+        "id": 23,
+        "category": "교통",
+        "instlPos": "303_장산3터널",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.20.5.43%3A556%2FSUQtMzAz&sensorName=303_%EC%9E%A5%EC%82%B03%ED%84%B0%EB%84%90",
+        "lat": 35.1775968005358,
+        "lon": 129.07697439193728,
+        "lastUpdateAt": "2024-10-26T02:14:52.77786"
+    },
+    {
+        "id": 24,
+        "category": "교통",
+        "instlPos": "202_중동역교차로",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.20.5.43%3A557%2FSUQtMjAy&sensorName=202_%EC%A4%91%EB%8F%99%EC%97%AD%EA%B5%90%EC%B0%A8%EB%A1%9C",
+        "lat": 35.181174649706925,
+        "lon": 129.0662240982056,
+        "lastUpdateAt": "2024-10-26T02:14:54.157712"
+    },
+    {
+        "id": 25,
+        "category": "교통",
+        "instlPos": "087_동백사거리",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.20.5.44%3A554%2FSUQtMDg3&sensorName=087_%EB%8F%99%EB%B0%B1%EC%82%AC%EA%B1%B0%EB%A6%AC",
+        "lat": 35.17424680880902,
+        "lon": 129.07693147659305,
+        "lastUpdateAt": "2024-10-26T02:21:21.337921"
+    },
+    {
+        "id": 26,
+        "category": "교통",
+        "instlPos": "621_동부지청어귀VMS1",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.20.5.45%3A554%2FSUQtNjIx&sensorName=621_%EB%8F%99%EB%B6%80%EC%A7%80%EC%B2%AD%EC%96%B4%EA%B7%80VMS1",
+        "lat": 35.19064466671118,
+        "lon": 129.09296035766604,
+        "lastUpdateAt": "2024-10-26T02:21:23.899819"
+    },
+    {
+        "id": 27,
+        "category": "교통",
+        "instlPos": "199_장대골삼거리",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.20.5.43%3A556%2FSUQtMTk5&sensorName=199_%EC%9E%A5%EB%8C%80%EA%B3%A8%EC%82%BC%EA%B1%B0%EB%A6%AC",
+        "lat": 35.18084142530753,
+        "lon": 129.0617394447327,
+        "lastUpdateAt": "2024-10-26T02:21:25.315769"
+    },
+    {
+        "id": 28,
+        "category": "교통",
+        "instlPos": "040_수영",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.20.5.44%3A556%2FSUQtMDQw&sensorName=040_%EC%88%98%EC%98%81",
+        "lat": 35.17952605249651,
+        "lon": 129.08957004547122,
+        "lastUpdateAt": "2024-10-26T02:21:26.696225"
+    },
+    {
+        "id": 29,
+        "category": "교통",
+        "instlPos": "065_망미사거리",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.20.5.44%3A557%2FSUQtMDY1&sensorName=065_%EB%A7%9D%EB%AF%B8%EC%82%AC%EA%B1%B0%EB%A6%AC",
+        "lat": 35.18454189329742,
+        "lon": 129.0712881088257,
+        "lastUpdateAt": "2024-10-26T02:21:27.989298"
+    },
+    {
+        "id": 30,
+        "category": "교통",
+        "instlPos": "043_49호광장",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.20.5.44%3A556%2FSUQtMDQz&sensorName=043_49%ED%98%B8%EA%B4%91%EC%9E%A5",
+        "lat": 35.184313907249155,
+        "lon": 129.0798926353455,
+        "lastUpdateAt": "2024-10-26T02:21:59.390853"
+    },
+    {
+        "id": 31,
+        "category": "교통",
+        "instlPos": "039_KBS",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.20.5.43%3A555%2FSUQtMDM5&sensorName=039_KBS",
+        "lat": 35.175877973857176,
+        "lon": 129.08156633377078,
+        "lastUpdateAt": "2024-10-26T02:22:00.696849"
+    },
+    {
+        "id": 32,
+        "category": "교통",
+        "instlPos": "128_황령터널",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.20.5.43%3A556%2FSUQtMTI4&sensorName=128_%ED%99%A9%EB%A0%B9%ED%84%B0%EB%84%90",
+        "lat": 35.177842344237405,
+        "lon": 129.06654596328738,
+        "lastUpdateAt": "2024-10-26T02:22:32.217282"
+    },
+    {
+        "id": 33,
+        "category": "교통",
+        "instlPos": "120_대연-문현(구요금소)",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.20.5.44%3A554%2FSUQtMTIw&sensorName=120_%EB%8C%80%EC%97%B0-%EB%AC%B8%ED%98%84%28%EA%B5%AC%EC%9A%94%EA%B8%88%EC%86%8C%29",
+        "lat": 35.1763164535037,
+        "lon": 129.072060585022,
+        "lastUpdateAt": "2024-10-26T02:22:33.541073"
+    },
+    {
+        "id": 34,
+        "category": "교통",
+        "instlPos": "064_신리",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.20.5.44%3A556%2FSUQtMDY0&sensorName=064_%EC%8B%A0%EB%A6%AC",
+        "lat": 35.19313474718115,
+        "lon": 129.05708312988284,
+        "lastUpdateAt": "2024-10-26T02:23:17.213361"
+    },
+    {
+        "id": 35,
+        "category": "교통",
+        "instlPos": "018_교대",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.20.5.43%3A554%2FSUQtMDE4&sensorName=018_%EA%B5%90%EB%8C%80",
+        "lat": 35.18135003042106,
+        "lon": 129.08442020416263,
+        "lastUpdateAt": "2024-10-26T02:23:39.756628"
+    }
+]
