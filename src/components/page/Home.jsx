@@ -133,7 +133,7 @@ const Home = () => {
 
       }catch(e){
         console.log(e);
-        //axios 연결 실패시 있던거에 연결
+        //axios 연결 실패시 있던거에
         setClusterCCTV1(cctv1Data.map(item => ({ ...item, type: 'CCTV1' })));
         setClusterCCTV2(cctv2Data.map(item => ({ ...item, type: 'CCTV2' })));
 

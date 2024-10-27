@@ -2,6 +2,7 @@
 import {useState,useEffect} from "react";
 
 import "../../styles/TopController.scss"
+import GaugeChart from "./GaugeChart"
 
 const TopController = (props)=>{
     const [activeMenu,setActiveMenu] = useState();
@@ -112,7 +113,7 @@ const TopController = (props)=>{
             </div>
 
             <div className="flooding-status">
-        
+                    <GaugeChart level="안전" />
             </div>
 
         </div>
