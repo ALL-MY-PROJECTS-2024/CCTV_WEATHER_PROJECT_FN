@@ -1,12 +1,11 @@
 import React, { useRef, useEffect } from 'react';
 
-const GaugeChart = ({ level }) => {
+const GaugeChart = ({ floodRiskInfo }) => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
-
     const centerX = canvas.width / 2;
     const centerY = canvas.height - 30;
     const radius = 100;
@@ -16,47 +15,26 @@ const GaugeChart = ({ level }) => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     const sections = [
-      { color: 'rgba(255, 99, 71, 0.9)', text: '위험', startAngle: -Math.PI, endAngle: -0.75 * Math.PI },
-      { color: 'rgba(255, 193, 7, 0.9)', text: '경계', startAngle: -0.75 * Math.PI, endAngle: -0.5 * Math.PI },
-      { color: 'rgba(75, 0, 130, 0.8)', text: '주의', startAngle: -0.5 * Math.PI, endAngle: -0.25 * Math.PI },
-      { color: 'rgba(76, 175, 80, 0.8)', text: '안전', startAngle: -0.25 * Math.PI, endAngle: 0 },
+      { color: 'rgba(255, 99, 71, 1)', text: '위험', startAngle: -Math.PI, endAngle: -0.75 * Math.PI },
+      { color: 'rgba(255, 193, 7, 1)', text: '경계', startAngle: -0.75 * Math.PI, endAngle: -0.5 * Math.PI },
+      { color: 'rgba(75, 0, 130, 1)', text: '주의', startAngle: -0.5 * Math.PI, endAngle: -0.25 * Math.PI },
+      { color: 'rgba(76, 175, 80, 1)', text: '안전', startAngle: -0.25 * Math.PI, endAngle: 0 },
     ];
 
-    sections.forEach(({ color, text, startAngle, endAngle }) => {
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, radius, startAngle, endAngle);
-      ctx.arc(centerX, centerY, innerRadius, endAngle, startAngle, true);
-      ctx.closePath();
-      ctx.fillStyle = color;
-      ctx.fill();
-
-      const angle = (startAngle + endAngle) / 2;
-      const textX = centerX + (radius + innerRadius) / 2 * Math.cos(angle);
-      const textY = centerY + (radius + innerRadius) / 2 * Math.sin(angle);
-
-      ctx.fillStyle = 'white';
-      ctx.font = `12px ${fontFamily}`;
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText(text, textX, textY);
-    });
-
-    const levelMap = {
+    const riskAngleMap = {
       '위험': -0.875 * Math.PI,
       '경계': -0.625 * Math.PI,
       '주의': -0.375 * Math.PI,
       '안전': -0.125 * Math.PI,
     };
-    const targetAngle = levelMap[level] || levelMap['경계'];
-
-    // 애니메이션을 위한 변수 설정
-    let currentAngle = -Math.PI; // 시작 각도
-    const step = (targetAngle - currentAngle) / 20; // 애니메이션의 각도 변화
+    const targetAngle = riskAngleMap[floodRiskInfo?.info] || riskAngleMap['안전'];
+    
+    let currentAngle = -Math.PI;
+    const step = (targetAngle - currentAngle) / 15;
 
     const animateNeedle = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // 게이지 섹션 다시 그리기
       sections.forEach(({ color, text, startAngle, endAngle }) => {
         ctx.beginPath();
         ctx.arc(centerX, centerY, radius, startAngle, endAngle);
@@ -76,6 +54,8 @@ const GaugeChart = ({ level }) => {
         ctx.fillText(text, textX, textY);
       });
 
+      const needleColor = sections.find(s => s.startAngle <= currentAngle && currentAngle < s.endAngle)?.color || 'gray';
+
       const needleLength = innerRadius + 3;
       const needleWidth = 10;
 
@@ -93,35 +73,61 @@ const GaugeChart = ({ level }) => {
         centerY + needleWidth * Math.sin(currentAngle - Math.PI / 2)
       );
       ctx.closePath();
-      ctx.fillStyle = 'rgb(76, 175, 80)';
+      ctx.fillStyle = needleColor;
       ctx.fill();
 
-      // 바늘 중심 원
       ctx.beginPath();
-      ctx.arc(centerX, centerY, 10, 0, Math.PI * 3);
-      ctx.fillStyle = 'rgb(76, 175, 80)';
+      ctx.arc(centerX, centerY, 10, 0, Math.PI * 2);
+      ctx.fillStyle = needleColor;
       ctx.fill();
 
-      if (currentAngle < targetAngle) {
+      if (Math.abs(currentAngle - targetAngle) > 0.01) {
         currentAngle += step;
         requestAnimationFrame(animateNeedle);
       }
     };
 
     animateNeedle();
+  }, [floodRiskInfo]);
 
-  }, [level]);
+  const getMessageByRiskLevel = (floodRiskInfo) => {
+    if (!floodRiskInfo || !floodRiskInfo.info) return '정보 없음: 현재 위치의 침수 위험 정보를 가져올 수 없습니다.';
+    
+    switch(floodRiskInfo.info) {
+      case '위험':
+        return '경고: 현재 매우 위험한 침수 상황입니다.';
+      case '경계':
+        return '주의: 현재 경계가 필요한 침수 수준입니다.';
+      case '주의':
+        return '유의: 현재 침수 가능성이 있는 상태입니다.';
+      case '안전':
+        return '안전: 현재 침수 위험이 없습니다.';
+      default:
+        return '';
+    }
+  };
 
   return (
     <div style={{ textAlign: 'center', backgroundColor: "white", borderRadius: "5px" }}>
-      <div className="title" style={{ padding: "10px", textAlign: "left", display: "flex", justifyContent: "left", alignItems: "center", height: "35px" }}>
+      <div className="title" style={{fontWeight:"800", padding: "20px 10px", textAlign: "left", display: "flex", justifyContent: "left", alignItems: "center", height: "35px",fontSize:"1.3rem" }}>
         <img src="https://safecity.busan.go.kr/vue/img/ico-falv.47714d6f.svg" alt="icon" />
         &nbsp;도시 침수 위험 상태
       </div>
-      <div style={{ padding: "0 5px", height: "1px", borderBottom: "1px solid gray", width: "100%", backgroundColor: "gray" }}></div>
+      <div style={{ padding: "0 5px", height: "2px", borderBottom: "1px solid gray", width: "90%", backgroundColor: "gray",margin:"0 auto" }}></div>
+      <div style={{fontSize:"1.1rem",marginTop:"10px",fontWeight:"600"}}>
+        { floodRiskInfo && (
+          <>
+            {floodRiskInfo.Dong || ''}  
+            &nbsp;
+            {floodRiskInfo.Gu ? "|" : ""}  
+            &nbsp;
+            {floodRiskInfo.Gu || ''} 
+          </>
+        )}
+      </div>
       <canvas ref={canvasRef} width="250" height="140" />
-      <p style={{ color: 'gray', fontSize: '12px', fontWeight: "100", fontFamily: 'Pretendard-Regular', position: "relative", top: "-20px" }}>
-        {level}: 침수 위험이 없습니다.
+      <p style={{ color: 'black', fontSize: '11px', fontWeight: "400", fontFamily: 'Pretendard-Regular', position: "relative", top: "-15px" }}>
+        {getMessageByRiskLevel(floodRiskInfo)}
       </p>
     </div>
   );

@@ -4,10 +4,10 @@ import {useState,useEffect} from "react";
 import "./TopController.scss"
 import GaugeChart from "./GaugeChart"
 
-const TopController = (props)=>{
+const TopController = ({ CCTV01State, CCTV02State, setCCTV01State, setCCTV02State, floodRiskInfo })=>{
     const [activeMenu,setActiveMenu] = useState();
     const [activeSubMenu,setActiveSubMenu] = useState();
-
+    
     //
     const activeMenuHandler = (e)=>{
         //기본메뉴 음영주기
@@ -42,7 +42,7 @@ const TopController = (props)=>{
 
     const 재난CCTV = (e)=>{
         
-        if(!props.CCTV01State){
+        if(!CCTV01State){
             //ON
             e.target.style.backgroundColor="royalblue";
             e.target.style.color="white";
@@ -55,11 +55,11 @@ const TopController = (props)=>{
 
         }
 
-        props.setCCTV01State(!props.CCTV01State);
+        setCCTV01State(!CCTV01State);
     }       
 
     const 교통CCTV = (e)=>{
-        if(!props.CCTV02State){
+        if(!CCTV02State){
             //ON
             e.target.style.backgroundColor="royalblue";
             e.target.style.color="white";
@@ -70,7 +70,7 @@ const TopController = (props)=>{
             e.target.innerHTML="OFF"
 
         }
-        props.setCCTV02State(!props.CCTV02State);
+        setCCTV02State(!CCTV02State);
     }       
 
     return (
@@ -113,7 +113,7 @@ const TopController = (props)=>{
             </div>
 
             <div className="flooding-status">
-                    <GaugeChart level="안전" />
+                    <GaugeChart level={95}  floodRiskInfo={floodRiskInfo} />
             </div>
 
         </div>
