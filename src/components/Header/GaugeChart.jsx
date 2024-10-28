@@ -31,7 +31,7 @@ const GaugeChart = ({ floodRiskInfo }) => {
     const targetAngle = riskAngleMap[floodRiskInfo?.info] || riskAngleMap[floodRiskInfo?.info];
     
     let currentAngle = -Math.PI;
-    const step = (targetAngle - currentAngle) / 15;
+    const step = (targetAngle - currentAngle) / 10;
 
     const animateNeedle = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
