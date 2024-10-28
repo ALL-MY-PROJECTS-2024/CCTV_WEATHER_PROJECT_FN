@@ -217,9 +217,13 @@ const Home = () => {
         {/* Leaflet 지도 추가 */}
         <MapContainer center={position} zoom={14} style={{ height: "100vh", width: "100%" }}>
           <TileLayer
-            url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            
+          url={`https://api.maptiler.com/maps/basic-v2/{z}/{x}/{y}@2x.png?key=C8KH1r2Gc55eS4hW9Gpq`} // 고해상도 URL
+           attribution='&copy; <a href="https://www.maptiler.com/copyright/">MapTiler</a> contributors'
+          
+           detectRetina={true}
+           tileSize={512}
+           zoomOffset={-1}
+  
           />
           
           {/* 클러스터형 마커 추가 */}

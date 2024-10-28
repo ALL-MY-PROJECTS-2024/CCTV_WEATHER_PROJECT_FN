@@ -1,65 +1,146 @@
 [
     {
-        "id": 1,
+        "id": 7,
         "category": "재난",
         "instlPos": "기장군_효암천",
         "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.1.210.201%3A554%2Fus676r3DLcDns60tMDQz&sensorName=%EA%B8%B0%EC%9E%A5%EA%B5%B0_%ED%9A%A8%EC%95%94%EC%B2%9C",
-        "lat": 35.197518506209555,
-        "lon": 129.1176795959473,
-        "lastUpdateAt": "2024-10-26T02:24:28.172799"
+        "lat": 35.13029297592948,
+        "lon": 128.9683394973398,
+        "lastUpdateAt": "2024-10-25T13:37:29.902777"
     },
     {
-        "id": 2,
+        "id": 8,
         "category": "재난",
         "instlPos": "강서구_녹산산단",
         "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.1.210.203%3A554%2Fus676r3DLcDns60tMTE2&sensorName=%EA%B0%95%EC%84%9C%EA%B5%AC_%EB%85%B9%EC%82%B0%EC%82%B0%EB%8B%A8",
-        "lat": 35.200885072535,
-        "lon": 129.0630912780762,
-        "lastUpdateAt": "2024-10-26T02:24:29.571477"
+        "lat": 35.152443101844966,
+        "lon": 129.0934334255389,
+        "lastUpdateAt": "2024-10-25T13:37:31.188247"
     },
     {
-        "id": 3,
+        "id": 9,
         "category": "재난",
         "instlPos": "기장군_죽성방파제",
         "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.1.210.204%3A554%2Fus676r3DLcDns60tMTIx&sensorName=%EA%B8%B0%EC%9E%A5%EA%B5%B0_%EC%A3%BD%EC%84%B1%EB%B0%A9%ED%8C%8C%EC%A0%9C",
-        "lat": 35.179280513880876,
-        "lon": 129.1092681884766,
-        "lastUpdateAt": "2024-10-26T02:24:42.074223"
+        "lat": 35.18051206326687,
+        "lon": 129.04003964938252,
+        "lastUpdateAt": "2024-10-25T13:37:43.482812"
     },
     {
-        "id": 4,
+        "id": 10,
         "category": "재난",
         "instlPos": "기장군_두호마을",
         "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.1.210.201%3A554%2Fus676r3DLcDns60tMDQ5&sensorName=%EA%B8%B0%EC%9E%A5%EA%B5%B0_%EB%91%90%ED%98%B8%EB%A7%88%EC%9D%84",
-        "lat": 35.178578970892055,
-        "lon": 129.03202056884768,
-        "lastUpdateAt": "2024-10-26T02:24:43.496208"
+        "lat": 35.154907297978475,
+        "lon": 129.07096987676604,
+        "lastUpdateAt": "2024-10-25T13:37:44.726642"
     },
     {
-        "id": 5,
+        "id": 11,
         "category": "재난",
         "instlPos": "기장군_서암방파제",
         "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.1.210.204%3A554%2Fus676r3DLcDns60tMTIw&sensorName=%EA%B8%B0%EC%9E%A5%EA%B5%B0_%EC%84%9C%EC%95%94%EB%B0%A9%ED%8C%8C%EC%A0%9C",
-        "lat": 35.15598605057665,
-        "lon": 129.08969879150393,
-        "lastUpdateAt": "2024-10-26T02:25:07.008729"
+        "lat": 35.07189383022407,
+        "lon": 128.97562389580116,
+        "lastUpdateAt": "2024-10-25T13:38:07.319571"
     },
     {
-        "id": 6,
+        "id": 12,
         "category": "재난",
         "instlPos": "기장군_동암마을",
         "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.1.210.201%3A554%2Fus676r3DLcDns60tMDQ3&sensorName=%EA%B8%B0%EC%9E%A5%EA%B5%B0_%EB%8F%99%EC%95%94%EB%A7%88%EC%9D%84",
-        "lat": 35.15121407216851,
-        "lon": 129.0550231933594,
-        "lastUpdateAt": "2024-10-26T02:25:08.477109"
+        "lat": 35.143708559405255,
+        "lon": 128.99923161008883,
+        "lastUpdateAt": "2024-10-25T13:38:08.523018"
     },
     {
-        "id": 7,
+        "id": 13,
         "category": "재난",
         "instlPos": "(재난)구덕포방파제_고2",
         "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.1.210.212%3A554%2Fus676r3DLcDns60tMjIz&sensorName=%28%EC%9E%AC%EB%82%9C%29%EA%B5%AC%EB%8D%95%ED%8F%AC%EB%B0%A9%ED%8C%8C%EC%A0%9C_%EA%B3%A02",
-        "lat": 35.19597545001105,
-        "lon": 129.10068511962893,
-        "lastUpdateAt": "2024-10-26T02:26:30.467226"
+        "lat": 35.14869983886185,
+        "lon": 129.04499768598,
+        "lastUpdateAt": "2024-10-25T13:39:09.938267"
+    },
+    {
+        "id": 14,
+        "category": "재난",
+        "instlPos": "기장군_월내출장소_인근",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.1.210.204%3A554%2Fus676r3DLcDns60tMTE5&sensorName=%EA%B8%B0%EC%9E%A5%EA%B5%B0_%EC%9B%94%EB%82%B4%EC%B6%9C%EC%9E%A5%EC%86%8C_%EC%9D%B8%EA%B7%BC",
+        "lat": 35.14526836390568,
+        "lon": 129.0152497596958,
+        "lastUpdateAt": "2024-10-25T13:40:34.504394"
+    },
+    {
+        "id": 15,
+        "category": "재난",
+        "instlPos": "기장군_장안배수펌프장_입구",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.1.210.201%3A554%2Fus676r3DLcDns60tMDUz&sensorName=%EA%B8%B0%EC%9E%A5%EA%B5%B0_%EC%9E%A5%EC%95%88%EB%B0%B0%EC%88%98%ED%8E%8C%ED%94%84%EC%9E%A5_%EC%9E%85%EA%B5%AC",
+        "lat": 35.13278905665363,
+        "lon": 129.08923822181808,
+        "lastUpdateAt": "2024-10-25T13:40:35.702396"
+    },
+    {
+        "id": 16,
+        "category": "재난",
+        "instlPos": "기장군_학리방파제1(박스형)",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.1.210.208%3A554%2Fus676r3DLcDns60tMTk5LTM%3D&sensorName=%EA%B8%B0%EC%9E%A5%EA%B5%B0_%ED%95%99%EB%A6%AC%EB%B0%A9%ED%8C%8C%EC%A0%9C1%28%EB%B0%95%EC%8A%A4%ED%98%95%29",
+        "lat": 35.08129171045419,
+        "lon": 129.05262534434513,
+        "lastUpdateAt": "2024-10-25T13:40:39.165951"
+    },
+    {
+        "id": 17,
+        "category": "재난",
+        "instlPos": "기장군_이동어촌계",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.1.210.201%3A554%2Fus676r3DLcDns60tMDUw&sensorName=%EA%B8%B0%EC%9E%A5%EA%B5%B0_%EC%9D%B4%EB%8F%99%EC%96%B4%EC%B4%8C%EA%B3%84",
+        "lat": 35.09658826982488,
+        "lon": 129.02478433265225,
+        "lastUpdateAt": "2024-10-25T13:40:40.442045"
+    },
+    {
+        "id": 18,
+        "category": "재난",
+        "instlPos": "중앙공원_아래_산책로",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.17.50.66%3A557%2Fus676i01LbHiwOUtMDA2OQ%3D%3D&sensorName=%EC%A4%91%EC%95%99%EA%B3%B5%EC%9B%90_%EC%95%84%EB%9E%98_%EC%82%B0%EC%B1%85%EB%A1%9C",
+        "lat": 35.09315459894802,
+        "lon": 129.0038081883479,
+        "lastUpdateAt": "2024-10-25T13:42:13.687899"
+    },
+    {
+        "id": 19,
+        "category": "재난",
+        "instlPos": "영도구_조도방파제",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.1.210.203%3A554%2Fus676r3DLcDns60tMTAz&sensorName=%EC%98%81%EB%8F%84%EA%B5%AC_%EC%A1%B0%EB%8F%84%EB%B0%A9%ED%8C%8C%EC%A0%9C",
+        "lat": 35.10782471232296,
+        "lon": 128.9778741121963,
+        "lastUpdateAt": "2024-10-25T13:42:27.279876"
+    },
+    {
+        "id": 20,
+        "category": "재난",
+        "instlPos": "남구_오륙도선착장_공영주차장",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.1.210.204%3A554%2Fus676r3DLcDns60tMTI0&sensorName=%EB%82%A8%EA%B5%AC_%EC%98%A4%EB%A5%99%EB%8F%84%EC%84%A0%EC%B0%A9%EC%9E%A5_%EA%B3%B5%EC%98%81%EC%A3%BC%EC%B0%A8%EC%9E%A5",
+        "lat": 35.12030784507315,
+        "lon": 129.01029176499839,
+        "lastUpdateAt": "2024-10-25T13:42:28.485442"
+    },
+    {
+        "id": 21,
+        "category": "재난",
+        "instlPos": "남구_백운포체육공원",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.1.210.202%3A554%2Fus676r3DLcDns60tMDYx&sensorName=%EB%82%A8%EA%B5%AC_%EB%B0%B1%EC%9A%B4%ED%8F%AC%EC%B2%B4%EC%9C%A1%EA%B3%B5%EC%9B%90",
+        "lat": 35.128420860889634,
+        "lon": 129.05071838785375,
+        "lastUpdateAt": "2024-10-25T13:42:29.690557"
+    },
+    {
+        "id": 22,
+        "category": "재난",
+        "instlPos": "남구_백세교",
+        "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.1.210.201%3A554%2Fus676r3DLcDns60tMDU2&sensorName=%EB%82%A8%EA%B5%AC_%EB%B0%B1%EC%84%B8%EA%B5%90",
+        "lat": 35.11968374071411,
+        "lon": 129.03317478199392,
+        "lastUpdateAt": "2024-10-25T13:43:21.260489"
     }
 ]
