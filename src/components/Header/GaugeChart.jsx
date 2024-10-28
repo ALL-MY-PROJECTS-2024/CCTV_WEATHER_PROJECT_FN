@@ -27,7 +27,7 @@ const GaugeChart = ({ floodRiskInfo }) => {
       '주의': -0.375 * Math.PI,
       '안전': -0.125 * Math.PI,
     };
-    const targetAngle = riskAngleMap[floodRiskInfo?.info] || riskAngleMap['안전'];
+    const targetAngle = riskAngleMap[floodRiskInfo?.info] || riskAngleMap[floodRiskInfo?.info];
     
     let currentAngle = -Math.PI;
     const step = (targetAngle - currentAngle) / 15;
@@ -91,7 +91,7 @@ const GaugeChart = ({ floodRiskInfo }) => {
   }, [floodRiskInfo]);
 
   const getMessageByRiskLevel = (floodRiskInfo) => {
-    if (!floodRiskInfo || !floodRiskInfo.info) return '정보 없음: 현재 위치의 침수 위험 정보를 가져올 수 없습니다.';
+    if (!floodRiskInfo || !floodRiskInfo.info) return '';
     
     switch(floodRiskInfo.info) {
       case '위험':
