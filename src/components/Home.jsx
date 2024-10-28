@@ -21,8 +21,6 @@ const throttle = (func, delay) => {
 };
 
 
-
-
 // 날씨 정보 가져오기
 const fetchWeatherInfo = async (latitude, longitude) => {
   // 현재 날짜와 시간을 가져와서 포맷
