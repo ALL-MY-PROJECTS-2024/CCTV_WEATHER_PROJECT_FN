@@ -3,6 +3,7 @@ import React from 'react';
 import './CCTVPopup.scss';
 
 const CCTVPopup = ({ lat, lon, hlsAddr, weatherData, onClose }) => {
+  console.log('weatherData',weatherData);
   return (
     <div className="cctv-popup-overlay">
       <div className="cctv-popup">
@@ -17,56 +18,79 @@ const CCTVPopup = ({ lat, lon, hlsAddr, weatherData, onClose }) => {
             <div className="title">
               <h3>날씨조회</h3>
             </div>
-            <div>
+            <div className="weatherInfo">
               <table className="table">
                 <tr>
                   <td>1</td>
                   <td>2</td>
                   <td>3</td>
                   <td>4</td>
+                  <td>5</td>
                 </tr>
                 <tr>
                   <td>1</td>
                   <td>2</td>
                   <td>3</td>
                   <td>4</td>
+                  <td>5</td>
                 </tr>
                 <tr>
                   <td>1</td>
                   <td>2</td>
                   <td>3</td>
                   <td>4</td>
+                  <td>5</td>
                 </tr>
                 <tr>
                   <td>1</td>
                   <td>2</td>
                   <td>3</td>
                   <td>4</td>
+                  <td>5</td>
                 </tr>
                 <tr>
                   <td>1</td>
                   <td>2</td>
                   <td>3</td>
                   <td>4</td>
+                  <td>5</td>
+                </tr>             
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                  <td>5</td>
                 </tr>
                 <tr>
                   <td>1</td>
                   <td>2</td>
                   <td>3</td>
                   <td>4</td>
+                  <td>5</td>
                 </tr>
                 <tr>
                   <td>1</td>
                   <td>2</td>
                   <td>3</td>
                   <td>4</td>
+                  <td>5</td>
                 </tr>
                 <tr>
                   <td>1</td>
                   <td>2</td>
                   <td>3</td>
                   <td>4</td>
+                  <td>5</td>
                 </tr>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                  <td>5</td>
+                </tr>
+
               </table>
             </div>
 

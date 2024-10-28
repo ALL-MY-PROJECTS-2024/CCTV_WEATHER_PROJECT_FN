@@ -86,6 +86,14 @@ tr,td{
       align-items: center;
       
     }
+
+    .weatherInfo{
+      overflow:auto;
+      height:90%;
+    }
+    .weatherInfo::-webkit-scrollbar{
+      display:none;
+    }
   }
   .right{
     width:100%;
