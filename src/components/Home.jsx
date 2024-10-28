@@ -37,7 +37,7 @@ const fetchWeatherInfo = async (latitude, longitude) => {
   const base_time = hours.toString().padStart(2, '0') + "00";
 
   const gridCoords = convertNxNy("toXY", latitude, longitude);
-  console.log(`baseDate : ${base_date} 격자 좌표: x=${gridCoords.x}, y=${gridCoords.y}`);
+  console.log(`baseDate : ${base_date} base_time : ${base_time} 격자 좌표: x=${gridCoords.x}, y=${gridCoords.y}`);
 
   try {
     const response = await axios.get(
@@ -49,7 +49,7 @@ const fetchWeatherInfo = async (latitude, longitude) => {
           numOfRows: 100,
           dataType: "JSON",
           base_date: base_date,
-          base_time: "1400",
+          base_time: base_time,
           nx: gridCoords.x,
           ny: gridCoords.y,
           
