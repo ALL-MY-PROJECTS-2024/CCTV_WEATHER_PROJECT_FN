@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import "./GaugeChart.scss";
 
 const GaugeChart = ({ floodRiskInfo }) => {
   const canvasRef = useRef(null);

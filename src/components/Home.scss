@@ -1,13 +1,39 @@
-/* 마커 트랜지션 효과 */
-.marker-fade {
-  transition: opacity 0.5s ease;
-  opacity: 0; /* 초기 투명도 */
+/* Home.scss */
+
+.mainSection {
+  display: flex;
+  flex-direction: row;
+
+  /* Desktop-specific layout */
+  #map {
+    width: calc(100vw - 220px);
+    height: 100vh;
+    position: absolute;
+    left: 220px;
+  }
+
+  .info-container {
+    padding: 10px;
+  }
 }
 
-.marker-fade-in {
-  opacity: 1; /* 나타나는 효과 */
-}
+/* Mobile Styles */
+@media (max-width: 480px) {
+  .mainSection {
+    flex-direction: column;
+  }
 
-.marker-fade-out {
-  opacity: 0; /* 사라지는 효과 */
+  #map {
+    left:0 !important;
+    top:70px !important;
+    width: 100% !important;
+    height: calc(100vh - 80px - 70px) !important; /* Adjust map height for mobile */
+    position: relative;
+  }
+
+  .info-container {
+    padding: 20px;
+    font-size: 1rem;
+    text-align: center;
+  }
 }

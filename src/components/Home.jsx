@@ -78,9 +78,10 @@ const Home = () => {
         styles: [
           { width: '40px', height: '40px', background: 'rgba(144, 43, 34, 0.7)', color: 'white', borderRadius: '20px', textAlign: 'center', lineHeight: '40px' }
         ],
-      });
-
-      const cctv2Clusterer = new kakao.maps.MarkerClusterer({
+        animate: true,  // 추가된 애니메이션 옵션
+    });
+    
+    const cctv2Clusterer = new kakao.maps.MarkerClusterer({
         map: kakaoMap,
         averageCenter: false,
         minLevel: 5,
@@ -89,7 +90,9 @@ const Home = () => {
         styles: [
           { width: '40px', height: '40px', background: 'rgba(65, 105, 225, 0.7)', color: 'white', borderRadius: '20px', textAlign: 'center', lineHeight: '40px' }
         ],
-      });
+        animate: true,  // 추가된 애니메이션 옵션
+    });
+    
 
       const handleClusterClick = (cluster) => {
         const bounds = cluster.getBounds();
@@ -105,6 +108,7 @@ const Home = () => {
     });
   }, []); 
 
+  //
   useEffect(() => {
     const fetchCCTVData = async () => {
       try {
@@ -122,6 +126,7 @@ const Home = () => {
     fetchCCTVData();
   }, []);
 
+  // 클러스터 수정 
   useEffect(() => {
     const updateClusters = () => {
       if (map && clusterer1 && clusterer2) {
@@ -226,7 +231,7 @@ const Home = () => {
         setCCTV02State={setCCTV02State}
         floodRiskInfo={floodRiskInfo}  // Pass flood risk info to TopController
       />
-      <div id="map" style={{ width: "calc(100vw - 220px)", height: "100vh", position: "absolute", left: "220px" }}></div>
+      <div id="map" style={{ }}></div>
       <div style={{ padding: "10px" }}>
         <p>현재 중심 좌표: {centerPosition.lat}, {centerPosition.lng}</p>
         <p>현재 주소: {address}</p>

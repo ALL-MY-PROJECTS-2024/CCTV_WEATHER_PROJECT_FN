@@ -1,218 +1,292 @@
 $asideWidth: 220px;
 
 .controller {
-    position: absolute;
-    top: 40px;
-    left: calc($asideWidth + 30px);
-    width: 500px;
-    height: 50px;
-    z-index: 8888;
-    border-radius: 5px;
-    // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    background-color: white;  
+  position: absolute;
+  top: 40px;
+  left: calc($asideWidth + 30px);
+  width: 500px;
+  height: 50px;
+  z-index: 8888;
+  border-radius: 5px;
+  background-color: white;
 
-    ul{
-      list-style: none;
-      margin:0;padding:5px;
-      display:flex;
-      justify-content: space-between;
-      align-items: center;
-      width : 100%;
-      height : 100%;
-      font-size : 1.2rem;
-      li{
-        
-        width : 100%;
-        height : 100%;
-        
-        
-        
-        button{
-          border-radius: 5px;
-          color:#6C6C6C !important;
-          display:block;
-          width : 95%;
-          height : 100%;
-          display:flex;
-          justify-content: center;
-          align-items: center;
-          font-weight:400;
-          background-color: white;
-          outline:none;
-          border : 0;
-        }
-        button:hover{
-          background-color:  #ED0C0C;
-          color : white !important;
-        }
-      }
-    }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: 1.2rem;
 
- 
+    li {
+      width: 100%;
+      height: 100%;
 
-    .layerBtn{
-      
-      width : 50px;
-      height: 50px;
-      background-color: white;
-      position:absolute;
-      right: -70px;
-      top:0;
-      z-index: 9999;
-      border-radius: 5px;
-      // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-      display:flex;
-      justify-content: center;
-      align-items: center;
-
-      
-      &:after{
-        content: '침수위험지도 확인하기';
-        width : 160px;
-        height : 35px;
-        position:absolute;
-        right:-180px;
-        top:0;  
-        z-index: 99999;
-        background-color:#052563;
-        display:flex;
+      button {
+        border-radius: 5px;
+        color: #6c6c6c !important;
+        display: block;
+        width: 95%;
+        height: 100%;
+        display: flex;
         justify-content: center;
         align-items: center;
-        font-size : 1.2rem;
         font-weight: 400;
-        color:white;
-        border-radius: 20px;
-       
-   
+        background-color: white;
+        outline: none;
+        border: 0;
       }
-      &:before{
-        content:"";
-        width : 0;
-        height : 0;
-        // border-left:10px solid #052563;;
-        // border-right:10px solid #052563;
-        // border-top:10px solid #052563;;
-        // border-bottom:10px solid#052563;;
-        position:absolute;
-        right:-31.5px;
-        top:10px;
 
-        width : 15px;
-        height :15px;
-        background-color: #052563;
-        z-index: 99999;
-        transform : rotate(45deg);
-
+      button:hover {
+        background-color: #ed0c0c;
+        color: white !important;
       }
     }
-    
-    .active{
-        background-color: #ED0C0C;
-        color:white !important;
+  }
+
+  .layerBtn {
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    position: absolute;
+    right: -70px;
+    top: 0;
+    z-index: 9999;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:after {
+      content: '침수위험지도 확인하기';
+      width: 160px;
+      height: 35px;
+      position: absolute;
+      right: -180px;
+      top: 0;
+      z-index: 99999;
+      background-color: #052563;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: white;
+      border-radius: 20px;
     }
 
+    &:before {
+      content: "";
+      width: 15px;
+      height: 15px;
+      background-color: #052563;
+      position: absolute;
+      right: -31.5px;
+      top: 10px;
+      z-index: 99999;
+      transform: rotate(45deg);
+    }
+  }
+
+  .active {
+    background-color: #ed0c0c;
+    color: white !important;
+  }
 }
 
-.show-contents{
-    position:fixed;
-    top: 105px;
-    left: calc($asideWidth + 30px);
+.show-contents {
+  position: fixed;
+  top: 105px;
+  left: calc($asideWidth + 30px);
+  border-radius: 5px;
+  z-index: 99999;
+  width: 250px;
+  font-size: 1.2rem;
+
+  & > * {
+    margin-bottom: 20px;
+  }
+
+  .menu-01 {
+    position: relative;
+    height: 80px;
+    background-color: white;
     border-radius: 5px;
-    z-index:99999;
-    width :250px;
-     
-         
-    font-size : 1.2rem;  
+    padding: 10px;
+    display: none;
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      color: #6c6c6c !important;
+      height: 50%;
+
+      div {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        span {
+          width: 50px;
+          height: 25px;
+          border: 1px solid;
+          border-radius: 20px;
+          cursor: pointer;
+          font-size: 1rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        &:nth-child(2) {
+          justify-content: flex-end;
+        }
+      }
+    }
+  }
+
+  .menu-02 {
+    position: relative;
+    padding: 10px;
+    background-color: white;
+    height: 200px;
+    border-radius: 5px;
+    display: none;
+  }
+
+  .menu-03 {
+    position: relative;
+    height: 40px;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: white;
+    display: none;
+  }
+
+  .active {
+    display: block !important;
+  }
+}
+
+/* Responsive Styling */
+@media (max-width: 480px) {
+  $asideWidth: 0px;
+
+  .controller {
+    // border : 1px solid gray;;
+    top:calc(80vh);
+    left: 5px;
+    width: calc(80vw);
     
-
-    &>*{
-        margin-bottom : 20px;
-    }
-    //menu-01
-    .menu-01{
-        
-        position:relative;
-        left:0;
-        top:0;
-        height : 80px;       
-        background-color: white;   
+    ul {
+      font-size: 1rem;
+      display:flex;
+      justify-content: left;
+      gap:25px;
+      
+      li{
+        font-size:.7rem;
+        // border : 1px solid gray;
         border-radius: 5px;
-        padding : 10px;
+        width:80px;
 
-        display:none;
-        .item{
-            display:flex;
-            justify-content: space-between;
-            text-align:center;
-            color:#6C6C6C !important;
-            height:50%;
-            div{
-              width : 100%;
-              // border : 1px solid;
-              display:flex;
-              justify-content: space-around;
-              align-items: center;
-      
-              span{
-                width : 50px;
-                height : 25px;
-                border : 1px solid;
-                border-radius: 20px;
-                cursor: pointer;
-                font-size:1rem;
-                
-      
-                display:flex;
-                justify-content: center;
-                align-items: center;
-                
-              }
-      
-              &:nth-child(2){
-                display:flex;
-                justify-content: right;
-              }
-            }
-          } 
+        button {
+          border-radius: 5px;
+          color : black !important;
+          display: block;
+          width: 95%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-weight: 200;
+          background-color: white;
+          outline: none;
+          border: 0;
+        }
+  
+        button:hover {
+          background-color: #ed0c0c;
+          width:100%;
+          color: white !important;
+        }
 
-    }
-    // menu-02
-    .menu-02{
-        position:relative;
-        left:0;
-        top:0;
-        padding : 10px;
-        background-color: white;   
-        height : 200px;
-        border-radius:5px;
-        display:none;
-        
+      }
     }
 
-    .menu-03{
-        position:relative;
-        left:0;
-        top:0;
+    .layerBtn {
+      top:0;bottom:0;
+      margin : auto;
+      margin-right:5px;
 
-        height : 40px;
-        border-radius: 5px;
-        padding : 10px;
-        background-color: white;   
-        
+      width:45px;
+      height:45px;
+      // border : 1px solid;
+      
+      &:after {
         display:none;
+        width: 140px;
+        font-size: .8rem;
+        right: -150px;
+      }
 
+      &:before {
+        display:none;
+      }
     }
+  }
 
 
-    .active{
-        display:none;
+  .show-contents {
+    top : 80px;
+    left: 5px;
+    width: 44vw;
+
+    .menu-01,
+    .menu-02,
+    .menu-03 {
+      font-size: .8rem;
+      height: auto;
+      padding: 8px;
     }
   }
   
+  .menu-01{
+    .item {
+      display: flex;
+      justify-content: space-between;
+      color: #6c6c6c !important;
+      height: 50%;
 
+      div {
+       
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
 
+        span {
+          width: 35px !important;
+          height: 20px !important;
+          border: 1px solid;
+          border-radius: 20px;
+          cursor: pointer;
+          font-size: .8rem !important;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin:2px;
+        }
 
+        &:nth-child(2) {
+          justify-content: flex-end;
+        }
+      }
+    }
 
-  .active{
-    display:block !important;
   }
+
+}
