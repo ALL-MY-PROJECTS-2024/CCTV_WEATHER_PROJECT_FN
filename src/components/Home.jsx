@@ -57,7 +57,7 @@ const Home = () => {
       const mapContainer = document.getElementById('map');
       const kakaoMap = new kakao.maps.Map(mapContainer, {
         center: new kakao.maps.LatLng(initialPosition.lat, initialPosition.lng),
-        level: 3,
+        level: 6,
       });
 
       kakao.maps.event.addListener(kakaoMap, 'center_changed', () => {
