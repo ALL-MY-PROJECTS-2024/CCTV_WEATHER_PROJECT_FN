@@ -202,38 +202,52 @@ const CCTVPopup = ({ lat, lon, hlsAddr, onClose }) => {
   return (
     <div className="cctv-popup-overlay">
       <div className="cctv-popup">
-        <button onClick={onClose} className="close-btn">X</button> {/* 닫기 버튼 */}
-        <div className="header">CCTV 실시간 보기</div>
+        <button style={{position:"absolute",right:"1px",top:"1px",width:"25px",height:"25px",borderRadius:"50%",fontSize:".8rem",backgroundColor:"#052563",color:"white"}} onClick={onClose} className="close-btn">X</button> {/* 닫기 버튼 */}
+             
         {/* <div className="info">날씨 정보: {weatherData ? JSON.stringify(weatherData) : "날씨 정보 없음"}</div> */}
         
         <div className="show-data">
           <div className="left">
             <div className="title">
-              <h5> 날씨조회</h5>
+              <div style={{display:"flex",gap:"8px"}}>
+                <img
+                  style={{width:"25px",height:"25px",borderRadius:"8px"}} 
+                  src={`${process.env.PUBLIC_URL}/images/1 기상청_한글_상하.jpg`} alt="-" 
+                  />
+                <span style={{fontSize:"1.3rem"}}>날씨 조회</span>
+              </div>
             </div>
+
             <div className="weatherInfo" ref={weatherInfoRef}>
+              
               {weatherData ? ( // 조건부 렌더링으로 로딩 메시지 표시
                 Object.entries(weatherData).map(([key, items], index) => (
-                  <div key={index} className="item" > {/* 고유 키 index 추가 */}
-                    <div style={{border:"1px solid"}}>
-                      <h6>{key}</h6>
-                    </div>
-                    {items.map((item, idx) => (
-                      <div key={idx}> {/* 고유 키 idx 추가 */}
-                        {item.category}: {item.fcstValue}
+                  <>
+                    <div key={index} className="item" style={{margin:"10px"}} > {/* 고유 키 index 추가 */}
+                      <div style={{border:"1px solid"}}>
+                        <div>{key}</div>
                       </div>
-                    ))}
-                  </div>
+                    
+                    </div>
+                    <div className="item">
+                      {items.map((item, idx) => (
+                        <div key={idx}> {/* 고유 키 idx 추가 */}
+                          {item.category}: {item.fcstValue}
+                        </div>
+                      ))}
+                    </div>
+                  </>
                 ))
               ) : (
                   // Bootstrap 스피너로 로딩 메시지 표시
-                <div className="d-flex justify-content-center my-3" style={{width:"100%",height:"80%",backgroundColor:"white",display:"flex",justifyContent:"center",alignItems:"center",flexDirection:"column"}}>
+                <div className="d-flex justify-content-center my-3" style={{width:"100%",height:"100%",backgroundColor:"white",display:"flex",justifyContent:"center",alignItems:"center",flexDirection:"column"}}>
                   <span className="sr-only" style={{fontSize:"1.2rem",margin:"15px",color:"black",fontWeight:"300",fontWeight:"600"}}>Loading...</span>
                   <div className="spinner-border text-primary" role="status">
                   </div>
                 </div>
               )}
              </div>
+             
      
           </div>
 
