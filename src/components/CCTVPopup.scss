@@ -1,16 +1,15 @@
 // CCTVPopup.scss
 
+td {
+  border: 1px solid;
+  width: 40px !important;
+  max-width: 40px !important;
+  min-width: 40px !important;
+  font-size: 0.8rem;
+  text-align: center;
 
-td{
-  border : 1px solid;
-  width:40px !important;
-  max-width:40px !important;
-  min-width:40px !important;
-  font-size : .8rem;
-  text-align:center;
-  
-  &>div{
-    border:1px solid;
+  & > div {
+    border: 1px solid;
   }
 }
 .cctv-popup-overlay {
@@ -28,8 +27,8 @@ td{
 
 .cctv-popup {
   width: 95vw;
-  min-width:1200px;
-  height:90vh;
+  min-width: 1200px;
+  height: 90vh;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -45,11 +44,11 @@ td{
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  border : 1px solid;
-  width:35px;
-  height : 35px;
+  border: 1px solid;
+  width: 35px;
+  height: 35px;
   background-color: #052563;
-  color:white;
+  color: white;
 }
 
 .header {
@@ -67,41 +66,69 @@ td{
 }
 
 .iframe-container {
- 
 }
 
-.show-data{
-  width : 100%;
-  height : 100%;
+.show-data {
+  width: 100%;
+  height: 100%;
 
-  gap :10px;
-  .left{
+  gap: 10px;
+  .left {
+    min-width: 400px;
 
-    min-width : 400px;
+    border: 1px solid lightgray;
 
-    border : 1px solid lightgray;
-
-    .title{
-      height:35px;
+    .title {
+      height: 35px;
       background-color: #052563;
-      color:white;
-      display:flex;
+      color: white;
+      display: flex;
       justify-content: left;
       align-items: center;
-      padding : 5px;
+      padding: 5px;
     }
 
-    .weatherInfo{
-      overflow:auto;
-      height:90%;
+    .weatherInfo {
+      width:100%;
+
+      overflow-y: hidden;
+      overflow-x : auto;
+
+
+      height: 140px;
+      display: flex;
+      justify-content: left;
+
+      .item {
+        min-width: 100px;
+        height: 100%;
+        border: 1px solid;
+
+        .time {
+          height: 20px;
+          border: 1px solid;
+        }
+
+        .body {
+          height: 100%;
+          border: 1px solid;
+        }
+
+
+
+ 
+      }
     }
-    .weatherInfo::-webkit-scrollbar{
-      display:none;
+    .weatherInfo::-webkit-scrollbar {
+      
     }
   }
-  .right{
-    width:100%;
-    min-width:800px;
+  .right {
+    width: 100%;
+    min-width: 800px;
     height: 600px;
   }
 }
+
+
+

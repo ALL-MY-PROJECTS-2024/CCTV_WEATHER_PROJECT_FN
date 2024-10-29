@@ -36,7 +36,7 @@ const fetchWeatherInfo = async (latitude, longitude) => {
   }
   const base_time = hours.toString().padStart(2, '0') + "00";
 
-  const gridCoords = convertNxNy("toXY", latitude, longitude);
+  const gridCoords = dfs_xy_conv("toXY", latitude, longitude);
   console.log(`baseDate : ${base_date} base_time : ${base_time} 격자 좌표: x=${gridCoords.x}, y=${gridCoords.y}`);
 
   try {
@@ -63,16 +63,24 @@ const fetchWeatherInfo = async (latitude, longitude) => {
   }
 };
 //날씨정보
-const convertNxNy = (code, v1, v2)=>{
-  // /https://gist.github.com/fronteer-kr/14d7f779d52a21ac2f16
-  var RE = 6371.00877; // 지구 반경(km)
-  var GRID = 5.0; // 격자 간격(km)
-  var SLAT1 = 30.0; // 투영 위도1(degree)
-  var SLAT2 = 60.0; // 투영 위도2(degree)
-  var OLON = 126.0; // 기준점 경도(degree)
-  var OLAT = 38.0; // 기준점 위도(degree)
-  var XO = 43; // 기준점 X좌표(GRID)
-  var YO = 136; // 기1준점 Y좌표(GRID)
+function dfs_xy_conv(code, v1, v2) {
+      //<!--
+    //
+    // LCC DFS 좌표변환을 위한 기초 자료
+    //
+    var RE = 6371.00877; // 지구 반경(km)
+    var GRID = 5.0; // 격자 간격(km)
+    var SLAT1 = 30.0; // 투영 위도1(degree)
+    var SLAT2 = 60.0; // 투영 위도2(degree)
+    var OLON = 126.0; // 기준점 경도(degree)
+    var OLAT = 38.0; // 기준점 위도(degree)
+    var XO = 43; // 기준점 X좌표(GRID)
+    var YO = 136; // 기1준점 Y좌표(GRID)
+    //
+    // LCC DFS 좌표변환 ( code : "toXY"(위경도->좌표, v1:위도, v2:경도), "toLL"(좌표->위경도,v1:x, v2:y) )
+    //
+
+
   var DEGRAD = Math.PI / 180.0;
   var RADDEG = 180.0 / Math.PI;
 
@@ -107,7 +115,7 @@ const convertNxNy = (code, v1, v2)=>{
       var xn = v1 - XO;
       var yn = ro - v2 + YO;
       ra = Math.sqrt(xn * xn + yn * yn);
-      if (sn < 0.0) - ra;
+      if (sn < 0.0) ra = - ra;
       var alat = Math.pow((re * sf / ra), (1.0 / sn));
       alat = 2.0 * Math.atan(alat) - Math.PI * 0.5;
 
@@ -117,7 +125,7 @@ const convertNxNy = (code, v1, v2)=>{
       else {
           if (Math.abs(yn) <= 0.0) {
               theta = Math.PI * 0.5;
-              if (xn < 0.0) - theta;
+              if (xn < 0.0) theta = - theta;
           }
           else theta = Math.atan2(xn, yn);
       }
@@ -126,9 +134,7 @@ const convertNxNy = (code, v1, v2)=>{
       rs['lng'] = alon * RADDEG;
   }
   return rs;
-
 }
-
 
 const Home = () => {
   const initialPosition = { lat: 35.120696, lng: 129.0411816 };
@@ -166,24 +172,27 @@ const Home = () => {
   useEffect(() => {
     // Initial fetch for the initial coordinates
     fetchFloodRiskInfo(initialPosition.lat, initialPosition.lng);
-
-    kakao.maps.load(() => {
+  
+    // window.kakao 객체가 존재하는지 확인 후 Kakao Maps 초기화
+    if (window.kakao && window.kakao.maps) {
       const mapContainer = document.getElementById('map');
-      const kakaoMap = new kakao.maps.Map(mapContainer, {
-        center: new kakao.maps.LatLng(initialPosition.lat, initialPosition.lng),
+      const kakaoMap = new window.kakao.maps.Map(mapContainer, {
+        center: new window.kakao.maps.LatLng(initialPosition.lat, initialPosition.lng),
         level: 6,
       });
-
-      kakao.maps.event.addListener(kakaoMap, 'center_changed', () => {
+  
+      // 중심 좌표 변경 이벤트 리스너 추가
+      window.kakao.maps.event.addListener(kakaoMap, 'center_changed', () => {
         const center = kakaoMap.getCenter();
         const newCenter = { lat: center.getLat(), lng: center.getLng() };
         setCenterPosition(newCenter);
-
+  
         // Throttled call to fetch flood risk info for new center
         throttledFetchFloodRiskInfo(newCenter.lat, newCenter.lng);
       });
-
-      const cctv1Clusterer = new kakao.maps.MarkerClusterer({
+  
+      // CCTV 클러스터러 생성 및 스타일 설정
+      const cctv1Clusterer = new window.kakao.maps.MarkerClusterer({
         map: kakaoMap,
         averageCenter: false,
         minLevel: 5,
@@ -192,10 +201,10 @@ const Home = () => {
         styles: [
           { width: '40px', height: '40px', background: 'rgba(144, 43, 34, 0.7)', color: 'white', borderRadius: '20px', textAlign: 'center', lineHeight: '40px' }
         ],
-        animate: true,  // 추가된 애니메이션 옵션
-    });
-    
-    const cctv2Clusterer = new kakao.maps.MarkerClusterer({
+        animate: true,
+      });
+  
+      const cctv2Clusterer = new window.kakao.maps.MarkerClusterer({
         map: kakaoMap,
         averageCenter: false,
         minLevel: 5,
@@ -204,23 +213,25 @@ const Home = () => {
         styles: [
           { width: '40px', height: '40px', background: 'rgba(65, 105, 225, 0.7)', color: 'white', borderRadius: '20px', textAlign: 'center', lineHeight: '40px' }
         ],
-        animate: true,  // 추가된 애니메이션 옵션
-    });
-    
-
+        animate: true,
+      });
+  
+      // 클러스터 클릭 이벤트 리스너 추가
       const handleClusterClick = (cluster) => {
         const bounds = cluster.getBounds();
         kakaoMap.setBounds(bounds);
       };
-
-      kakao.maps.event.addListener(cctv1Clusterer, 'clusterclick', handleClusterClick);
-      kakao.maps.event.addListener(cctv2Clusterer, 'clusterclick', handleClusterClick);
-
+  
+      window.kakao.maps.event.addListener(cctv1Clusterer, 'clusterclick', handleClusterClick);
+      window.kakao.maps.event.addListener(cctv2Clusterer, 'clusterclick', handleClusterClick);
+  
       setMap(kakaoMap);
       setClusterer1(cctv1Clusterer);
       setClusterer2(cctv2Clusterer);
-    });
-  }, []); 
+    } else {
+      console.error("Kakao Maps API가 로드되지 않았습니다.");
+    }
+  }, []);
 
   //
   useEffect(() => {
@@ -245,39 +256,37 @@ const Home = () => {
     const updateClusters = () => {
       if (map && clusterer1 && clusterer2) {
         const addMarkers = (data, markerIconUrl, clusterer) => {
-          
           const markers = data.map(item => {
-            
-            const markerPosition = new kakao.maps.LatLng(item.lat, item.lon);
+            const markerPosition = new window.kakao.maps.LatLng(item.lat, item.lon);
            
-            const marker = new kakao.maps.Marker({
+            const marker = new window.kakao.maps.Marker({
               position: markerPosition,
-              image: new kakao.maps.MarkerImage(markerIconUrl, new kakao.maps.Size(40, 40)),
+              image: new window.kakao.maps.MarkerImage(markerIconUrl, new window.kakao.maps.Size(40, 40)),
               clickable: true,
             });
-
-            kakao.maps.event.addListener(marker, 'click', async function () {
-             
-              const weatherData = await fetchWeatherInfo(item.lat, item.lon);
-              setSelectedCCTV({ ...item, weatherData });  // 선택된 CCTV 정보와 날씨 데이터 설정
+  
+            // 클릭 이벤트 리스너 추가
+            window.kakao.maps.event.addListener(marker, 'click', async function () {
+              setSelectedCCTV({ ...item });  // 선택된 CCTV 정보와 날씨 데이터 설정
             });
-
+  
             return marker;
           });
-
+  
           clusterer.addMarkers(markers);
         };
-
+  
         clusterer1.clear();
         clusterer2.clear();
-
+  
         if (CCTV01State) addMarkers(clusterCCTV1, 'https://safecity.busan.go.kr/vue/img/gis_picker_cctv_city.a17cfe5e.png', clusterer1);
         if (CCTV02State) addMarkers(clusterCCTV2, 'https://safecity.busan.go.kr/vue/img/gis_picker_cctv_its.9994bd52.png', clusterer2);
       }
     };
-
+  
     updateClusters();
   }, [CCTV01State, CCTV02State, map, clusterer1, clusterer2, clusterCCTV1, clusterCCTV2]);
+
 
   return (
     <div className="mainSection">
@@ -295,7 +304,6 @@ const Home = () => {
           lat={selectedCCTV.lat}
           lon={selectedCCTV.lon}
           hlsAddr={selectedCCTV.hlsAddr}
-          weatherData={selectedCCTV.weatherData}
           onClose={() => setSelectedCCTV(null)}  // 팝업 닫기 설정
         />
       )}
