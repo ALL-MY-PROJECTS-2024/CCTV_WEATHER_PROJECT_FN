@@ -222,21 +222,16 @@ const CCTVPopup = ({ lat, lon, hlsAddr, onClose }) => {
               
               {weatherData ? ( // 조건부 렌더링으로 로딩 메시지 표시
                 Object.entries(weatherData).map(([key, items], index) => (
-                  <>
-                    <div key={index} className="item" style={{margin:"10px"}} > {/* 고유 키 index 추가 */}
-                      <div style={{border:"1px solid"}}>
-                        <div>{key}</div>
+                  <div key={index} className="item" style={{margin:"10px"}} > {/* 고유 키 index 추가 */}
+                    <div style={{border:"1px solid"}}>
+                      <div>{key}</div>
+                    </div>
+                    {items.map((item, idx) => (
+                      <div key={idx}> {/* 고유 키 idx 추가 */}
+                        {item.category}: {item.fcstValue}
                       </div>
-                    
-                    </div>
-                    <div className="item">
-                      {items.map((item, idx) => (
-                        <div key={idx}> {/* 고유 키 idx 추가 */}
-                          {item.category}: {item.fcstValue}
-                        </div>
-                      ))}
-                    </div>
-                  </>
+                    ))}
+                  </div>
                 ))
               ) : (
                   // Bootstrap 스피너로 로딩 메시지 표시
