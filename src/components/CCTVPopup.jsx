@@ -1,5 +1,5 @@
 // CCTVPopup.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './CCTVPopup.scss';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstrap CSS import
@@ -149,16 +149,16 @@ const CCTVPopup = ({ lat, lon, hlsAddr, onClose }) => {
 
   const [weatherData,setWeatherData] = useState(null)
   const [iframeLoading, setIframeLoading] = useState(true); // iframe 로딩 상태 추가
-
+  const weatherInfoRef = useRef(null); // 스크롤 컨테이너 참조
 
   
     // 마우스 휠 이벤트 핸들러!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! - 안됨
     const handleWheel = (event) => {
-      event.preventDefault(); // 세로 스크롤 방지
-      const scrollContainer = event.currentTarget;
-      scrollContainer.scrollLeft += event.deltaY; // deltaY를 scrollLeft로 적용하여 가로 스크롤
+      event.preventDefault();
+      if (weatherInfoRef.current) {
+        weatherInfoRef.current.scrollLeft += event.deltaY;
+      }
     };
-
 
 
   useEffect(()=>{
@@ -187,6 +187,15 @@ const CCTVPopup = ({ lat, lon, hlsAddr, onClose }) => {
 
     };
     req();
+
+        // 비수동(non-passive) wheel 이벤트 리스너 추가
+        const scrollContainer = weatherInfoRef.current;
+        scrollContainer.addEventListener("wheel", handleWheel, { passive: false });
+    
+        return () => {
+          scrollContainer.removeEventListener("wheel", handleWheel);
+        };
+
   },[])
 
 
@@ -202,7 +211,7 @@ const CCTVPopup = ({ lat, lon, hlsAddr, onClose }) => {
             <div className="title">
               <h5> 날씨조회</h5>
             </div>
-            <div className="weatherInfo" onWheel={handleWheel}>
+            <div className="weatherInfo" ref={weatherInfoRef}>
               {weatherData ? ( // 조건부 렌더링으로 로딩 메시지 표시
                 Object.entries(weatherData).map(([key, items], index) => (
                   <div key={index} className="item" > {/* 고유 키 index 추가 */}
