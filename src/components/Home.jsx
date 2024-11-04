@@ -144,7 +144,7 @@ const Home = () => {
   
   const [CCTV01State, setCCTV01State] = useState(false);
   const [CCTV02State, setCCTV02State] = useState(false);
-  const [clusterCCTV1, setClusterCCTV1] = useState([]);
+  const [clusterCCTV1, setClusterCCTV1] = useState([]);   //재난
   const [clusterCCTV2, setClusterCCTV2] = useState([]);
   const [map, setMap] = useState(null);
   const [clusterer1, setClusterer1] = useState(null);
