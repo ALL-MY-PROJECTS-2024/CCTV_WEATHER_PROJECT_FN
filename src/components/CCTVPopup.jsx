@@ -275,7 +275,8 @@ const CCTVPopup = ({ lat, lon, hlsAddr, onClose }) => {
               allow="autoplay; fullscreen"
               allowFullScreen
               onLoad={() => setIframeLoading(false)} // iframe이 로드되면 스피너 숨김
-              style={{ display: iframeLoading ? "none" : "block",minHeight:"500px"}} // 로딩 중이면 숨김
+              style={{ display: iframeLoading ? "none" : "block",minHeight:"520px",paddingBottom:"20px"}} // 로딩 중이면 숨김
+              
             ></iframe>
           </div>
 
