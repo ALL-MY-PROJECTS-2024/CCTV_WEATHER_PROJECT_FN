@@ -207,7 +207,7 @@ const CCTVPopup = ({ lat, lon, hlsAddr, onClose }) => {
               </div>
             </div>
 
-            <div className="weatherInfo" style={{overflow:"auto"}}>
+            <div className="weatherInfo" style={{overflowY:"hidden"}}>
               
               {weatherData ? ( // 조건부 렌더링으로 로딩 메시지 표시
                 Object.entries(weatherData).map(([key, items], index) => (
