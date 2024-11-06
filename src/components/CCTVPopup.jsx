@@ -37,8 +37,9 @@ const fetchWeatherInfo = async (latitude, longitude) => {
 
   // 자정 이전의 base_time을 사용하는 경우 하루 전 날짜로 설정
   let baseDate = now;
-  if (baseTime === "2300" && now.getHours() < 2) {
+  if (now.getHours() < 6) {
     baseDate.setDate(now.getDate() - 1);
+    baseTime = "2300"
   }
 
   // base_date 포맷: YYYYMMDD
@@ -54,7 +55,7 @@ const fetchWeatherInfo = async (latitude, longitude) => {
         params: {
           ServiceKey: "xYZ80mMcU8S57mCCY/q8sRsk7o7G8NtnfnK7mVEuVxdtozrl0skuhvNf34epviHrru/jiRQ41FokE9H4lK0Hhg==",
           pageNo: 1,
-          numOfRows: 1000,
+          numOfRows: 250,
           dataType: "JSON",
           base_date: formattedDate,
           base_time: baseTime,
@@ -152,15 +153,9 @@ const CCTVPopup = ({ lat, lon, hlsAddr, onClose }) => {
   const weatherInfoRef = useRef(null); // 스크롤 컨테이너 참조
 
   
-    // 마우스 휠 이벤트 핸들러!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! - 안됨
-    const handleWheel = (event) => {
-      event.preventDefault();
-      if (weatherInfoRef.current) {
-        weatherInfoRef.current.scrollLeft += event.deltaY;
-      }
-    };
 
 
+  //
   useEffect(()=>{
     const req=async()=>{
       try{
@@ -168,7 +163,7 @@ const CCTVPopup = ({ lat, lon, hlsAddr, onClose }) => {
         
         console.log("resp",);
         const groupedData = Array.from(resp.data.response.body.items.item).reduce((acc,item)=>{
-          const key = `${item.fcstTime} - ${item.fcstDate}`;
+          const key = `${item.fcstDate} - ${item.fcstTime}`;
             // 키가 이미 존재하는 경우 기존 배열에 추가, 그렇지 않으면 새 배열 생성
             if (!acc[key]) {
               acc[key] = [];
@@ -188,13 +183,7 @@ const CCTVPopup = ({ lat, lon, hlsAddr, onClose }) => {
     };
     req();
 
-        // 비수동(non-passive) wheel 이벤트 리스너 추가
-        const scrollContainer = weatherInfoRef.current;
-        scrollContainer.addEventListener("wheel", handleWheel, { passive: false });
-    
-        return () => {
-          scrollContainer.removeEventListener("wheel", handleWheel);
-        };
+
 
   },[])
 
@@ -207,32 +196,52 @@ const CCTVPopup = ({ lat, lon, hlsAddr, onClose }) => {
         {/* <div className="info">날씨 정보: {weatherData ? JSON.stringify(weatherData) : "날씨 정보 없음"}</div> */}
         
         <div className="show-data">
-          <div className="left">
-            <div className="title">
-              <div style={{display:"flex",gap:"8px"}}>
+          <div className="left" >
+            <div className="title" >
+              <div style={{display:"flex",gap:"8px",alignItems : "center"}}>
                 <img
-                  style={{width:"25px",height:"25px",borderRadius:"8px"}} 
+                  style={{width:"20px",height:"20px",borderRadius:"50%"}} 
                   src={`${process.env.PUBLIC_URL}/images/1 기상청_한글_상하.jpg`} alt="-" 
                   />
-                <span style={{fontSize:"1.3rem"}}>날씨 조회</span>
+                <span style={{fontSize:"1rem"}}>날씨 조회</span>
               </div>
             </div>
 
-            <div className="weatherInfo" ref={weatherInfoRef}>
+            <div className="weatherInfo" style={{overflow:"auto"}}>
               
               {weatherData ? ( // 조건부 렌더링으로 로딩 메시지 표시
                 Object.entries(weatherData).map(([key, items], index) => (
-                  <div key={index} className="item" style={{margin:"10px"}} > {/* 고유 키 index 추가 */}
+                  
+                  <div key={index} className="item" style={{margin:"2px"}} > {/* 고유 키 index 추가 */}
                     
-                    
-                    <div style={{border:"1px solid"}}>
-                      <div>{key}</div>
-                    </div>
-                    {items.map((item, idx) => (
-                      <div key={idx}> {/* 고유 키 idx 추가 */}
-                        {item.category}: {item.fcstValue}
+                    <div style={{display:"flex",width:"100%",justifyContent:"space-between",borderBottom:"1px solid"}}>
+                      <div style={{width:"100%"}}>
+                        <div style={{backgroundColor:"#052563",color:"white",width:"100%",height:"100%",padding:"5px",display:"flex",justifyContent:"center",alignItems:"center"}}>
+                          {key.split('-')[0][4]}{key.split('-')[0][5]}
+                          /
+                          {key.split('-')[0][6]}{key.split('-')[0][7]}
+                        </div>
                       </div>
-                    ))}
+                      <div style={{width:"100%"}}>
+                        <div style={{backgroundColor:"rgb(255,255,255)",color:"black",width:"100%",height:"100%",padding:"5px",display:"flex",justifyContent:"center",alignItems:"center"}}>
+                            {key.split('-')[1][1]}{key.split('-')[1][2]}
+                            :
+                            {key.split('-')[1][3]}{key.split('-')[1][4]}
+                        </div>
+                      </div>
+                    </div>
+                   
+                   
+                    <div style={{position:"relative"}}>
+                      <div style={{backgroundColor:"rgb(255,255,255)",color:"black",width:"100%",height:"100%",padding:"5px",display:"flex",justifyContent:"center",alignItems:"center"}}>
+                        <img src={`${process.env.PUBLIC_URL}/images/weather/NB01_N.png`} alt="Weather Icon" />
+                        {items.map((item,index)=>{
+                            return   item.category==="TMP" && <div style={{position:"absolute",top:"10%",right:"5%",fontWeight:"800",fontSize:"1rem"}}>{item.fcstValue} ℃</div> 
+                        })}                       
+                      </div>
+                    </div>
+                    
+
 
                     
                   </div>
@@ -241,7 +250,7 @@ const CCTVPopup = ({ lat, lon, hlsAddr, onClose }) => {
               : 
               (
                   // Bootstrap 스피너로 로딩 메시지 표시
-                <div className="d-flex justify-content-center my-3" style={{width:"100%",height:"100%",backgroundColor:"white",display:"flex",justifyContent:"center",alignItems:"center",flexDirection:"column"}}>
+                <div className="d-flex justify-content-center my-3" style={{width:"100%",height:"100%",backgroundColor:"white",display:"flex",justifyContent:"center",alignItems:"center",flexDirection:"column",position:"relative",top:"-25%"}}>
                   <span className="sr-only" style={{fontSize:"1.2rem",margin:"15px",color:"black",fontWeight:"300",fontWeight:"600"}}>Loading...</span>
                   <div className="spinner-border text-primary" role="status">
                   </div>
@@ -252,20 +261,21 @@ const CCTVPopup = ({ lat, lon, hlsAddr, onClose }) => {
      
           </div>
 
-          <div className="iframe-container right">
+          <div className="iframe-container right" style={{overflow:"auto"}}>
             {iframeLoading && ( // iframe 로딩 시 스피너 표시
               <div className="d-flex justify-content-center align-items-center" style={{width: "100%", height: "100%", backgroundColor: "white"}}>
-                <div className="spinner-border text-primary" role="status"></div>
+                      <div className="spinner-border text-primary" role="status"></div>
               </div>
             )}
             <iframe
               src={hlsAddr}
               width="100%"
               height="100%"
+
               allow="autoplay; fullscreen"
               allowFullScreen
               onLoad={() => setIframeLoading(false)} // iframe이 로드되면 스피너 숨김
-              style={{ display: iframeLoading ? "none" : "block" }} // 로딩 중이면 숨김
+              style={{ display: iframeLoading ? "none" : "block",minHeight:"500px"}} // 로딩 중이면 숨김
             ></iframe>
           </div>
 
