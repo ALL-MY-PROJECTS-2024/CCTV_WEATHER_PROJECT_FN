@@ -37,7 +37,7 @@ const fetchWeatherInfo = async (latitude, longitude) => {
 
   // 자정 이전의 base_time을 사용하는 경우 하루 전 날짜로 설정
   let baseDate = now;
-  if (now.getHours() < 6) {
+  if (now.getHours() < 8) {
     baseDate.setDate(now.getDate() - 1);
     baseTime = "2300"
   }
@@ -150,10 +150,9 @@ const CCTVPopup = ({ lat, lon, hlsAddr, onClose }) => {
 
   const [weatherData,setWeatherData] = useState(null)
   const [iframeLoading, setIframeLoading] = useState(true); // iframe 로딩 상태 추가
-  const weatherInfoRef = useRef(null); // 스크롤 컨테이너 참조
+  const [skyIcon,setSkyIcon] = useState();
 
   
-
 
   //
   useEffect(()=>{
@@ -176,6 +175,8 @@ const CCTVPopup = ({ lat, lon, hlsAddr, onClose }) => {
         console.log('groupedData',groupedData);
         setWeatherData(groupedData);
 
+  
+
       }catch(error){
         console.error(error);
       }
@@ -183,9 +184,44 @@ const CCTVPopup = ({ lat, lon, hlsAddr, onClose }) => {
     };
     req();
 
-
-
   },[])
+  
+  // 날씨 아이콘 설정 함수
+  const skyIconHandler = (skyValue) => {
+    switch (skyValue) {
+      case '1':
+        return 'NB01.png'; // 맑음
+      case '3':
+        return 'NB03.png'; // 구름 많음
+      case '4':
+        return 'NB04.png'; // 흐림
+      default:
+        return 'NB01.png'; // 기본 맑음
+    }
+  };
+  // PTY(강수) 아이콘 설정 함수
+  const ptyIconHandler = (ptyValue) => {
+    switch (ptyValue) {
+      case '1':
+        return {"icon":'NB08.png',"name":"비"}; // 비
+      case '2':
+        return {"icon":'NB12.png',"name":"비/눈"}; // 비눈
+      case '3':
+        return {"icon":'NB11.png',"name":"눈"}; //눈
+      case '4':
+          return {"icon":'NB07.png',"name":"소나기"}; // 소나기
+      default:
+        return {"icon":null,"name":"강수 없음"}; // 기본 맑음
+    }
+  };
+// 바람 방향 계산 함수(UUU, VVV) - 16방위 변환
+const calculateWindDirection = (uuu, vvv) => {
+  const angle = (Math.atan2(vvv, uuu) * (180 / Math.PI) + 360) % 360; // 각도 계산 후 0~360 범위로 변환
+  const index = Math.floor((angle + 22.5 * 0.5) / 22.5);
+  const directions = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW', 'N'];
+  return directions[index];
+};
+
 
 
   return (
@@ -214,6 +250,7 @@ const CCTVPopup = ({ lat, lon, hlsAddr, onClose }) => {
                   
                   <div key={index} className="item" style={{margin:"2px"}} > {/* 고유 키 index 추가 */}
                     
+                    {/* 날짜 시간 */}
                     <div style={{display:"flex",width:"100%",justifyContent:"space-between",borderBottom:"1px solid"}}>
                       <div style={{width:"100%"}}>
                         <div style={{backgroundColor:"#052563",color:"white",width:"100%",height:"100%",padding:"5px",display:"flex",justifyContent:"center",alignItems:"center"}}>
@@ -232,13 +269,102 @@ const CCTVPopup = ({ lat, lon, hlsAddr, onClose }) => {
                     </div>
                    
                    
+                   {/* 아이콘 */}
                     <div style={{position:"relative"}}>
                       <div style={{backgroundColor:"rgb(255,255,255)",color:"black",width:"100%",height:"100%",padding:"5px",display:"flex",justifyContent:"center",alignItems:"center"}}>
-                        <img src={`${process.env.PUBLIC_URL}/images/weather/NB01_N.png`} alt="Weather Icon" />
+                        
+                        {/* SKY ICON */}
+                        <img src={`${process.env.PUBLIC_URL}/images/weather/${skyIconHandler(items.find(item => item.category === 'SKY')?.fcstValue || '1')}`} alt="Weather Icon" />
+
+                        {/* TMP */}
                         {items.map((item,index)=>{
-                            return   item.category==="TMP" && <div style={{position:"absolute",top:"10%",right:"5%",fontWeight:"800",fontSize:"1rem"}}>{item.fcstValue} ℃</div> 
-                        })}                       
+                            return   item.category==="TMP" && <div style={{position:"absolute",top:"3%",right:"5%",fontWeight:"800",fontSize:"1rem"}}>{item.fcstValue}℃</div> 
+                        })}   
+                        
+
+                        
+                        
+                        <div style={{borderTop : "1px solid",width:"100%",position:"absolute",top:"85%",display:"flex",justifyContent:"space-between",padding:"2px"}}>
+                          {/* PTY */}
+                          {items.map((item, index) => {
+                            if (item.category === "PTY") {
+                              const pty = ptyIconHandler(item.fcstValue);
+                            
+                              if(pty.icon=='null'){
+                                return (
+                                  <>
+                                    <div key={index} style={{position:"relative",bottom:"0px",left:"0%",fontSize:"0.9rem", display: "flex", justifyContent:"center",alignItems: "center",width:'50%',padding:"1px"}}>
+                                      {
+                                        pty.icon && <img src={`${process.env.PUBLIC_URL}/images/weather/${pty.icon}`} alt={pty.name} style={{width:"24px",height:"24px", marginRight: "0px"}} />
+                                      }
+                                                      
+                                    </div>
+                                    <div key={index} style={{backgroundColor:"",flexGrow:1,display:"flex",justifyContent:"center",alignItems:"center"}}>
+                                      <span style={{fontSize:".7rem",fontWeight:200}}>{pty.name}</span>     
+                                    </div>
+                                  </>
+                                );
+                              }else{
+                                return (
+                                  <>
+                                    <div key={index} style={{height:"100%",backgroundColor:"",flexGrow:1,display:"flex",justifyContent:"center",alignItems:"center"}}>
+                                      <div style={{fontSize:".9rem",fontWeight:400,height:"30px",backgroundColor:'',flexGrow:'1',display:"flex",justifyContent:"center",alignItems:"center"}}>{pty.name}</div>     
+                                    </div>
+                                  </>
+                                );
+
+                              }
+                              
+                            }
+                            return null;
+                          })}
+                          </div>
+
+                           {/* WIND VVV UUU 이용 */}
+                          <div style={{borderTop : "1px solid",width:"100%",position:"absolute",top:"135%",display:"flex",justifyContent:"space-between",padding:"2px"}}>
+                           
+                            {items.find(item => item.category === 'UUU') && items.find(item => item.category === 'VVV') && (() => {
+                              const uuuValue = items.find(item => item.category === 'UUU').fcstValue;
+                              const vvvValue = items.find(item => item.category === 'VVV').fcstValue;
+                              const windDirectionText = calculateWindDirection(uuuValue, vvvValue); // 방향 텍스트
+
+                              // UUU와 VVV 값을 이용하여 바람의 각도(도) 계산
+                              const angle = Math.atan2(vvvValue, uuuValue) * (180 / Math.PI);
+
+                              const windSpeed = items.find(item => item.category === 'WSD')?.fcstValue;
+
+                              return (
+                                <div style={{position: "relative", bottom: "0px", right: "0",  fontSize: "0.9rem",display:"flex",justifyContent:"space-between", flexGrow:1,alignItems:"center",padding:"3px"}}>
+                                  <div style={{width:"100%",flexGrow:"1",display:"flex",justifyContent:"left",alignItems:"center",backgroundColor:''}}>
+                                    <img
+                                      src={`${process.env.PUBLIC_URL}/images/weather/ic_wd_48x.png`}
+                                      alt="바람 방향"
+                                      style={{
+                                        width: "18px",
+                                        height: "18px",
+                                        marginRight: "-7px",
+                                        transform: `rotate(${angle}deg)`, // 각도에 따라 이미지 회전
+                                      }}
+                                    />
+                                    <span style={{fontSize:"1rem",flexGrow:"1",display:"flex",justifyContent:"center",alignItems:"center"}}>
+                                      {windDirectionText}
+                                    </span>
+                                  </div>
+                                  <div style={{fontSize:"1rem",flexGrow:"1",display:"flex",justifyContent:"center",alignItems:"center"}}>
+                                    {windSpeed}m/s {/* 풍속 표시 */}
+                                  </div>
+                                </div>
+                              );
+                            })()}
+                        </div>
+
+
+
+
+
                       </div>
+          
+
                     </div>
                     
 
