@@ -235,20 +235,23 @@ const Home = () => {
 
   //
   useEffect(() => {
+    
     const fetchCCTVData = async () => {
+      console.log("fetchCCTVData invoked...")
       try {
-        const response1 = await axios.get("http://localhost:8080/get/cctv1");
+        const response1 = await axios.get("http://54.180.211.164:8080/get/cctv1");
         setClusterCCTV1(response1.data.map(item => ({ ...item, type: 'CCTV1' })));
         
-        const response2 = await axios.get("http://localhost:8080/get/cctv2");
+        const response2 = await axios.get("http://54.180.211.164:8080/get/cctv2");
         setClusterCCTV2(response2.data.map(item => ({ ...item, type: 'CCTV2' })));
       } catch (error) {
-        console.error(error);
+        console.error('fetchCCTVData error',error);
         setClusterCCTV1(cctv1Data.map(item => ({ ...item, type: 'CCTV1' })));
         setClusterCCTV2(cctv2Data.map(item => ({ ...item, type: 'CCTV2' })));
       }
     };
     fetchCCTVData();
+
   }, []);
 
   // 클러스터 수정 
