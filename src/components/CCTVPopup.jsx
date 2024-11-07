@@ -160,7 +160,7 @@ const CCTVPopup = ({ lat, lon, hlsAddr, onClose }) => {
       try{
         const resp =  await fetchWeatherInfo(lat,lon);
         
-        console.log("resp",);
+       
         const groupedData = Array.from(resp.data.response.body.items.item).reduce((acc,item)=>{
           const key = `${item.fcstDate} - ${item.fcstTime}`;
             // 키가 이미 존재하는 경우 기존 배열에 추가, 그렇지 않으면 새 배열 생성
@@ -199,6 +199,7 @@ const CCTVPopup = ({ lat, lon, hlsAddr, onClose }) => {
         return 'NB01.png'; // 기본 맑음
     }
   };
+
   // PTY(강수) 아이콘 설정 함수
   const ptyIconHandler = (ptyValue) => {
     switch (ptyValue) {
@@ -216,7 +217,11 @@ const CCTVPopup = ({ lat, lon, hlsAddr, onClose }) => {
   };
 // 바람 방향 계산 함수(UUU, VVV) - 16방위 변환
 const calculateWindDirection = (uuu, vvv) => {
-  const angle = (Math.atan2(vvv, uuu) * (180 / Math.PI) + 360) % 360; // 각도 계산 후 0~360 범위로 변환
+  console.log("uuu",uuu,"vvv",vvv);
+  const angle = (270 - Math.atan2(vvv, uuu) * (180 / Math.PI) + 360) % 360;
+
+
+  console.log('angle',angle);
   const index = Math.floor((angle + 22.5 * 0.5) / 22.5);
   const directions = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW', 'N'];
   return directions[index];
@@ -329,26 +334,30 @@ const calculateWindDirection = (uuu, vvv) => {
                               const windDirectionText = calculateWindDirection(uuuValue, vvvValue); // 방향 텍스트
 
                               // UUU와 VVV 값을 이용하여 바람의 각도(도) 계산
-                              const angle = Math.atan2(vvvValue, uuuValue) * (180 / Math.PI);
+                              const angle = (270 - Math.atan2(vvvValue, uuuValue) * (180 / Math.PI) + 360) % 360;
 
                               const windSpeed = items.find(item => item.category === 'WSD')?.fcstValue;
 
                               return (
                                 <div style={{position: "relative", bottom: "0px", right: "0",  fontSize: "0.9rem",display:"flex",justifyContent:"space-between", flexGrow:1,alignItems:"center",padding:"3px"}}>
-                                  <div style={{width:"100%",flexGrow:"1",display:"flex",justifyContent:"left",alignItems:"center",backgroundColor:''}}>
+                                  <div style={{width:"100%",flexGrow:"1",display:"flex",justifyContent:"center",alignItems:"center",backgroundColor:'',}}>
                                     <img
                                       src={`${process.env.PUBLIC_URL}/images/weather/ic_wd_48x.png`}
                                       alt="바람 방향"
                                       style={{
-                                        width: "18px",
-                                        height: "18px",
-                                        marginRight: "-7px",
+                                        width: "20px",
+                                        height: "20px",
+                                        marginRight: "0px",
                                         transform: `rotate(${angle}deg)`, // 각도에 따라 이미지 회전
                                       }}
                                     />
+
+{/* 
                                     <span style={{fontSize:"1rem",flexGrow:"1",display:"flex",justifyContent:"center",alignItems:"center"}}>
                                       {windDirectionText}
                                     </span>
+                                     */}
+
                                   </div>
                                   <div style={{fontSize:"1rem",flexGrow:"1",display:"flex",justifyContent:"center",alignItems:"center"}}>
                                     {windSpeed}m/s {/* 풍속 표시 */}

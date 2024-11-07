@@ -267,6 +267,7 @@ const Home = () => {
   
             // 클릭 이벤트 리스너 추가
             window.kakao.maps.event.addListener(marker, 'click', async function () {
+              console.log('marker clicked..',item);
               setSelectedCCTV({ ...item });  // 선택된 CCTV 정보와 날씨 데이터 설정
             });
   
