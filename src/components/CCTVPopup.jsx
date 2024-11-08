@@ -55,7 +55,7 @@ const fetchWeatherInfo = async (latitude, longitude) => {
         params: {
           ServiceKey: "xYZ80mMcU8S57mCCY/q8sRsk7o7G8NtnfnK7mVEuVxdtozrl0skuhvNf34epviHrru/jiRQ41FokE9H4lK0Hhg==",
           pageNo: 1,
-          numOfRows: 250,
+          numOfRows: 450,
           dataType: "JSON",
           base_date: formattedDate,
           base_time: baseTime,
