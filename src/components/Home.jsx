@@ -137,7 +137,7 @@ function dfs_xy_conv(code, v1, v2) {
 }
 
 const Home = () => {
-  const initialPosition = { lat: 35.120696, lng: 129.0411816 };
+  const initialPosition = { lat: 35.1795543, lng: 129.0756416 };
   const [centerPosition, setCenterPosition] = useState(initialPosition);
   const [address, setAddress] = useState(null);
   const [floodRiskInfo, setFloodRiskInfo] = useState(null); 
@@ -151,6 +151,9 @@ const Home = () => {
   const [clusterer2, setClusterer2] = useState(null);
   const [selectedCCTV, setSelectedCCTV] = useState(null);  // 선택된 CCTV 정보 상태 추가
 
+  //침수 
+  const [fldm_30,setFldm_30] = useState();
+  const [fldm_50,setFldm_50] = useState();
 
   // Fetch flood risk info
   const fetchFloodRiskInfo = async (latitude, longitude) => {
@@ -176,11 +179,14 @@ const Home = () => {
     // window.kakao 객체가 존재하는지 확인 후 Kakao Maps 초기화
     if (window.kakao && window.kakao.maps) {
       const mapContainer = document.getElementById('map');
+     
       const kakaoMap = new window.kakao.maps.Map(mapContainer, {
         center: new window.kakao.maps.LatLng(initialPosition.lat, initialPosition.lng),
-        level: 6,
+        level:4,
+        
       });
   
+
       // 중심 좌표 변경 이벤트 리스너 추가
       window.kakao.maps.event.addListener(kakaoMap, 'center_changed', () => {
         const center = kakaoMap.getCenter();
@@ -289,6 +295,9 @@ const Home = () => {
     };
   
     updateClusters();
+
+
+
   }, [CCTV01State, CCTV02State, map, clusterer1, clusterer2, clusterCCTV1, clusterCCTV2]);
 
 
@@ -301,7 +310,11 @@ const Home = () => {
         setCCTV01State={setCCTV01State}
         setCCTV02State={setCCTV02State}
         floodRiskInfo={floodRiskInfo}  // Pass flood risk info to TopController
+        map = {map}
+        setFldm_30={setFldm_30}
+
       />
+
       <div id="map" style={{ }}></div>
       {selectedCCTV && (
         <CCTVPopup 
@@ -317,7 +330,11 @@ const Home = () => {
         <p>현재 주소: {address}</p>
         <p>침수 위험 정보: {floodRiskInfo ? JSON.stringify(floodRiskInfo) : "정보 없음"}</p>
       </div>
+      <div>
+       <img alt="" role="presentation" src="https://safecity.busan.go.kr/geoserver/iots/wms?service=WMS&amp;request=GetMap&amp;layers=fldm_30&amp;styles=&amp;format=image%2Fpng&amp;transparent=true&amp;version=1.1.1&amp;width=256&amp;height=256&amp;srs=EPSG%3A5181&amp;bbox=387791.99999999866,189855.99999999953,389840.00000000163,191904.0000000018" class="leaflet-tile leaflet-tile-loaded"  />
+      </div>
     </div>
+    
   );
 };
 

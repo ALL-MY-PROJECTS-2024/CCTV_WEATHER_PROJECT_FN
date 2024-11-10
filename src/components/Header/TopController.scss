@@ -60,35 +60,61 @@ $asideWidth: 220px;
     justify-content: center;
     align-items: center;
 
-    &:after {
-      content: '침수위험지도 확인하기';
-      width: 160px;
-      height: 35px;
-      position: absolute;
-      right: -180px;
-      top: 0;
-      z-index: 99999;
-      background-color: #052563;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 1.2rem;
-      font-weight: 400;
-      color: white;
-      border-radius: 20px;
+    // &:after {
+    //   content: '';
+    //   width: 160px;
+    //   height: 35px;
+    //   position: absolute;
+    //   right: -180px;
+    //   top: 0;
+    //   z-index: 99999;
+    //   background-color: #052563;
+    //   display: flex;
+    //   justify-content: center;
+    //   align-items: center;
+    //   font-size: 1.2rem;
+    //   font-weight: 400;
+    //   color: white;
+    //   border-radius: 20px;
+    // }
+
+    // &:before {
+    //   content: "";
+    //   width: 15px;
+    //   height: 15px;
+    //   background-color: #052563;
+    //   position: absolute;
+    //   right: -31.5px;
+    //   top: 10px;
+    //   z-index: 99999;
+    //   transform: rotate(45deg);
+    // }
+
+
+    .selectBox{
+      position:absolute;
+      top:60px;
+      left: 0 ;
+      width : 300px;
+     
+      padding : 12px;
+      background-color: white;
+      h6{
+        font-weight : 600;
+        margin-bottom : 10px;
+      }
+
+      div{
+        display:flex;
+        justify-content: left;
+        align-items: center;
+        gap:5px;
+        font-size : .9rem;
+        margin-bottom : 5px;
+      }
     }
 
-    &:before {
-      content: "";
-      width: 15px;
-      height: 15px;
-      background-color: #052563;
-      position: absolute;
-      right: -31.5px;
-      top: 10px;
-      z-index: 99999;
-      transform: rotate(45deg);
-    }
+
   }
 
   .active {
