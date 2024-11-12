@@ -98,28 +98,7 @@ const TopController = ({ CCTV01State, CCTV02State, setCCTV01State, setCCTV02Stat
         //그냥 범위내의 위도경도를 잡아서 거기에 오버레이를 해버리는건 어떨까!
         //이동해도 상관없이 고정으로 오버레이 하기!!!!!!!
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        const content = 
-        `<div id="fixedOverlay" style="
-            background-image: url('https://safecity.busan.go.kr/geoserver/iots/wms?service=WMS&request=GetMap&layers=fldm_30&styles=&format=image%2Fpng&transparent=true&version=1.1.1&width=1000&height=1000&srs=CRS%3A84&bbox=128.8048024262355,35.00381579648614,129.28960715493199,35.38509155161659');
-            background-size: contain;
-            width: 1000px;
-            height: 1000px;
-            position: fixed;
-            top: 50px; /* 원하는 위치로 조정 */
-            left: 50px; /* 원하는 위치로 조정 */
-            z-index: 1000; /* 지도 위에 표시되도록 */
-        "></div>`
-        // 커스텀 오버레이가 표시될 위치입니다 
-        var position = new window.kakao.maps.LatLng(35.182712, 129.072904);  
-        // 커스텀 오버레이를 생성합니다
-        var customOverlay = new window.kakao.maps.CustomOverlay({
-            position: position,
-            content: content,
-            xAnchor: 0.3,
-            yAnchor: 0.91
-        });
-        // 커스텀 오버레이를 지도에 표시합니다
-        customOverlay.setMap(map);
+
 
         // const mapContainer = document.getElementById('map'); // HTML 요소 id로 가져오기
         // const width = mapContainer.offsetWidth;  // 가로 크기
@@ -182,69 +161,46 @@ const TopController = ({ CCTV01State, CCTV02State, setCCTV01State, setCCTV02Stat
 
 
 
-        // setFldm_30State(!fldm_30State);
+        setFldm_30State(!fldm_30State);
 
-
- 
-
-
-        // let i_x = 0;
-        // let i_y = 0;
-
-        // if (!fldm_30State) {
-        //      // 타일셋 정의 및 추가
-        //     window.kakao.maps.Tileset.add('CUSTOM_TILE', 
-        //         new window.kakao.maps.Tileset({
+  
+        proj4.defs("EPSG:4326", "+proj=longlat +datum=WGS84 +no_defs");
+        proj4.defs("EPSG:5181", "+proj=tmerc +lat_0=38 +lon_0=127.0028902777778 +k=1 +x_0=200000 +y_0=500000 +ellps=GRS80 +units=m +no_defs");
+        if (!fldm_30State) {
+             // 타일셋 정의 및 추가
+            window.kakao.maps.Tileset.add('CUSTOM_TILE', 
+                new window.kakao.maps.Tileset({
                     
-        //             width: 256,
-        //             height:256,
+                    width: 256,
+                    height:256,
                 
-        //             getTile: function (x, y, z) {
-        //                 const tileSize = 256;
+                    getTile: function (x, y, z) {
+        
+                        console.log(x,y,z);
+                        const baseUrl = "https://safecity.busan.go.kr/geoserver/iots/fldm_30/gwc/service/tms/1.0.0/iots%3Afldm_30@EPSG%3A900913@png";
+                     
 
-        //                 // x, y, z에 좌하단의 x, y
-        //                 var wtm_x = x * Math.pow(2, z - 3) * 256 - 30000;
-        //                 var wtm_y = y * Math.pow(2, z - 3) * 256 - 60000;
+                        const div = document.createElement("div");
+                        div.style.position="absolute";
+                        div.style.top="0";
+                        div.style.left="0";
+                        div.style.backgroundColor="orange";
+                        div.style.border="1px solid";
+                        div.style.opacity=".2";
+                      
+                       
+                        return div;
+                    }
 
-        //                 var coords = new window.kakao.maps.Coords(wtm_x, wtm_y);
-        //                 var latlng = coords.toLatLng();
-        //                 console.log(latlng.toString());
+                })
+            );
 
-        //                 // 타일 생성 및 스타일 설정
-        //                 const div = document.createElement('div');
-
-
-        //                 div.style.backgroundSize = 'cover';
-        //                 div.style.width = '100%';
-        //                 div.style.height = '100%';
-        //                 div.style.opacity = '1';
-        //                 div.style.fontSize = '2.5rem';
-        //                 div.style.border = `1px solid black`;
-                        
-        //                 // 타일 좌표 정보를 텍스트로 표시
-        //                 div.innerHTML = `${x} ${y} ${z}`;
-        //                 div.style.color = 'black';
-        //                 div.style.display = 'flex';
-        //                 div.style.alignItems = 'center';
-        //                 div.style.justifyContent = 'center';
-        //                 div.style.position = 'relative';
-        //                 div.style.boxSizing = 'border-box';
-                        
-     
-
-          
-        //                 return div;
-        //             }
-
-        //         })
-        //     );
-
-        //     // 타일 오버레이 추가
-        //     map.addOverlayMapTypeId(window.kakao.maps.MapTypeId.CUSTOM_TILE);
-        // } else {
-        //     // 타일 오버레이 제거
-        //     map.removeOverlayMapTypeId(window.kakao.maps.MapTypeId.CUSTOM_TILE);
-        // }
+            // 타일 오버레이 추가
+            map.addOverlayMapTypeId(window.kakao.maps.MapTypeId.CUSTOM_TILE);
+        } else {
+            // 타일 오버레이 제거
+            map.removeOverlayMapTypeId(window.kakao.maps.MapTypeId.CUSTOM_TILE);
+        }
 
         
         // 지도를 클릭했을 때 클릭한 위치의 위도와 경도를 표시하는 함수
