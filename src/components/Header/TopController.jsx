@@ -158,49 +158,108 @@ const TopController = ({ CCTV01State, CCTV02State, setCCTV01State, setCCTV02Stat
         // </Style>
         // </Layer>
 
-
-
-
         setFldm_30State(!fldm_30State);
 
-  
-        proj4.defs("EPSG:4326", "+proj=longlat +datum=WGS84 +no_defs");
-        proj4.defs("EPSG:5181", "+proj=tmerc +lat_0=38 +lon_0=127.0028902777778 +k=1 +x_0=200000 +y_0=500000 +ellps=GRS80 +units=m +no_defs");
-        if (!fldm_30State) {
-             // 타일셋 정의 및 추가
-            window.kakao.maps.Tileset.add('CUSTOM_TILE', 
-                new window.kakao.maps.Tileset({
-                    
-                    width: 256,
-                    height:256,
-                
-                    getTile: function (x, y, z) {
+
+
+
+
+        //-----------------------------------------
+        // 마커 ATTR
+        //-----------------------------------------
+        var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png', // 마커 이미지 URL
+            imageSize = new window.kakao.maps.Size(24, 35), // 마커 이미지의 크기
+            imageOption = {offset: new window.kakao.maps.Point(12, 35)}; // 마커 이미지의 좌표
+
+        var markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+
+            // 마커 위치 좌표 설정
+        var markerPositions = [
+            new window.kakao.maps.LatLng(35.003847767054964, 128.80496461966746), // Minx, Miny
+            new window.kakao.maps.LatLng(35.38443556026641, 129.28951961954024)   // Maxx, Maxy
+        ];
+        // 마커 생성 및 지도에 표시
+        markerPositions.forEach(function(position) {
+            var marker = new window.kakao.maps.Marker({
+                position: position,
+                image: markerImage
+            });
+            marker.setMap(map);
+        });
+        // 1024미터 단위로 나누기 위한 설정
+        var baseTileSizeInMeters = 1024;
+        var metersPerDegreeLat = 111000; // 위도 1도당 약 111km
+        var metersPerDegreeLng = 88800; // 경도 1도당 약 88.8km
+
+        // 1024m 타일 크기를 위도와 경도로 변환
+        var tileSizeLat = baseTileSizeInMeters / metersPerDegreeLat;
+        var tileSizeLng = baseTileSizeInMeters / metersPerDegreeLng;    
+        // 경계 사각형의 좌표 설정
+        var boundarySouth = Math.min(markerPositions[0].getLat(), markerPositions[1].getLat());
+        var boundaryNorth = Math.max(markerPositions[0].getLat(), markerPositions[1].getLat());
+        var boundaryWest = Math.min(markerPositions[0].getLng(), markerPositions[1].getLng());
+        var boundaryEast = Math.max(markerPositions[0].getLng(), markerPositions[1].getLng());
         
-                        console.log(x,y,z);
-                        const baseUrl = "https://safecity.busan.go.kr/geoserver/iots/fldm_30/gwc/service/tms/1.0.0/iots%3Afldm_30@EPSG%3A900913@png";
-                     
+        // 경계 내 1024m 간격으로 오버레이 타일 생성 (간격 없이 밀착)
+        for (var lat = boundarySouth; lat <= boundaryNorth; lat += tileSizeLat) {
+            for (var lng = boundaryWest; lng <= boundaryEast; lng += tileSizeLng) {
+                var tilePosition = new window.kakao.maps.LatLng(lat + tileSizeLat / 2, lng + tileSizeLng / 2);
+                
+                // 오버레이 콘텐츠 생성
+                var content = document.createElement('div');
+                content.style.width = "100%";   // 고정된 폭
+                content.style.height = "100%";  // 고정된 높이
+                content.style.border = "1px solid black";
+                content.style.backgroundColor = "rgba(0, 169, 255, 0.3)"; // 반투명 파란색
 
-                        const div = document.createElement("div");
-                        div.style.position="absolute";
-                        div.style.top="0";
-                        div.style.left="0";
-                        div.style.backgroundColor="orange";
-                        div.style.border="1px solid";
-                        div.style.opacity=".2";
-                      
-                       
-                        return div;
-                    }
-
-                })
-            );
-
-            // 타일 오버레이 추가
-            map.addOverlayMapTypeId(window.kakao.maps.MapTypeId.CUSTOM_TILE);
-        } else {
-            // 타일 오버레이 제거
-            map.removeOverlayMapTypeId(window.kakao.maps.MapTypeId.CUSTOM_TILE);
+                // 커스텀 오버레이 생성
+                var customOverlay = new window.kakao.maps.CustomOverlay({
+                    position: tilePosition,
+                    content: content,
+                    xAnchor: 0.5,
+                    yAnchor: 0.5
+                });
+                customOverlay.setMap(map);
+            }
         }
+        
+        // if (!fldm_30State) {
+        //      // 타일셋 정의 및 추가
+        //     window.kakao.maps.Tileset.add('CUSTOM_TILE', 
+        //         new window.kakao.maps.Tileset({
+                    
+        //             width: 256,
+        //             height:256,
+                
+        //             getTile: function (x, y, z) {
+                
+       
+        //                         const div = document.createElement("div");
+        //                         div.style.position = "absolute";
+        //                         div.style.border = "1px solid black";
+        //                         div.style.width = "100%";
+        //                         div.style.height = "100%";
+        //                         div.style.backgroundColor = "rgba(0, 169, 255, 0.2)"; // 반투명 파란색
+        //                         // 타일 정보 표시
+        //                         div.innerHTML = `<span style="color: black; font-size: 10px; padding: 5px;">
+        //                             x: ${x}, y: ${y}, z: ${z}
+        //                         </span>`;
+        //                         return div;
+                  
+                       
+        //             }
+
+
+                    
+        //         })
+        //     );
+
+        //     // 타일 오버레이 추가
+        //     map.addOverlayMapTypeId(window.kakao.maps.MapTypeId.CUSTOM_TILE);
+        // } else {
+        //     // 타일 오버레이 제거
+        //     map.removeOverlayMapTypeId(window.kakao.maps.MapTypeId.CUSTOM_TILE);
+        // }
 
         
         // 지도를 클릭했을 때 클릭한 위치의 위도와 경도를 표시하는 함수
@@ -231,6 +290,10 @@ const TopController = ({ CCTV01State, CCTV02State, setCCTV01State, setCCTV02Stat
 
 
     };
+
+
+    //--------------------------------------------------------------------------
+    
 
     useEffect(()=>{},[])
 
