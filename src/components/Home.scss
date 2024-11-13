@@ -17,23 +17,57 @@
   }
 }
 
-/* Mobile Styles */
-@media (max-width: 480px) {
-  .mainSection {
-    flex-direction: column;
-  }
 
-  #map {
-    left:0 !important;
-    top:70px !important;
-    width: 100% !important;
-    height: calc(100vh - 80px - 70px) !important; /* Adjust map height for mobile */
-    position: relative;
-  }
 
-  .info-container {
-    padding: 20px;
-    font-size: 1rem;
-    text-align: center;
-  }
+/* 클러스터링 아이콘 공통 스타일 */
+.custom-cluster-icon {
+ 
+  color: white;
+
+  text-align: center;
+  transition: transform 0.3s ease;
+  font-size : 1.2rem;
+  width : 100%;
+  height : 100%;
+  font-weight:300;
+  
+}
+
+.marker-cluster-icon-small {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(144, 43, 34, 0.7); /* CCTV1 기본 색상 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.marker-cluster-icon-medium {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  background-color: rgba(144, 43, 34, 0.7); /* CCTV1 기본 색상 */
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.marker-cluster-icon-large {
+  width: 60px;
+  height: 60px;
+  background-color: rgba(144, 43, 34, 0.7); /* CCTV1 기본 색상 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+/* CCTV2 클러스터의 배경색 */
+.marker-cluster-icon-cctv2 {
+  background-color: rgba(65, 105, 225, 0.7); /* CCTV2 색상 */
+}
+
+.leaflet-control-zoom.leaflet-bar.leaflet-control{
+  display:none;
 }
