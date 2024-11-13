@@ -107,8 +107,163 @@
 //     setfloodingMenu(!floodingMenu);
 //   };
 
+//   // WMS 적용!!
+//   // EPSG:5186 (한국 중부) TM 좌표계 정의
+//   proj4.defs(
+//     "EPSG:5186",
+//     "+proj=tmerc +lat_0=38 +lon_0=127.5 +k=1 +x_0=200000 +y_0=500000 +ellps=GRS80 +units=m +no_defs"
+//   );
+
 //   const Fldm_30Handler = (e) => {
+//     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//     //그냥 범위내의 위도경도를 잡아서 거기에 오버레이를 해버리는건 어떨까!
+//     //이동해도 상관없이 고정으로 오버레이 하기!!!!!!!
+//     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+//     // const mapContainer = document.getElementById('map'); // HTML 요소 id로 가져오기
+//     // const width = mapContainer.offsetWidth;  // 가로 크기
+//     // const height = mapContainer.offsetHeight; // 세로 크기
+
+//     // console.log("지도 가로 크기 (px):", width);
+//     // console.log("지도 세로 크기 (px):", height);
+
+//     // const div = document.createElement('div');
+
+//     // const url = `https://safecity.busan.go.kr/geoserver/iots/wms?service=WMS&request=GetMap&layers=fldm_30&styles=&format=image%2Fpng&transparent=true&version=1.1.1&width=${width}&height=${height}&srs=CRS%3A84&bbox=128.8048024262355,35.00381579648614,129.28960715493199,35.38509155161659`;
+
+//     // var content = `<div style='width:100vw;height:100vh;border:5px solid;'>TEST</div>`;
+//     // var position = new window.kakao.maps.LatLng(35.17944, 129.07556);
+//     // // 커스텀 오버레이를 생성합니다
+//     // var customOverlay = new window.kakao.maps.CustomOverlay({
+//     //     position: position,
+//     //     content: content
+//     // });
+
+//     // // 커스텀 오버레이를 지도에 표시합니다
+//     // customOverlay.setMap(map);
+
+//     //-----------------------------------
+//     // 타일형으로 부여하기(실패)
+//     //-----------------------------------
+//     //https://safecity.busan.go.kr/geoserver/iots/wms?service=WMS&request=GetCapabilities
+
+//     // <Layer queryable="1" opaque="0">
+//     // <Name>fldm_30</Name>
+//     // <Title>fldm_30</Title>
+//     // <Abstract/>
+//     // <KeywordList>
+//     // <Keyword>features</Keyword>
+//     // <Keyword>fldm_30</Keyword>
+//     // </KeywordList>
+//     // <CRS>EPSG:5181</CRS>
+//     // <CRS>CRS:84</CRS>
+//     // <EX_GeographicBoundingBox>
+//     // <westBoundLongitude>128.80496461966746</westBoundLongitude>
+//     // <eastBoundLongitude>129.28951961954024</eastBoundLongitude>
+//     // <southBoundLatitude>35.003847767054964</southBoundLatitude>
+//     // <northBoundLatitude>35.38443556026641</northBoundLatitude>
+//     // </EX_GeographicBoundingBox>
+//     // <BoundingBox CRS="CRS:84" minx="128.80496461966746" miny="35.003847767054964" maxx="129.28951961954024" maxy="35.38443556026641"/>
+//     // <BoundingBox CRS="EPSG:5181" minx="169896.25" miny="364757.59375" maxx="211255.65625" maxy="408063.0"/>
+//     // <Style>
+//     // <Name>fldm_sld</Name>
+//     // <Title>fldm_sld</Title>
+//     // <LegendURL width="58" height="120">
+//     // <Format>image/png</Format>
+//     // <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://safecity.busan.go.kr/geoserver/iots/ows?service=WMS&version=1.3.0&request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=fldm_30"/>
+//     // </LegendURL>
+//     // </Style>
+//     // </Layer>
+
 //     setFldm_30State(!fldm_30State);
+
+//     //-----------------------------------------
+//     // 마커 ATTR
+//     //-----------------------------------------
+//     var imageSrc =
+//         "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png", // 마커 이미지 URL
+//       imageSize = new window.kakao.maps.Size(24, 35), // 마커 이미지의 크기
+//       imageOption = { offset: new window.kakao.maps.Point(12, 35) }; // 마커 이미지의 좌표
+
+//     var markerImage = new window.kakao.maps.MarkerImage(
+//       imageSrc,
+//       imageSize,
+//       imageOption
+//     );
+
+//     // 마커 위치 좌표 설정
+//     var markerPositions = [
+//       new window.kakao.maps.LatLng(35.003847767054964, 128.80496461966746), // Minx, Miny
+//       new window.kakao.maps.LatLng(35.38443556026641, 129.28951961954024), // Maxx, Maxy
+//     ];
+//     // 마커 생성 및 지도에 표시
+//     markerPositions.forEach(function (position) {
+//       var marker = new window.kakao.maps.Marker({
+//         position: position,
+//         image: markerImage,
+//       });
+//       marker.setMap(map);
+//     });
+
+//     if (!fldm_30State) {
+//       // 타일셋 정의 및 추가
+//       window.kakao.maps.Tileset.add(
+//         "CUSTOM_TILE",
+//         new window.kakao.maps.Tileset({
+//           width: 256,
+//           height: 256,
+
+//           getTile: function (x, y, z) {
+//             const div = document.createElement("div");
+//             div.style.position = "absolute";
+//             div.style.border = "1px solid black";
+//             div.style.width = "100%";
+//             div.style.height = "100%";
+//             div.style.display = "flex";
+//             div.style.justifyContent = "center";
+//             div.style.alignItems = "center";
+//             // 타일 정보 표시
+//             div.innerHTML = `<span style="gray: black; font-size: 2rem; ">
+//                                     x: ${x}, y: ${y}, z: ${z}
+//                                 </span>`;
+//             return div;
+//           },
+//         })
+//       );
+
+//       // 타일 오버레이 추가
+//       map.addOverlayMapTypeId(window.kakao.maps.MapTypeId.CUSTOM_TILE);
+//     } else {
+//       // 타일 오버레이 제거
+//       map.removeOverlayMapTypeId(window.kakao.maps.MapTypeId.CUSTOM_TILE);
+//     }
+
+//     // 지도를 클릭했을 때 클릭한 위치의 위도와 경도를 표시하는 함수
+//     window.kakao.maps.event.addListener(map, "click", function (mouseEvent) {
+//       // 클릭한 위치의 위도와 경도 정보 가져오기
+//       const latlng = mouseEvent.latLng;
+
+//       // 위도와 경도를 출력
+//       const message = `클릭한 위치의 위도: ${latlng
+//         .getLat()
+//         .toFixed(6)}, 경도: ${latlng.getLng().toFixed(6)}`;
+//       console.log(message);
+
+//       // 정보 표시를 위한 HTML 요소 생성 및 업데이트
+//       let infoDiv = document.getElementById("mapInfo");
+//       if (!infoDiv) {
+//         infoDiv = document.createElement("div");
+//         infoDiv.id = "mapInfo";
+//         infoDiv.style.position = "absolute";
+//         infoDiv.style.top = "10px";
+//         infoDiv.style.left = "10px";
+//         infoDiv.style.padding = "10px";
+//         infoDiv.style.backgroundColor = "white";
+//         infoDiv.style.border = "1px solid #333";
+//         document.body.appendChild(infoDiv);
+//       }
+//       infoDiv.innerHTML = message;
+//     });
 //   };
 //   //---------------------------------------------------
 //   //침수 처리 종료
