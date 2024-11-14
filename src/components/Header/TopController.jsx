@@ -18,10 +18,11 @@ const TopController = ({
   const [activeMenu, setActiveMenu] = useState();
   const [activeSubMenu, setActiveSubMenu] = useState();
   const [floodingMenu, setfloodingMenu] = useState(false);
-  const [wmsOverlays, setWmsOverlays] = useState([]);
+
 
   //
-  const [fldm_30State, setFldm_30State] = useState(false);
+  const [fldm_30State,setFldm_30State] = useState(false);
+  const [fldm_30, setFldm_30] = useState(null);
 
   const activeMenuHandler = (e) => {
     //기본메뉴 음영주기
@@ -108,41 +109,45 @@ const TopController = ({
   };
 
   const Fldm_30Handler = (e) => {
+    // 새로운 상태를 먼저 설정
+   
+    setFldm_30State(!fldm_30State);
+  
+    // map 객체가 초기화되지 않았으면 종료
+    if (!map) {
+      console.error("Map 객체가 초기화되지 않았습니다.");
+      return;
+    }
+  
+    // 기존 레이어 제거 또는 추가
+    if (!fldm_30State) {
+      // 새로운 상태가 true이고 레이어가 없을 때 추가
+      console.log("새로운 WMS 레이어 추가 중...");
+      const wmsLayer = L.tileLayer.wms('https://safecity.busan.go.kr/geoserver/iots/wms', {
+        layers: 'iots:fldm_30',
+        format: 'image/png',
+        transparent: true,
+        version: '1.1.1',
+        attribution: '&copy; Safe City Busan GeoServer',
+        styles: '',
+        zIndex: 1000,
+      });
+  
+      wmsLayer.addTo(map);
+      setFldm_30(wmsLayer);
+      console.log("레이어가 추가되었습니다.");
+      
+    } else {
+      // 새로운 상태가 false이고 레이어가 존재할 때 제거
+      console.log("기존 레이어 제거 중...");
+      map.removeLayer(fldm_30);
+      setFldm_30(null);
+      console.log("레이어가 제거되었습니다.");
+    }
+
     
-        // 상태 반전
-        setFldm_30State(!fldm_30State);
-
-        // map 객체가 초기화되지 않았으면 종료
-        if (!map) {
-            console.error("Map 객체가 초기화되지 않았습니다.");
-            return;
-        }
-
-        // 기존 레이어 제거
-        const existingLayer = wmsOverlays.find(layer => layer.options.layers === 'fldm_30');
-        if (existingLayer) {
-            console.log("기존 레이어 제거 중...");
-            map.removeLayer(existingLayer);
-            setWmsOverlays(wmsOverlays.filter(layer => layer.options.layers !== 'fldm_30'));
-            return;
-        }
-
-        // 새로운 WMS 오버레이 레이어 추가
-        console.log("새로운 WMS 레이어 추가 중...");
-        const wmsLayer = L.tileLayer.wms('https://safecity.busan.go.kr/geoserver/iots/wms', {
-            layers: 'fldm_30',       // GeoServer의 레이어 이름
-            format: 'image/png',     // 이미지 형식
-            transparent: true,       // 배경을 투명하게 설정
-            version: '1.3.0',
-            attribution: '&copy; Safe City Busan GeoServer',
-            styles: 'fldm_sld',      // GeoServer에 설정된 스타일 이름
-            zIndex: 1000             // 기본 타일 레이어보다 높은 zIndex 설정
-        });
-
-        wmsLayer.addTo(map);
-        setWmsOverlays([...wmsOverlays, wmsLayer]);
-
   };
+
   //---------------------------------------------------
   //침수 처리 종료
   //---------------------------------------------------
