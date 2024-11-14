@@ -1,43 +1,44 @@
-// <!DOCTYPE html>
-// <html lang="ko">
-// <head>
-//   <meta charset="UTF-8" />
-//   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-//   <title>Leaflet로 기본 지도 위에 WMS 오버레이 적용</title>
-//   <link
-//     rel="stylesheet"
-//     href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-//   />
-//   <style>
-//     #map {
-//       height: 100vh;
-//     }
-//   </style>
-// </head>
-// <body>
-//   <div id="map"></div>
-//   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-//   <script>
-//     // Leaflet 지도 초기화, 서울 위치로 설정
-//     const map = L.map('map').setView([35.1796, 129.0756], 12);
-    
-//     // Vworld 하이브리드 베이스맵 추가
-//     L.tileLayer('http://api.vworld.kr/req/wmts/1.0.0/{apiKey}/Base/{z}/{y}/{x}.png', {
-//       maxZoom: 19,
-//       minZoom: 6,
-//       attribution: '&copy; <a href="http://map.vworld.kr/">Vworld</a>',
-//       apiKey: 'C5307FBC-84D9-3817-BBE1-B36D9635CCAF'  // Vworld API 키를 여기에 입력하세요
-//     }).addTo(map);
+{/* <html>
 
-//     // GeoServer의 WMS 오버레이 레이어 추가
-//     L.tileLayer.wms('https://safecity.busan.go.kr/geoserver/iots/wms', {
-//       layers: 'fldm_30',            // GeoServer의 레이어 이름
-//       format: 'image/png',          // 이미지 형식
-//       transparent: true,            // 배경을 투명하게 설정
-//       version: '1.3.0',
-//       attribution: '&copy; Safe City Busan GeoServer',
-//       styles: 'fldm_sld'            // GeoServer에 설정된 스타일 이름
-//     }).addTo(map);
-//   </script>
-// </body>
-// </html>
+<head>
+	<!-- Mobile 화면 : Viewport 설정 -->
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
+	<meta name="robots" content="noindex">
+	<meta name="format-detection" content="telephone=no">
+	<!--STEP 1: CSS 추가하기 -->
+	<!--CDN 방식 -->
+	<!--<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"/>-->
+	
+	<!-- Download 방식 -->
+	<link rel="stylesheet" href="css/leaflet@1.3.3/leaflet.css"/>
+	<!--STEP 3: 지도 영역 관련 CSS 추가하기 -->
+	<link rel="stylesheet" href="css/main.css"/>
+	
+	
+	<!--STEP 2: JS 추가하기 -->
+	<!--CDN 방식 -->
+	<!--<script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"></script>-->
+	<!-- Download 방식 -->
+	<script src="js/leaflet@1.3.3/leaflet.js"></script>
+	 <!-- Leaflet Plugins: Leaflet.KoreanTmsProviders 추가  -->
+	<script src="js/KoreanTmsProviders/lib/proj4.js"></script>
+	<script src="js/KoreanTmsProviders/lib/proj4leaflet.js"></script>
+	<script src="js/KoreanTmsProviders/src/Leaflet.KoreanTmsProviders.js"></script>  
+</head>
+
+<body>
+	<!-- 배경지도 영역 추가하기-->
+	<div id="map" class="map"></div>
+	<script>
+		var map = new L.Map('map', {
+			  center: new L.LatLng(35.1795543, 129.0756416), //중심점 : 김천 위경도 좌표
+			  zoom: 9,	//Leaflet.KoreanTmsProviders.js : resolutions기준 줌 레벨(Level 12)
+			  crs: L.Proj.CRS.Daum, //Leaflet.KoreanTmsProviders.js : 새로 정의된 Daum Map CRS
+			  worldCopyJump: false,  //https://leafletjs.com/reference-1.3.2.html#map-worldcopyjump 참조    
+		});
+		var baseLayers = L.tileLayer.koreaProvider('DaumMap.Street').addTo(map);
+	</script>
+</body>
+
+</html> */}
