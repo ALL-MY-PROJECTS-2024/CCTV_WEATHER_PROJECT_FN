@@ -273,7 +273,7 @@ const Home = () => {
 
           // Add a base tile layer (OpenStreetMap)
        const tileLayer =L.tileLayer('http://map{s}.daumcdn.net/map_2d/1807hsm/L{z}/{y}/{x}.png', {
-        minZoom:6,
+        minZoom:1,
         maxZoom:13,
         zoomReverse:true,
         zoomOffset:1,
@@ -304,7 +304,7 @@ const Home = () => {
     useEffect(() => {
       if (map && CCTV01State) {
         const clusterGroup1 = L.markerClusterGroup({
-          maxClusterRadius:150, // 클러스터링 반경을 100미터로 설정 (값을 원하는 대로 조정)
+          maxClusterRadius:100, // 클러스터링 반경을 100미터로 설정 (값을 원하는 대로 조정)
           iconCreateFunction: (cluster) => {
             const count = cluster.getChildCount();
             let clusterClass = 'marker-cluster-icon-small'; // 기본 아이콘 클래스
@@ -342,7 +342,7 @@ const Home = () => {
     useEffect(() => {
       if (map && CCTV02State) {
         const clusterGroup2 = L.markerClusterGroup({
-          maxClusterRadius: 150, // 클러스터링 반경을 100미터로 설정 (값을 원하는 대로 조정)
+          maxClusterRadius: 100, // 클러스터링 반경을 100미터로 설정 (값을 원하는 대로 조정)
           iconCreateFunction: (cluster) => {
             const count = cluster.getChildCount();
             let clusterClass = 'marker-cluster-icon-small marker-cluster-icon-cctv2'; // CCTV2 아이콘 기본 클래스
