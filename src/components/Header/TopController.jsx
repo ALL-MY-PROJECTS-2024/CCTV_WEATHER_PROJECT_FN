@@ -449,13 +449,18 @@ const TopController = ({
             </button>
           </li>
           <li>
-            <button onClick={activeMenuHandler} data-no="02">
-              인명피해 우려지역
+            <button onClick={activeMenuHandler} data-no="02" style={{fontSize:"1.1rem"}}>
+              인명 피해<br></br>우려 지역
             </button>
           </li>
           <li>
             <button onClick={activeMenuHandler} data-no="03">
               과거 침수이력
+            </button>
+          </li>
+          <li>
+            <button onClick={activeMenuHandler} data-no="04">
+              강수 예측지도
             </button>
           </li>
         </ul>
@@ -587,6 +592,31 @@ const TopController = ({
             <div>
               <span onClick={침수2020}>OFF</span>
             </div>
+          </div>
+        </div>
+        <div className="menu-04">
+          <div class="induationCheckBox">
+            <ul class="disaster_list">
+              <ul>
+                <li class="active" onClick={인명피해우려지역}>부산전체</li>
+                <li class="active" onClick={인명피해우려지역}>중구</li>
+                <li class="active" onClick={인명피해우려지역}>서구</li>
+                <li class="active" onClick={인명피해우려지역}>동구</li>
+                <li class="active" onClick={인명피해우려지역}>영도구</li>
+                <li class="active" onClick={인명피해우려지역}>부산진구</li>
+                <li class="active" onClick={인명피해우려지역}>동래구</li>
+                <li class="active" onClick={인명피해우려지역}>남구</li>
+                <li class="active" onClick={인명피해우려지역}>북구</li>
+                <li class="active" onClick={인명피해우려지역}>해운대구</li>
+                <li class="active" onClick={인명피해우려지역}>사하구</li>
+                <li class="active" onClick={인명피해우려지역}>금정구</li>
+                <li class="active" onClick={인명피해우려지역}>강서구</li>
+                <li class="active" onClick={인명피해우려지역}>연제구</li>
+                <li class="active" onClick={인명피해우려지역}>수영구</li>
+                <li class="active" onClick={인명피해우려지역}>사상구</li>
+                <li class="active" onClick={인명피해우려지역}>기장군</li>
+              </ul>
+            </ul>
           </div>
         </div>
 

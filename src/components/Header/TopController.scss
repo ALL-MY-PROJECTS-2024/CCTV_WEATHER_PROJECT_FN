@@ -138,7 +138,8 @@ $asideWidth: 220px;
 
   .menu-01,
   .menu-02, 
-  .menu-03
+  .menu-03,
+  .menu-04
   {
     position: relative;
     height: 80px;
@@ -178,7 +179,9 @@ $asideWidth: 220px;
     }
   }
 
-  .menu-02 {
+  .menu-02,
+  .menu-04
+   {
     position: relative;
     padding: 10px;
     background-color: white;
@@ -234,6 +237,9 @@ $asideWidth: 220px;
     display: none;
   }
 
+  .menu-04{
+    
+  }
   .active {
     display: block !important;
   }
