@@ -201,9 +201,7 @@ const Home = () => {
   const [selectedCCTV, setSelectedCCTV] = useState(null);  // 선택된 CCTV 정보 상태 추가
 
   //침수 
-  const [fldm_30,setFldm_30] = useState();
-  const [fldm_50,setFldm_50] = useState();
-
+  const [floodingImgState,setFloodingImgState] = useState(false);
 
   // Fetch flood risk info
   const fetchFloodRiskInfo = async (latitude, longitude) => {
@@ -387,6 +385,8 @@ const Home = () => {
         setCCTV02State={setCCTV02State}
         floodRiskInfo={floodRiskInfo}
         map={map}
+        floodingImgState = {floodingImgState}
+        setFloodingImgState={setFloodingImgState}
       />
 
       <div id="map" style={{ width: "100%", height: "100vh" }}></div>
@@ -399,7 +399,13 @@ const Home = () => {
           onClose={() => setSelectedCCTV(null)}
         />
       )}
+      {/* //침수 이미지 */}
+      {floodingImgState && (
+        <img className="floodingImage" src="https://safecity.busan.go.kr/vue/img/legend-1.1.1.242cf8a0.png" style={{width:"140px",position:"fixed",bottom:"10px",left:"230px",zIndex:"99999"}} />
+      )}
+
     </div>
+   
   );
 };
 
