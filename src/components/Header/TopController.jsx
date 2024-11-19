@@ -598,23 +598,11 @@ const TopController = ({
           <div class="induationCheckBox">
             <ul class="disaster_list">
               <ul>
-                <li class="active" onClick={인명피해우려지역}>부산전체</li>
-                <li class="active" onClick={인명피해우려지역}>중구</li>
-                <li class="active" onClick={인명피해우려지역}>서구</li>
-                <li class="active" onClick={인명피해우려지역}>동구</li>
-                <li class="active" onClick={인명피해우려지역}>영도구</li>
-                <li class="active" onClick={인명피해우려지역}>부산진구</li>
+                <li class="active" onClick={인명피해우려지역}>전체</li>
                 <li class="active" onClick={인명피해우려지역}>동래구</li>
-                <li class="active" onClick={인명피해우려지역}>남구</li>
                 <li class="active" onClick={인명피해우려지역}>북구</li>
-                <li class="active" onClick={인명피해우려지역}>해운대구</li>
-                <li class="active" onClick={인명피해우려지역}>사하구</li>
-                <li class="active" onClick={인명피해우려지역}>금정구</li>
-                <li class="active" onClick={인명피해우려지역}>강서구</li>
-                <li class="active" onClick={인명피해우려지역}>연제구</li>
-                <li class="active" onClick={인명피해우려지역}>수영구</li>
                 <li class="active" onClick={인명피해우려지역}>사상구</li>
-                <li class="active" onClick={인명피해우려지역}>기장군</li>
+                <li class="active" onClick={인명피해우려지역}>중구</li>
               </ul>
             </ul>
           </div>

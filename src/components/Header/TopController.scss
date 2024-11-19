@@ -238,7 +238,8 @@ $asideWidth: 220px;
   }
 
   .menu-04{
-    
+    grid-template-columns: repeat(5, 1fr); /* 두 번째 행부터 4열로 설정 */
+    height : 100px;
   }
   .active {
     display: block !important;
