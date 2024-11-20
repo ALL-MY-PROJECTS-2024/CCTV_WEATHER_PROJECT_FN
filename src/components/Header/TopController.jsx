@@ -598,13 +598,22 @@ const TopController = ({
           <div class="induationCheckBox">
             <ul class="disaster_list">
               <ul>
-                <li class="active" onClick={인명피해우려지역}>전체</li>
+                <li class="active" onClick={인명피해우려지역}>내수(도시지역)</li>
                 <li class="active" onClick={인명피해우려지역}>동래구</li>
                 <li class="active" onClick={인명피해우려지역}>북구</li>
                 <li class="active" onClick={인명피해우려지역}>사상구</li>
                 <li class="active" onClick={인명피해우려지역}>중구</li>
               </ul>
-            </ul>
+              
+              <ul>
+                <li class="active" onClick={인명피해우려지역}>외수(하천지역)</li>
+                <li class="active" onClick={인명피해우려지역}>동천</li>
+                <li class="active" onClick={인명피해우려지역}>수영강</li>
+                <li class="active" onClick={인명피해우려지역}>온천천</li>
+              </ul>                
+
+              </ul>
+           
           </div>
         </div>
 

@@ -221,7 +221,6 @@ $asideWidth: 220px;
           }
           li:first-child{
             grid-column: 1 / -1; /* 첫 번째 아이템이 전체 열을 차지하도록 설정 */
-            
           }
         }
       }
@@ -237,9 +236,39 @@ $asideWidth: 220px;
     display: none;
   }
 
+
+
   .menu-04{
-    grid-template-columns: repeat(5, 1fr); /* 두 번째 행부터 4열로 설정 */
-    height : 100px;
+    height : auto;
+
+    .induationCheckBox{
+      .disaster_list{
+        ul:nth-child(1){
+          
+          grid-template-columns: repeat(4, 1fr); /* 두 번째 행부터 4열로 설정 */
+          li{
+            height :30px;
+          }
+          li:nth-child(6){
+            grid-column: 1 / -1; /* 첫 번째 아이템이 전체 열을 차지하도록 설정 */
+          }
+        }
+
+        ul:nth-child(2){
+         
+          grid-template-columns: repeat(3, 1fr); /* 두 번째 행부터 4열로 설정 */
+
+          li{
+            height : 30px;
+          }
+          li:nth-child(6){
+            grid-column: 1 / -1; /* 첫 번째 아이템이 전체 열을 차지하도록 설정 */
+          }
+        }
+
+      }
+    }
+
   }
   .active {
     display: block !important;
