@@ -4,9 +4,13 @@ import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import cctv1Data from '../dataSet/CCTV1.json';
 import cctv2Data from '../dataSet/CCTV2.json';
+import floodingData from '../dataSet/FLOODING.json';
+
 import Aside from "./Aside/Aside.jsx";
 import TopController from "./Header/TopController.jsx";
 import CCTVPopup from "./CCTVPopup";
+import FloodingPopup from "./FloodingPopup";
+
 import "./Home.scss";
 
 //leaflet
@@ -182,6 +186,18 @@ const createCCTV2MarkerIcon = () => {
   });
 };
 
+// FLOODING ICON
+const createFLOODINGMarkerIcon = () => {
+  const { iconSize, shadowSize } = getMarkerIconSize();  // 마커와 그림자의 크기를 모두 가져옴
+  return new L.Icon({
+   iconUrl: 'https://safecity.busan.go.kr/vue/img/gis_picker_cctv_its.9994bd52.png',
+    iconSize: iconSize,  // 동적으로 마커 크기 설정
+    iconAnchor: [iconSize[0] / 2, iconSize[1]],  // 아이콘의 중심이 앵커에 맞도록 설정
+    popupAnchor: [0, -iconSize[1]],  // 팝업이 아이콘 위로 적절하게 뜨도록 설정
+    shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
+    shadowSize: shadowSize,  // 동적으로 그림자 크기 설정
+  });
+};
 
 
 
@@ -201,6 +217,11 @@ const Home = () => {
   const [selectedCCTV, setSelectedCCTV] = useState(null);  // 선택된 CCTV 정보 상태 추가
 
   //침수 
+  const [floodingState, setFloodingState] = useState(false);
+  const [clusterFLOODING, setClusterFLOODING] = useState([]);
+  const [selectedFLOODING, setSelectedFLOODING] = useState(null);  // 선택된 CCTV 정보 상태 추가
+
+  //침수 이미지 오버레이
   const [floodingImgState,setFloodingImgState] = useState(false);
 
   // Fetch flood risk info
@@ -230,10 +251,15 @@ const Home = () => {
         
         const response2 = await axios.get("http://54.180.211.164:8080/get/cctv2");
         setClusterCCTV2(response2.data.map(item => ({ ...item, type: 'CCTV2' })));
+
+        const response3 = await axios.get("http://54.180.211.164:8080/get/flooding");
+        setClusterFLOODING(response3.data.map(item => ({ ...item, type: 'FLOODING' })));
+
       } catch (error) {
         console.error('fetchCCTVData error',error);
         setClusterCCTV1(cctv1Data.map(item => ({ ...item, type: 'CCTV1' })));
         setClusterCCTV2(cctv2Data.map(item => ({ ...item, type: 'CCTV2' })));
+        setClusterFLOODING(floodingData.map(item => ({ ...item, type: 'FLOODING' })));
       }
     };
     fetchCCTVData();
@@ -269,7 +295,7 @@ const Home = () => {
       // }).addTo(mapInstance);
       // // Kakao Map 타일 레이어 추가
 
-          // Add a base tile layer (OpenStreetMap)
+      // Add a base tile layer (OpenStreetMap)
        const tileLayer =L.tileLayer('http://map{s}.daumcdn.net/map_2d/1807hsm/L{z}/{y}/{x}.png', {
         minZoom:1,
         maxZoom:13,
@@ -372,6 +398,43 @@ const Home = () => {
       }
     }, [map, CCTV02State, clusterCCTV2]);
 
+    //-----------------------------------
+    // FLODDING 클러스터링
+    //-----------------------------------
+    useEffect(() => {
+      if (map && floodingState) {
+        const clusterGroup3 = L.markerClusterGroup({
+          maxClusterRadius: 100, // 클러스터링 반경을 100미터로 설정 (값을 원하는 대로 조정)
+          iconCreateFunction: (cluster) => {
+            const count = cluster.getChildCount();
+            let clusterClass = 'marker-cluster-icon-small marker-cluster-icon-cctv2'; // CCTV2 아이콘 기본 클래스
+
+            if (count >= 10 && count < 50) {
+              clusterClass = 'marker-cluster-icon-medium marker-cluster-icon-cctv2';
+            } else if (count >= 50) {
+              clusterClass = 'marker-cluster-icon-large marker-cluster-icon-cctv2';
+            }
+
+            return new L.DivIcon({
+              html: `<div class="custom-cluster-icon ${clusterClass}">${count}</div>`,
+              className: 'custom-cluster-icon', // 공통 스타일 클래스
+              iconSize: L.point(40, 40), // 기본 크기 설정
+            });
+          }
+        });
+
+        clusterFLOODING.forEach((marker) => {
+          L.marker([marker.lat, marker.lon], { icon: createFLOODINGMarkerIcon() })
+            .on('click', () => setSelectedFLOODING(marker))
+            .addTo(clusterGroup3);
+        });
+        map.addLayer(clusterGroup3);
+
+        return () => {
+          map.removeLayer(clusterGroup3);
+        };
+      }
+    }, [map, floodingState, clusterFLOODING]);
 
 
 
@@ -379,14 +442,19 @@ const Home = () => {
     <div className="mainSection">
       <Aside />
       <TopController
+        map={map}
+        //CCTV 
         CCTV01State={CCTV01State}
         CCTV02State={CCTV02State}
         setCCTV01State={setCCTV01State}
         setCCTV02State={setCCTV02State}
+        //침수지도 
         floodRiskInfo={floodRiskInfo}
-        map={map}
         floodingImgState = {floodingImgState}
         setFloodingImgState={setFloodingImgState}
+        //FLOODING예측
+        floodingState={floodingState}
+        setFloodingState={setFloodingState}
       />
 
       <div id="map" style={{ width: "100%", height: "100vh" }}></div>
@@ -399,10 +467,26 @@ const Home = () => {
           onClose={() => setSelectedCCTV(null)}
         />
       )}
+
+      {selectedFLOODING && (
+        <FloodingPopup
+          lat={selectedFLOODING.lat}
+          lon={selectedFLOODING.lon}
+          hlsAddr={selectedFLOODING.hlsAddr}
+          onClose={() => setSelectedFLOODING(null)}
+        />
+      )}
+
+
       {/* //침수 이미지 */}
       {floodingImgState && (
         <img className="floodingImage" src="https://safecity.busan.go.kr/vue/img/legend-1.1.1.242cf8a0.png" style={{width:"140px",position:"fixed",bottom:"10px",left:"230px",zIndex:"99999"}} />
       )}
+
+
+
+
+
 
     </div>
    

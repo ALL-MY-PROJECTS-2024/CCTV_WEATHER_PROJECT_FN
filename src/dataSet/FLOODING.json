@@ -1,0 +1,292 @@
+[
+  {
+    "id": 10,
+    "category": "내수(도시지역)",
+    "instlPos": "7_동래화신타운 인근",
+    "hlsAddr": "",
+    "address": null,
+    "lat": 35.19288107074009,
+    "lon": 129.08906935676794,
+    "lastUpdateAt": "2024-11-20T13:45:04.071356"
+  },
+  {
+    "id": 11,
+    "category": "내수(도시지역)",
+    "instlPos": "79_동구_초량_제2지하차도",
+    "hlsAddr": "",
+    "address": null,
+    "lat": 35.123144,
+    "lon": 129.0469513,
+    "lastUpdateAt": "2024-11-20T13:45:54.573559"
+  },
+  {
+    "id": 12,
+    "category": "내수(도시지역)",
+    "instlPos": "6_더샵파크시티 아파트 인근",
+    "hlsAddr": "",
+    "address": null,
+    "lat": 35.1906268,
+    "lon": 129.0990608,
+    "lastUpdateAt": "2024-11-20T13:44:57.491216"
+  },
+  {
+    "id": 13,
+    "category": "내수(도시지역)",
+    "instlPos": "5_SK 토곡주유소 인근",
+    "hlsAddr": "",
+    "address": null,
+    "lat": 35.1879989,
+    "lon": 129.1047492,
+    "lastUpdateAt": "2024-11-20T13:44:51.246979"
+  },
+  {
+    "id": 14,
+    "category": "내수(도시지역)",
+    "instlPos": "76_동구_좌천동_1119-2_고1",
+    "hlsAddr": "",
+    "address": null,
+    "lat": 35.13139603189923,
+    "lon": 129.0487859068672,
+    "lastUpdateAt": "2024-11-20T13:45:28.672168"
+  },
+  {
+    "id": 15,
+    "category": "내수(도시지역)",
+    "instlPos": "78_동구_초량_제1지하차도",
+    "hlsAddr": "",
+    "address": null,
+    "lat": 35.1191445,
+    "lon": 129.0447294,
+    "lastUpdateAt": "2024-11-20T13:46:07.165179"
+  },
+  {
+    "id": 16,
+    "category": "내수(도시지역)",
+    "instlPos": "172_해운대구_우동_1291-33_고2",
+    "hlsAddr": "",
+    "address": null,
+    "lat": 35.1655322,
+    "lon": 129.1325993,
+    "lastUpdateAt": "2024-11-20T13:46:48.076188"
+  },
+  {
+    "id": 17,
+    "category": "내수(도시지역)",
+    "instlPos": "60_남구_동아건업_앞_고1",
+    "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=2&cctvUrl=rtsp://guest:guest@10.1.210.209:554/us676r3DLcDns60tMDI1LTE=,rtsp://guest:guest@10.1.210.209:554/us676r3DLcDns60tMDI1LTI=&sensorName=%EB%82%A8%EA%B5%AC_%EB%8F%99%EC%95%84%EA%B1%B4%EC%97%85_%EC%95%9E_%EA%B3%A01,%EB%82%A8%EA%B5%AC_%EB%8F%99%EC%95%84%EA%B1%B4%EC%97%85_%EC%95%9E_%EA%B3%A02",
+    "address": null,
+    "lat": 35.12995931594881,
+    "lon": 129.09797990500033,
+    "lastUpdateAt": "2024-11-20T13:59:56.877852"
+  },
+  {
+    "id": 18,
+    "category": "내수(도시지역)",
+    "instlPos": "71_남구_이마트_문현점_앞_고2",
+    "hlsAddr": "",
+    "address": null,
+    "lat": 35.1443594,
+    "lon": 129.0642591,
+    "lastUpdateAt": "2024-11-20T13:45:19.894416"
+  },
+  {
+    "id": 19,
+    "category": "내수(도시지역)",
+    "instlPos": "77_동구_좌천동_1119-2_고2",
+    "hlsAddr": "",
+    "address": null,
+    "lat": 35.13224223727686,
+    "lon": 129.04990407322208,
+    "lastUpdateAt": "2024-11-20T13:54:48.283275"
+  },
+  {
+    "id": 20,
+    "category": "내수(도시지역)",
+    "instlPos": "1_정보화지하차도 인근",
+    "hlsAddr": "",
+    "address": null,
+    "lat": 35.123144,
+    "lon": 129.0469513,
+    "lastUpdateAt": "2024-11-20T13:47:01.588345"
+  },
+  {
+    "id": 21,
+    "category": "내수(도시지역)",
+    "instlPos": "2_연산5동 행정복지센터 인근",
+    "hlsAddr": "",
+    "address": null,
+    "lat": 35.18447099999999,
+    "lon": 129.076058,
+    "lastUpdateAt": "2024-11-20T13:47:04.311316"
+  },
+  {
+    "id": 22,
+    "category": "내수(도시지역)",
+    "instlPos": "4_하나로한의원 인근",
+    "hlsAddr": "",
+    "address": null,
+    "lat": 35.1949742,
+    "lon": 129.0806786,
+    "lastUpdateAt": "2024-11-20T13:44:41.42351"
+  },
+  {
+    "id": 23,
+    "category": "내수(도시지역)",
+    "instlPos": "3_기아오토큐 협신자동차서비스 앞",
+    "hlsAddr": "",
+    "address": null,
+    "lat": 35.1883036,
+    "lon": 129.0772245,
+    "lastUpdateAt": "2024-11-20T13:44:31.675009"
+  },
+  {
+    "id": 24,
+    "category": "내수(도시지역)",
+    "instlPos": "127_사하구_장림동_334-5_고2",
+    "hlsAddr": "",
+    "address": null,
+    "lat": 35.0805014,
+    "lon": 128.9728789,
+    "lastUpdateAt": "2024-11-20T13:46:06.050376"
+  },
+  {
+    "id": 25,
+    "category": "내수(도시지역)",
+    "instlPos": "134_서구_RB모터스_인근_고1",
+    "hlsAddr": "",
+    "address": null,
+    "lat": 35.090442,
+    "lon": 129.0240209,
+    "lastUpdateAt": "2024-11-20T13:46:16.318157"
+  },
+  {
+    "id": 26,
+    "category": "내수(도시지역)",
+    "instlPos": "163_중구_중앙동_5가_8-2_고2",
+    "hlsAddr": "",
+    "address": null,
+    "lat": 35.1023698,
+    "lon": 129.0369138,
+    "lastUpdateAt": "2024-11-20T13:46:39.844645"
+  },
+  {
+    "id": 27,
+    "category": "내수(도시지역)",
+    "instlPos": "171_해운대구_우동_1291-33_고1",
+    "hlsAddr": "",
+    "address": null,
+    "lat": 35.1655322,
+    "lon": 129.1325993,
+    "lastUpdateAt": "2024-11-20T13:46:38.728396"
+  },
+  {
+    "id": 28,
+    "category": "외수(하천지역)",
+    "instlPos": "29_금정구_수영강재난감시1",
+    "hlsAddr": null,
+    "address": null,
+    "lat": 35.2588922,
+    "lon": 129.0915364,
+    "lastUpdateAt": "2024-11-20T13:54:09.364715"
+  },
+  {
+    "id": 29,
+    "category": "외수(하천지역)",
+    "instlPos": "81_동래구_동래2호교_고정",
+    "hlsAddr": null,
+    "address": null,
+    "lat": 35.2311043,
+    "lon": 129.0891666,
+    "lastUpdateAt": "2024-11-20T13:54:22.061144"
+  },
+  {
+    "id": 30,
+    "category": "외수(하천지역)",
+    "instlPos": "85_동래구_삼환맨션_앞",
+    "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=2&cctvUrl=rtsp%3A%2F%2F10.1.210.181%3A10035%2Fdeid,rtsp%3A%2F%2Fguest%3Aguest%4010.1.210.212%3A554%2Fus676r3DLcDns60tMTU1LTE%3D&sensorName=%EB%8F%99%EB%9E%98%EA%B5%AC_%EC%82%BC%ED%95%9C%EB%A7%A8%EC%85%98_%EC%95%9E",
+    "address": null,
+    "lat": 35.1946641,
+    "lon": 129.0874733,
+    "lastUpdateAt": "2024-11-21T12:38:01.965167"
+  },
+  {
+    "id": 31,
+    "category": "외수(하천지역)",
+    "instlPos": "86_동래구_세병교(영상수위_1)_고1",
+    "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2Fguest%3Aguest%4010.1.210.205%3A554%2Fus676r3DLcDns60tMTU5LTE%3D&sensorName=%EB%8F%99%EB%9E%98%EA%B5%AC_%EC%84%B8%EB%B3%91%EA%B5%90%28%EC%98%81%EC%83%81%EC%88%98%EC%9C%84_1%29_%EA%B3%A01",
+    "address": null,
+    "lat": 35.19726023056509,
+    "lon": 129.08281960727254,
+    "lastUpdateAt": "2024-11-21T12:39:40.670676"
+  },
+  {
+    "id": 33,
+    "category": "외수(하천지역)",
+    "instlPos": "88_동래구_세병교_상류방향_하류방향",
+    "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=2&cctvUrl=rtsp%3A%2F%2F10.1.210.181%3A10022%2Fdeid,rtsp%3A%2F%2F10.1.210.181%3A10031%2Fdeid&sensorName=%EB%8F%99%EB%9E%98%EA%B5%AC_%EC%84%B8%EB%B3%91%EA%B5%90_%EC%83%81%EB%A5%98%EB%B0%A9%ED%96%A5,%EB%8F%99%EB%9E%98%EA%B5%AC_%EC%84%B8%EB%B3%91%EA%B5%90_%ED%95%98%EB%A5%98%EB%B0%A9%ED%96%A5",
+    "address": null,
+    "lat": 35.19733283792367,
+    "lon": 129.0825277920904,
+    "lastUpdateAt": "2024-11-21T12:40:02.129902"
+  },
+  {
+    "id": 34,
+    "category": "외수(하천지역)",
+    "instlPos": "92_동래구_연안교_상류방향",
+    "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2F10.1.210.181%3A10029%2Fdeid&sensorName=%EB%8F%99%EB%9E%98%EA%B5%AC_%EC%97%B0%EC%95%88%EA%B5%90_%EC%83%81%EB%A5%98%EB%B0%A9%ED%96%A5",
+    "address": null,
+    "lat": 35.19368921764968,
+    "lon": 129.0908025885216,
+    "lastUpdateAt": "2024-11-21T12:37:16.205849"
+  },
+  {
+    "id": 35,
+    "category": "외수(하천지역)",
+    "instlPos": "93_동래구_연안교_하류방향",
+    "hlsAddr": "https://safecity.busan.go.kr/#/cctv?cnt=1&cctvUrl=rtsp%3A%2F%2F10.1.210.181%3A10020%2Fdeid&sensorName=%EB%8F%99%EB%9E%98%EA%B5%AC_%EC%97%B0%EC%95%88%EA%B5%90_%ED%95%98%EB%A5%98%EB%B0%A9%ED%96%A5",
+    "address": null,
+    "lat": 35.19356387631795,
+    "lon": 129.09179835255017,
+    "lastUpdateAt": "2024-11-21T12:37:17.546103"
+  },
+  {
+    "id": 36,
+    "category": "외수(하천지역)",
+    "instlPos": "94_동래구_온천교",
+    "hlsAddr": null,
+    "address": null,
+    "lat": 35.2179946,
+    "lon": 129.0848063,
+    "lastUpdateAt": "2024-11-20T13:54:32.989749"
+  },
+  {
+    "id": 37,
+    "category": "외수(하천지역)",
+    "instlPos": "97_부산진구_성서교(신)",
+    "hlsAddr": null,
+    "address": null,
+    "lat": 35.1449195,
+    "lon": 129.0631992,
+    "lastUpdateAt": "2024-11-20T13:54:34.380388"
+  },
+  {
+    "id": 38,
+    "category": "외수(하천지역)",
+    "instlPos": "98_부산진구_성서교_수위관측",
+    "hlsAddr": null,
+    "address": null,
+    "lat": 35.1449195,
+    "lon": 129.0631992,
+    "lastUpdateAt": "2024-11-20T13:54:35.964652"
+  },
+  {
+    "id": 39,
+    "category": "외수(하천지역)",
+    "instlPos": "112_사상구_학장교",
+    "hlsAddr": null,
+    "address": null,
+    "lat": 35.1419184,
+    "lon": 128.9837623,
+    "lastUpdateAt": "2024-11-20T13:54:37.598548"
+  }
+]

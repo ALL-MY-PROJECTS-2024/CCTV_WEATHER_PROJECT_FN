@@ -15,7 +15,11 @@ const TopController = ({
   flooding2020State,
   setFlooding2020State,
   floodingImgState,
-  setFloodingImgState
+  setFloodingImgState,
+
+  floodingState,
+  setFloodingState,
+
 }) => {
   const [activeMenu, setActiveMenu] = useState();
   const [activeSubMenu, setActiveSubMenu] = useState();
@@ -67,6 +71,13 @@ const TopController = ({
     //TOP_HEADER_01 인명피해 우려지역
 
     //TOP_HEADER_01 과거 침수 이력
+
+    //강수 예측지도 
+    if(no=="04"){
+       setFloodingState(true);
+    }else{
+      setFloodingState(false);
+    }
   };
 
   //---------------------------------------------------
@@ -120,6 +131,9 @@ const TopController = ({
     }
     setFlooding2020State(!flooding2020State);
   };
+
+
+
 
   //---------------------------------------------------
   // 침수 핸들러
