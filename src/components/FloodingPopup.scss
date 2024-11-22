@@ -22,26 +22,30 @@
 
     .flooding-items{
         margin-top:20px;
-        display:grid;
-        grid-template-columns: repeat(2, 1fr); /* 2 열 */
-        grid-template-rows: repeat(2, 1fr);   /* 2 행 */
-        gap: 10px; /* 셀 간의 간격 */
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 두 개의 열 */
+        grid-template-rows: repeat(2, 1fr);   /* 두 개의 행 */
+        gap: 5px; /* 셀 간의 간격 */
         border: 1px solid #ccc;
-        
-        td{
-            border : 1px solid;
+        width : 100%;
+        height : 100%;
+
+        .grid-item{
+  
+          border : 1px solid;
+          height : 92%;
+          .title{
+            background-color: #ccc;
+            padding-left:10px;
+          }
             .video{
-                width:100%;
-                height:100%;
-                overflow: hidden;        
-       
-                
-            }
-            .forecast{
-                width : 100%;
-                height:100%;
+              width:100%;
+              height : 100%;
             }
         }
+
+    
+
     }
 
 
