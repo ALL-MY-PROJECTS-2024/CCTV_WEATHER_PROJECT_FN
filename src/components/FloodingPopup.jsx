@@ -34,18 +34,21 @@ const FloodingPopup = ({ lat, lon, hlsAddr, onClose }) => {
                 <div className="video">
                     <div className="title" style={{height:"30px",lineHeight:"30px",}}>카메라 위치</div>
                     <iframe
-                        src={hlsAddr}
-                        width="100%"
-                        height="100%"
+                        //src={hlsAddr}
+                        src="http://localhost:5000/stream"
                         allow="autoplay; fullscreen"
                         allowFullScreen
-                        onLoad={() => {}}
                         style={{
-                            transform: "scale(0.5)", // 배율 축소
-                            transformOrigin: "top left", // 배율 적용 기준점
-                            width: "200%", // 축소된 배율 보정 (100% / 0.8)
-                            height: "calc(200% - 60px)", // 축소된 배율 보정 (100% / 0.8)
-                            
+                          // border: "1px solid red",
+                          width: "100%", // 필요에 따라 크기 조정
+                          height: "calc(100% - 30px)",
+                          display:"flex",
+                          justifyContent:"center",
+                          alignItems : "center",
+                          objectFit:"center",
+                          paddingLeft:"12px",
+                          paddingTop:"12px",
+
                         }}
                     />
                </div>
