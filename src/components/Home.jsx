@@ -473,7 +473,7 @@ const Home = () => {
           lat={selectedFLOODING.lat}
           lon={selectedFLOODING.lon}
           hlsAddr={selectedFLOODING.hlsAddr}
-          onClose={() => setSelectedFLOODING(null)}
+          setSelectedFLOODING={setSelectedFLOODING}
         />
       )}
 

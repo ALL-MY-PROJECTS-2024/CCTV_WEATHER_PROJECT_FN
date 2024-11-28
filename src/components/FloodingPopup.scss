@@ -12,8 +12,9 @@
   }
 
   .flooding-popup{
-    width : 95vw;
-    height : 92vh;
+    min-width:1200px;
+    width:90vw;
+    height : 90vh;
     background-color: white;
     padding : 10px;
     position:relative;
@@ -23,39 +24,46 @@
     .flooding-items{
         margin-top:20px;
         display: grid;
-        grid-template-columns: repeat(2, 1fr); /* 두 개의 열 */
-        grid-template-rows: repeat(2, 1fr);   /* 두 개의 행 */
+        grid-template-columns: repeat(2, 2fr); /* 두 개의 열 */
+        grid-template-rows: repeat(2, 21fr);   /* 두 개의 행 */
         gap: 5px; /* 셀 간의 간격 */
-        border: 1px solid #ccc;
         width : 100%;
         height : 100%;
 
         .grid-item{
   
           border : 1px solid;
-          height : 92%;
+          height : 95%;
+          width:100%;
+         
           .title{
             background-color: #ccc;
             padding-left:10px;
           }
-            .video{
-              width:100%;
-              height : 100%;
+            .img{
+              width:100vw;
+              height : 100vh;;
             }
         }
 
         .grid-item:nth-child(1){
-          width:350px;
-          height : 300px;
+          position:relative;
+          overflow:hidden;
 
-          display:flex;
-          justify-content: center;
-          align-items : center;
-
+          // height : 640px;
           .video{
+            background-color: black;
+            position:relative;
+            height :100%;
+            width : 100%;
+            
+            img{
+              width:100%;
+              height : 100%;
+              object-fit: fill;
+            }
           }
         }
-    
 
     }
 
