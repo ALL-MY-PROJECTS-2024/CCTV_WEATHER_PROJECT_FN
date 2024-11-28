@@ -35,7 +35,7 @@ const FloodingPopup = ({ lat, lon, hlsAddr, onClose }) => {
                     <div className="title" style={{height:"30px",lineHeight:"30px",}}>카메라 위치</div>
                     <iframe
                         //src={hlsAddr}
-                        src="http://localhost:5000/stream"
+                        src="https://d6ce-35-197-94-123.ngrok-free.app/stream"
                         allow="autoplay; fullscreen"
                         allowFullScreen
                         style={{
