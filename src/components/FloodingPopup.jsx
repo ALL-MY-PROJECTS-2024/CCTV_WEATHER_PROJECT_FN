@@ -7,32 +7,47 @@ const FloodingPopup = ({ lat, lon, hlsAddr, setSelectedFLOODING }) => {
   
   const [streamSrc, setStreamSrc] = useState("");
   const [server,setServer] = useState('http://localhost:5000');
+  const [clientId,setClientId] = useState(null)
+  
   // const [server,setServer] = useState('https://bumper-gig-mixer-crop.trycloudflare.com');
   useEffect(() => {
-      // 창이 열릴 때마다 새로운 요청을 보내기 위해 src 설정
-      setStreamSrc(`${server}/stream?hlsAddr=${hlsAddr}&t=${Date.now()}`);
-  }, []); // hlsAddr이 바뀔 때마다 실행
+      const initializeStream = async () => {
+        try {
+          const response = await fetch(`${server}/stream?hlsAddr=${hlsAddr}`);
+          const data = await response.json();
+          if (response.ok) {
+            setClientId(data.clientId);
+            setStreamSrc(`${server}/stream-data?hlsAddr=${hlsAddr}&clientId=${data.clientId}`);
+          } else {
+            console.error("Error initializing stream:", data.error);
+          }
+        } catch (error) {
+          console.error("Error initializing stream:", error);
+        }
+      };
+
+    initializeStream();
+  }, [hlsAddr, server]); // hlsAddr이 바뀔 때마다 실행
 
 
-  const closeHandler = async ()=>{
-    // 서버에 스트림 종료 요청
+
+  const closeHandler = async () => {
     try {
-        //await fetch(`http://localhost:5000/stop-stream`, {
+      if (clientId) {
         await fetch(`${server}/stop-stream`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ hlsAddr: hlsAddr }),
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ hlsAddr, clientId }),
         });
-        console.log('Stream stopped successfully');
-        //창닫기
-        setSelectedFLOODING(null);
-
-      } catch (error) {
-        console.error('Failed to stop stream:', error);
+        console.log("Stream stopped successfully");
       }
-  }
+      setSelectedFLOODING(null);
+    } catch (error) {
+      console.error("Failed to stop stream:", error);
+    }
+  };
+
+
   return (
     <div className="flooding-popup-overlay">
       <div className="flooding-popup">
@@ -72,28 +87,60 @@ const FloodingPopup = ({ lat, lon, hlsAddr, setSelectedFLOODING }) => {
                       alt="Streaming Video"
                     />
                   )}
-              
                </div>
-              
           </div>
           <div className="grid-item">
-            <div className="title" style={{height:"30px",lineHeight:"30px"}}>10분 뒤 예측이미지</div>
-            <div>
-                TTT
-            </div>
+              <div className="title" style={{height:"30px",lineHeight:"30px",}}>카메라 위치</div>
+              <div className="video">
+                    {/* <img
+                        //src={hlsAddr}
+                        //src="https://d6ce-35-197-94-123.ngrok-free.app/stream"
+                        src={`http://localhost:5000/stream?hlsAddr=${hlsAddr}`}
+                    /> */}
+
+                  {streamSrc && ( // streamSrc가 설정된 경우만 렌더링
+                    <img
+                      src={streamSrc}
+                      alt="Streaming Video"
+                    />
+                  )}
+               </div>
           </div>
           <div className="grid-item">
-            <div className="title" style={{height:"30px",lineHeight:"30px"}}>30분 뒤 예측이미지</div>
-            <div>
-                TTT
-            </div>
+              <div className="title" style={{height:"30px",lineHeight:"30px",}}>카메라 위치</div>
+              <div className="video">
+                    {/* <img
+                        //src={hlsAddr}
+                        //src="https://d6ce-35-197-94-123.ngrok-free.app/stream"
+                        src={`http://localhost:5000/stream?hlsAddr=${hlsAddr}`}
+                    /> */}
+
+                  {streamSrc && ( // streamSrc가 설정된 경우만 렌더링
+                    <img
+                      src={streamSrc}
+                      alt="Streaming Video"
+                    />
+                  )}
+               </div>
           </div>
           <div className="grid-item">
-            <div className="title" style={{height:"30px",lineHeight:"30px"}}>1시간 뒤 예측이미지</div>
-            <div>
-                TTT
-            </div>
+              <div className="title" style={{height:"30px",lineHeight:"30px",}}>카메라 위치</div>
+              <div className="video">
+                    {/* <img
+                        //src={hlsAddr}
+                        //src="https://d6ce-35-197-94-123.ngrok-free.app/stream"
+                        src={`http://localhost:5000/stream?hlsAddr=${hlsAddr}`}
+                    /> */}
+
+                  {streamSrc && ( // streamSrc가 설정된 경우만 렌더링
+                    <img
+                      src={streamSrc}
+                      alt="Streaming Video"
+                    />
+                  )}
+               </div>
           </div>
+          
           
         </div>
       </div>
