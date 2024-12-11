@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.css";
 
 
 import Home from "./components/Home";
-
+import Test from "./components/Test";
 
 import "./App.scss"
 
@@ -23,6 +23,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/Test" element={<Test />} />
         </Routes>
       </Router>
     </GlobalContextProvider>
