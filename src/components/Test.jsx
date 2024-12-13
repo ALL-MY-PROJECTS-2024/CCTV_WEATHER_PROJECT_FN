@@ -326,9 +326,9 @@ const Test  = ()=>{
 
             // 지도 이동 시 이벤트
             mapInstance.on('moveend', () => {
-              const center = mapInstance.getCenter();
-              setCenterPosition({ lat: center.lat, lng: center.lng });
-              throttledFetchFloodRiskInfo(center.lat, center.lng);
+            const center = mapInstance.getCenter();
+            setCenterPosition({ lat: center.lat, lng: center.lng });
+            throttledFetchFloodRiskInfo(center.lat, center.lng);
             });
 
         }
@@ -439,19 +439,19 @@ const Test  = ()=>{
             //---------------------------
             //법정동 표시용 
             //---------------------------
-            const wmsLayer = L.tileLayer.wms('https://safecity.busan.go.kr/geoserver/iots/wms', {
-                layers: 'iots:sig_layer',
-                format: 'image/png',
-                transparent: true,
-                version: '1.1.1',
-                attribution: '&copy; Safe City Busan GeoServer',
-                styles: '',
-                zIndex: 500,
-              });
+            // const wmsLayer = L.tileLayer.wms('https://safecity.busan.go.kr/geoserver/iots/wms', {
+            //     layers: 'iots:sig_layer',
+            //     format: 'image/png',
+            //     transparent: true,
+            //     version: '1.1.1',
+            //     attribution: '&copy; Safe City Busan GeoServer',
+            //     styles: '',
+            //     zIndex: 500,
+            //   });
           
-              wmsLayer.addTo(map);
+            //   wmsLayer.addTo(map);
               
-              setSig_layer(wmsLayer);
+            //   setSig_layer(wmsLayer);
 
 
 
@@ -662,8 +662,9 @@ const Test  = ()=>{
                         />
                   ) : (
                     <>
-                      <div style={{color:"white"}}>
-                        TEST
+                      <div style={{color:"white"}} className="empty">
+                        <span class="material-symbols-outlined">pause</span>
+
                       </div>
                     </>
                   )}

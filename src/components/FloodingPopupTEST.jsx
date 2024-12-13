@@ -25,7 +25,7 @@ const FloodingPopupTEST = ({ hlsAddr, setSelectedFLOODING,instl_pos }) => {
     };
 
     fetchStreamId();
-  }, [hlsAddr, server]);
+  }, [hlsAddr, server,streamSrc]);
 
   const closeHandler = async () => {
     // Stop the stream using the stream ID
@@ -73,19 +73,14 @@ const FloodingPopupTEST = ({ hlsAddr, setSelectedFLOODING,instl_pos }) => {
             </div>
 
             <div className="video" style={{width:"100%",height:"100%"}} >
-              {streamSrc ? (
+              {streamSrc && (
                 <img
                   src={streamSrc}
                   alt="Streaming Video"
                   style={{width:"100%",height:"100%",objectFit:"contain"}}
                 />
               )
-              :
-              (
-                <>
-                  <img src="" alt="video" />
-                </>
-              )
+             
             }
             </div>
 
