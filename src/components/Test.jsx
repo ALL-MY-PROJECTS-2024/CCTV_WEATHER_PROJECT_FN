@@ -250,12 +250,17 @@ const Test  = ()=>{
     //침수 이미지 오버레이
     const [floodingImgState,setFloodingImgState] = useState(false);
    
+    //표시여부
+    const [displayMap,setDisplayMap] = useState(true)
+
     //지도
     const [selectedShowMap, setSelectedShowMap] = useState(null)
     //날씨
     const [weatherData,setWeatherData] = useState(null)
     //
     const [floodRiskInfo, setFloodRiskInfo] = useState(null); 
+
+
 
     //----------------------------
      // Fetch flood risk info
@@ -427,7 +432,7 @@ const Test  = ()=>{
           map.removeLayer(clusterGroup3);
         };
       }
-    }, [map, floodingState, clusterFLOODING,selectedFLOODING]);
+    }, [map, floodingState, clusterFLOODING,]);
 
 
 
@@ -439,19 +444,25 @@ const Test  = ()=>{
             //---------------------------
             //법정동 표시용 
             //---------------------------
-            // const wmsLayer = L.tileLayer.wms('https://safecity.busan.go.kr/geoserver/iots/wms', {
-            //     layers: 'iots:sig_layer',
-            //     format: 'image/png',
-            //     transparent: true,
-            //     version: '1.1.1',
-            //     attribution: '&copy; Safe City Busan GeoServer',
-            //     styles: '',
-            //     zIndex: 500,
-            //   });
+            console.log('displayMap',displayMap)
+            if(displayMap){
+              const wmsLayer = L.tileLayer.wms('https://safecity.busan.go.kr/geoserver/iots/wms', {
+                layers: 'iots:sig_layer',
+                format: 'image/png',
+                transparent: true,
+                version: '1.1.1',
+                attribution: '&copy; Safe City Busan GeoServer',
+                styles: '',
+                zIndex: 500,
+              });
           
-            //   wmsLayer.addTo(map);
+              wmsLayer.addTo(map);
               
-            //   setSig_layer(wmsLayer);
+              setSig_layer(wmsLayer);
+            }else{
+              setSig_layer(null);
+            }
+
 
 
 
@@ -533,7 +544,7 @@ const Test  = ()=>{
             .addTo(map)
                 
         }
-    },[map,selectedMapLayer])
+    },[map,selectedMapLayer,])
 
 
 
@@ -587,9 +598,14 @@ const Test  = ()=>{
             <div className="map-control-item">
                
               <div className="item">
-                <a href="javascript:void(0)">
-                <span class="material-symbols-outlined">package_2</span>
-                </a>
+                  <a href="javascript:void(0)" onClick={e=>{setDisplayMap(!displayMap)}}>
+                      {displayMap ? (
+                        <span class="material-symbols-outlined" style={{color:"royalblue"}}>package_2</span>
+                      ):(
+                        <span class="material-symbols-outlined" >package_2</span>
+                      )
+                    }
+                  </a>
               </div>
               <div className="item">
                 <a href="javascript:void(0)">
@@ -664,7 +680,6 @@ const Test  = ()=>{
                     <>
                       <div style={{color:"white"}} className="empty">
                         <span class="material-symbols-outlined">pause</span>
-
                       </div>
                     </>
                   )}

@@ -25,7 +25,7 @@ const FloodingPopupTEST = ({ hlsAddr, setSelectedFLOODING,instl_pos }) => {
     };
 
     fetchStreamId();
-  }, [hlsAddr, server,streamSrc]);
+  }, []);
 
   const closeHandler = async () => {
     // Stop the stream using the stream ID
@@ -47,7 +47,7 @@ const FloodingPopupTEST = ({ hlsAddr, setSelectedFLOODING,instl_pos }) => {
       style={{backgroundColor:"",position:"relative",left:'0',top:"70px",width:"100%",minWidth:"300px",height:"80%",minHeight:"200px",overflow:"hidden"}}
     >
 
-        <div style={{position:"absolute",left:"10px",height:"30px",top:"5px",width:"50px",zIndex:"999"}}>
+        <div style={{position:"absolute",left:"10px",height:"30px",top:"0px",width:"50px",zIndex:"999"}}>
                 <div style={{display:"flex",width:"80px",color:"white",alignItems:"center",height:"100%"}}>
                     <span class="material-symbols-outlined" style={{fontSize:"1.5rem",color:"#40FF00"}}>notifications</span>
                     <span style={{fontSize:".8rem"}}>안전</span>    
