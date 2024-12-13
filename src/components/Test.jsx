@@ -218,19 +218,19 @@ const Test  = ()=>{
             //---------------------------
             //법정동 표시용 
             //---------------------------
-            // const wmsLayer = L.tileLayer.wms('https://safecity.busan.go.kr/geoserver/iots/wms', {
-            //     layers: 'iots:sig_layer',
-            //     format: 'image/png',
-            //     transparent: true,
-            //     version: '1.1.1',
-            //     attribution: '&copy; Safe City Busan GeoServer',
-            //     styles: '',
-            //     zIndex: 500,
-            //   });
+            const wmsLayer = L.tileLayer.wms('https://safecity.busan.go.kr/geoserver/iots/wms', {
+                layers: 'iots:sig_layer',
+                format: 'image/png',
+                transparent: true,
+                version: '1.1.1',
+                attribution: '&copy; Safe City Busan GeoServer',
+                styles: '',
+                zIndex: 500,
+              });
           
-            //   wmsLayer.addTo(map);
+              wmsLayer.addTo(map);
               
-            //   setSig_layer(wmsLayer);
+              setSig_layer(wmsLayer);
 
 
 
@@ -352,11 +352,32 @@ const Test  = ()=>{
             </div>
             <div className="map-control-item">
                
-              <div className="item">상세지도</div>
-              <div className="item">침수구역(도시)</div>
-              <div className="item">침수구역(하천)</div>
-              <div className="item"></div>
-              <div className="item"></div>
+              <div className="item">
+                <a href="javascript:void(0)">
+                <span class="material-symbols-outlined">package_2</span>
+                </a>
+              </div>
+              <div className="item">
+                <a href="javascript:void(0)">
+                <span class="material-symbols-outlined">package_2</span>
+                </a>
+              </div>
+              <div className="item">
+                <a href="javascript:void(0)">
+                <span class="material-symbols-outlined">package_2</span>
+                </a>
+              </div>
+              <div className="item">
+                <a href="javascript:void(0)">
+                <span class="material-symbols-outlined">package_2</span>
+                </a>
+              </div>
+              <div className="item">
+                <a href="javascript:void(0)">
+                <span class="material-symbols-outlined">package_2</span>
+                </a>
+              </div>
+
             </div>  
             <div className="weather-item">
                 <div className="item"></div>

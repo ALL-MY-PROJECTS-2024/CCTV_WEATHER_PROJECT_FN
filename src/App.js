@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import Home from "./components/Home";
 import Test from "./components/Test";
 import Test2 from "./components/Test2";
-
+import TEST3 from "./components/TEST3"
 import "./App.scss"
 
 
@@ -26,6 +26,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/Test1" element={<Test />} />
           <Route path="/Test2" element={<Test2 />} />
+          <Route path="/TEST3" element={<TEST3 />} />
         </Routes>
       </Router>
     </GlobalContextProvider>
