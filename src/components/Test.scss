@@ -1,73 +1,214 @@
-/* Home.scss */
 
-.mainSection {
-  display: flex;
-  flex-direction: row;
 
-  /* Desktop-specific layout */
-  #map {
-    width: calc(100vw - 220px);
-    height: 100vh;
-    position: absolute;
-    left: 220px;
-  }
 
-  .info-container {
-    padding: 10px;
-  }
+
+ul{
+  display:flex;
+  justify-content: right;
+
 }
 
-
-
-/* 클러스터링 아이콘 공통 스타일 */
-.custom-cluster-icon {
+.wrapper{
+  margin : 0;
  
-  color: white;
-
-  text-align: center;
-  transition: transform 0.3s ease;
-  font-size : 1.2rem;
-  width : 100%;
-  height : 100%;
-  font-weight:300;
+  background-color:#262C3C;
   
-}
 
-.marker-cluster-icon-small {
-  width: 40px;
-  height: 40px;
-  background-color: rgba(144, 43, 34, 0.7); /* CCTV1 기본 색상 */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-}
+  $headerHeight:80px;
 
-.marker-cluster-icon-medium {
-  width: 50px;
-  height: 50px;
-  display: flex;
-  background-color: rgba(144, 43, 34, 0.7); /* CCTV1 기본 색상 */
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-}
+  header{
+    position:absolute;
+    z-index: 3;
+    background-color:#262C3C;
 
-.marker-cluster-icon-large {
-  width: 60px;
-  height: 60px;
-  background-color: rgba(144, 43, 34, 0.7); /* CCTV1 기본 색상 */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-}
+    
+    
+    width : 100%;
+    height :  $headerHeight;
+    padding :10px;
+    display:flex;
+    justify-content: space-between;
+    .top-header{
+      border : 1px solid;
+      .logo{
+        width:100%;
+        height : 100%;
+        padding : 10px;
+        background-color: white;
+        img{
+          width:100%;
+          height:100%;
+          object-fit: contain;
+        }
+      }
+    }
+    nav{
+      height : 100%;
+      border : 1px solid;
+      position:relative;
+      z-index: 2;
+      ul{
+        width : 100%;
+        height : 100%;
+        margin : 0;
+        padding : 0;
+        display:flex;
+        justify-content: right;
+        align-items: center;
+        
+        li{
 
-/* CCTV2 클러스터의 배경색 */
-.marker-cluster-icon-cctv2 {
-  background-color: rgba(65, 105, 225, 0.7); /* CCTV2 색상 */
-}
+          width : 100px;
+          height : 35px;
+          padding :0 30px;
+          display:flex;
+          justify-content: center;
+          align-items: center;
+          margin : 5px;
+          background-color: white;
+          
+          &:last-child{
+            margin-right:0;
+          }
+        }
 
-.leaflet-control-zoom.leaflet-bar.leaflet-control{
-  display:none;
+        li.etc{
+          width:150px;
+          height : 100%;
+          border :1px solid
+        }
+
+      }
+    }
+
+
+  }
+
+  main{
+    width : 100%;
+    height : 100vh;
+    padding : 10px;
+    display:flex;
+    justify-content: space-between;
+    align-items: start;
+    gap:10px;
+
+      .left{
+       
+        width : 70vw;
+        height : 98vh;
+       
+        background-color: #393F4F;
+        display:flex;
+        justify-content: space-between;
+        align-items: start;
+        
+        position:relative;
+        padding : 0;
+        $weatherWidth:120px;
+        .map-item{
+          
+          width : 100%;
+          height : calc(98vh - 70px);
+          overflow:hidden;
+          
+          display:flex;
+          justify-content: center;
+          align-items: end;
+          position:relative;
+          top:70px;
+
+          #map{
+            width : 100%;
+            height : 100%;
+            font-size : .8rem;
+            position:relative;
+           
+          }
+        }
+      
+        .map-control-item{
+          width : 300px;
+          height : 50px;
+          position:absolute;
+          left:10px;
+          top:80px;
+          border : 1px solid white;
+          background-color: #393F4F;
+          z-index: 999;
+          opacity: .8;
+          
+          display:flex;
+          justify-content: center;
+          align-items: center;
+          gap:10px;
+          .item{
+            width:100%;
+            height: 100%;
+            border : 1px solid white;
+            color : white;
+          }
+
+        }
+        .weather-item{
+          background-color: #393F4F;
+          border : 1px solid white;
+          z-index: 999;
+          height : 60%;
+          width : $weatherWidth;
+          position:absolute;
+          bottom:10px;
+          right:10px;
+          color:white;
+          opacity: .8;
+
+          display:flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          gap:10px;
+
+          .item{
+            width : 100%;
+            height : 100%;
+            border : 1px solid ;
+            padding : 5px;
+          }
+
+        }
+
+
+      }
+      .right{
+        width:30vw;
+        height :98vh;
+
+        
+        flex-grow: 1;
+
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap:10px;
+        
+        div{
+          width:100%;
+          height:100%;
+          background-color: #393F4F;;
+        }
+
+        div:nth-child(1){
+        
+          padding : 5px;
+          position:relative;
+          left:0;top:0;
+          width:100%;
+          height:100%;
+
+        }
+
+
+      }
+  }
 }

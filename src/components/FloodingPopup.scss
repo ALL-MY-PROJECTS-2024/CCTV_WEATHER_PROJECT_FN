@@ -1,81 +1,80 @@
 .flooding-popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 95vh;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 99999;
-  }
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+}
 
-  .flooding-popup{
-    min-width:1200px;
-    width:90vw;
-    height : 90vh;
-    background-color: white;
-    padding : 10px;
-    position:relative;
-    overflow : auto;
+.flooding-popup{
+
+  width:98%;
+  height : 98%;;
+  background-color: white;
+  padding : 10px;
+  position:relative;
+  overflow : auto;
 
 
-    .flooding-items{
-        margin-top:20px;
-        display: grid;
-        grid-template-columns: repeat(2, 2fr); /* 두 개의 열 */
-        grid-template-rows: repeat(2, 21fr);   /* 두 개의 행 */
-        gap: 5px; /* 셀 간의 간격 */
-        width : 100%;
-        height : 100%;
+  .flooding-items{
+      margin-top:20px;
+      display: grid;
+      grid-template-columns: repeat(2, 2fr); /* 두 개의 열 */
+      grid-template-rows: repeat(2, 21fr);   /* 두 개의 행 */
+      gap: 5px; /* 셀 간의 간격 */
+      width : 100%;
+      height : 100%;
 
-        .grid-item{
-          border : 1px solid;
-          height : 95%;
-          width:100%;
+      .grid-item{
+        border : 1px solid;
+        height : 95%;
+        width:100%;
 
-          .title{
-            background-color: #ccc;
-            padding-left:10px;
-          }
-          
-          // height : 640px;
-          .video{
-            background-color: black;
-            position:relative;
-            height :100%;
-            width : 100%;
-            img{
-              width:100%;
-              height : 100%;
-              object-fit: contain;
-            }
-          }
-          .title{
-            background-color: #ccc;
-            padding-left:10px;
-          }
-            .img{
-              width:100%;
-              height : 100%;
-              object-fit: contain;
-            }
+        .title{
+          background-color: #ccc;
+          padding-left:10px;
         }
-
-        .grid-item{
+        
+        // height : 640px;
+        .video{
+          background-color: black;
           position:relative;
-          overflow:hidden;
+          height :100%;
+          width : 100%;
+          img{
+            width:100%;
+            height : 100%;
+            object-fit: contain;
+          }
         }
+        .title{
+          background-color: #ccc;
+          padding-left:10px;
+        }
+          .img{
+            width:100%;
+            height : 100%;
+            object-fit: contain;
+          }
+      }
 
-    }
-
+      .grid-item{
+        position:relative;
+        overflow:hidden;
+      }
 
   }
-  .flooding-popup::-webkit-scrollbar{
-    display:none;
-  }
 
-  
 
-  
+}
+.flooding-popup::-webkit-scrollbar{
+  display:none;
+}
+
+
+
