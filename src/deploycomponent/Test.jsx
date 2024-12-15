@@ -10,11 +10,13 @@ import ShowMap from "./ShowMap";
 import Weather from "./Weather";
 import GaugeChart from "./GaugeChart";
 import FloodingMapOverlay from "./FloodingMapOverlay";
-
+import CCTVPopup from "./CCTVPopup";
 //Dataset
 import busanGeoJson from "../dataSet/busan.json";
 import floodingData from "../dataSet/FLOODING.json";
 import busanRiverGeoJson from "../dataSet/river.json"
+import cctv1Data from '../dataSet/CCTV1.json';
+
 
 import axios from "axios";
 
@@ -237,17 +239,34 @@ const getMarkerIconSize = () => {
     ? { iconSize: [30, 30], shadowSize: [30, 30] }
     : { iconSize: [40, 40], shadowSize: [50, 50] };
 };
-
+const getMarkerIconSize2 = () => {
+  const isMobile = window.innerWidth <= 768; // 화면 너비가 768px 이하인 경우를 모바일로 간주
+  return isMobile
+    ? { iconSize: [25, 41], shadowSize: [25, 41] }
+    : { iconSize: [25, 41], shadowSize: [25, 41] };
+};
+// 마커 아이콘 생성 함수
+const createCCTV1MarkerIcon = () => {
+  const { iconSize, shadowSize } = getMarkerIconSize();  // 마커와 그림자의 크기를 모두 가져옴
+  return new L.Icon({
+    iconUrl: 'https://safecity.busan.go.kr/vue/img/gis_picker_cctv_city.a17cfe5e.png',
+    iconSize: iconSize,  // 동적으로 마커 크기 설정
+    iconAnchor: [iconSize[0] / 2, iconSize[1]],  // 아이콘의 중심이 앵커에 맞도록 설정
+    popupAnchor: [0, -iconSize[1]],  // 팝업이 아이콘 위로 적절하게 뜨도록 설정
+    shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
+    shadowSize: shadowSize,  // 동적으로 그림자 크기 설정
+  });
+};
 // FLOODING ICON
 const createFLOODINGMarkerIcon = () => {
-  const { iconSize, shadowSize } = getMarkerIconSize(); // 마커와 그림자의 크기를 모두 가져옴
+  const { iconSize, shadowSize } = getMarkerIconSize2(); // 마커와 그림자의 크기를 모두 가져옴
   return new L.Icon({
     iconUrl:
-      "https://safecity.busan.go.kr/vue/img/gis_picker_cctv_its.9994bd52.png",
+      "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png",
     iconSize: iconSize, // 동적으로 마커 크기 설정
     iconAnchor: [iconSize[0] / 2, iconSize[1]], // 아이콘의 중심이 앵커에 맞도록 설정
     popupAnchor: [0, -iconSize[1]], // 팝업이 아이콘 위로 적절하게 뜨도록 설정
-    shadowUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png",
+    shadowUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png",
     shadowSize: shadowSize, // 동적으로 그림자 크기 설정
   });
 };
@@ -297,6 +316,10 @@ const Test = () => {
   const [floodingState, setFloodingState] = useState(false);
   const [clusterFLOODING, setClusterFLOODING] = useState([]);
   const [selectedFLOODING, setSelectedFLOODING] = useState(null); // 선택된 CCTV 정보 상태 추가
+  //CCTV1
+  const [CCTV01State, setCCTV01State] = useState(false);
+  const [clusterCCTV1, setClusterCCTV1] = useState([]);   //재난
+  const [selectedCCTV, setSelectedCCTV] = useState(null);  // 선택된 CCTV 정보 상태 추가
 
   //침수 이미지 오버레이
   const [floodingImgState, setFloodingImgState] = useState(false);
@@ -348,7 +371,7 @@ const Test = () => {
   );
 
   //----------------------------
-  //
+  // 기본 지도 
   //----------------------------
   useEffect(() => {
     if (map == null) {
@@ -378,6 +401,8 @@ const Test = () => {
         center: [newCenter.lat, newCenter.lng],
         crs: EPSG5181,
         zoom: 5,
+        minZoom: 1,     // 최소 줌 레벨
+        maxZoom: 18,    // 최대 줌 레벨 추가
         worldCopyJump: false,
       });
 
@@ -385,11 +410,12 @@ const Test = () => {
       setMap(mapInstance);
 
       // 지도 이동 시 이벤트
-      mapInstance.on("moveend", () => {
-        const center = mapInstance.getCenter();
-        setCenterPosition({ lat: center.lat, lng: center.lng });
-        throttledFetchFloodRiskInfo(center.lat, center.lng);
-      });
+      // mapInstance.on("moveend", () => {
+      //   const center = mapInstance.getCenter();
+      //   setCenterPosition({ lat: center.lat, lng: center.lng });
+      //   throttledFetchFloodRiskInfo(center.lat, center.lng);
+      // });
+      
     }
   }, []);
 
@@ -489,7 +515,7 @@ const Test = () => {
               if (isHighlighted) {
                 return {
                   color: "",
-                  fillColor: "orange",
+                  fillColor:"gray",
                   fillOpacity: 0.5,
                   weight: 0,
                 };
@@ -541,10 +567,7 @@ const Test = () => {
                 }
               }
               
-    
-
-
-   
+  
             })
             .addTo(map);
           setJsonLayer(geojsonLayer);
@@ -586,7 +609,7 @@ const Test = () => {
               if(isHighlighted){
                 layer.setStyle({
                   color: "",
-                  fillColor: "orange",
+                  fillColor: "gray",
                   fillOpacity: 0.5,
                   weight: 0,
                 })
@@ -739,6 +762,8 @@ const Test = () => {
         setClusterFLOODING(
           floodingData.map((item) => ({ ...item, type: "FLOODING" }))
         );
+        setClusterCCTV1(cctv1Data.map(item => ({ ...item, type: 'CCTV1' })));
+
       } catch (error) {}
     };
     fetchCCTVData();
@@ -753,20 +778,16 @@ const Test = () => {
         maxClusterRadius: 100, // 클러스터링 반경을 100미터로 설정 (값을 원하는 대로 조정)
         iconCreateFunction: (cluster) => {
           const count = cluster.getChildCount();
-          let clusterClass =
-            "marker-cluster-icon-small marker-cluster-icon-cctv2"; // CCTV2 아이콘 기본 클래스
-
+          let clusterClass = "marker-cluster-icon-small"; // CCTV2 아이콘 기본 클래스
           if (count >= 10 && count < 50) {
-            clusterClass =
-              "marker-cluster-icon-medium marker-cluster-icon-cctv2";
+            clusterClass = "marker-cluster-icon-medium";
           } else if (count >= 50) {
-            clusterClass =
-              "marker-cluster-icon-large marker-cluster-icon-cctv2";
+            clusterClass ="marker-cluster-icon-large";
           }
 
           return new L.DivIcon({
             html: `<div className="custom-cluster-icon ${clusterClass}">${count}</div>`,
-            className: "custom-cluster-icon", // 공통 스타일 클래스
+            className: 'custom-cluster-icon', // 공통 스타일 클래스
             color:"royalblue",
             iconSize: L.point(40, 40), // 기본 크기 설정
           });
@@ -789,6 +810,45 @@ const Test = () => {
     }
   }, [map, floodingState, clusterFLOODING]);
 
+   //-----------------------------------
+    // CCTV1 클러스터링
+    //-----------------------------------
+    useEffect(() => {
+      if (map && CCTV01State) {
+        const clusterGroup1 = L.markerClusterGroup({
+          maxClusterRadius:100, // 클러스터링 반경을 100미터로 설정 (값을 원하는 대로 조정)
+          iconCreateFunction: (cluster) => {
+            const count = cluster.getChildCount();
+            let clusterClass = 'marker-cluster-icon-small'; // 기본 아이콘 클래스
+
+            if (count >= 10 && count < 50) {
+              clusterClass = 'marker-cluster-icon-medium';
+            } else if (count >= 50) {
+              clusterClass = 'marker-cluster-icon-large';
+            }
+
+            return new L.DivIcon({
+              html: `<div class="custom-cluster-icon ${clusterClass}">${count}</div>`,
+              className: 'custom-cluster-icon', // 공통 스타일 클래스
+              iconSize: L.point(40, 40), // 기본 크기 설정
+            });
+          }
+        });
+
+        clusterCCTV1.forEach((marker) => {
+          L.marker([marker.lat, marker.lon], { icon: createCCTV1MarkerIcon() })
+            .on('click', () => setSelectedCCTV(marker))
+            .addTo(clusterGroup1);
+        });
+        map.addLayer(clusterGroup1);
+
+        return () => {
+          map.removeLayer(clusterGroup1);
+        };
+      }
+    }, [map, CCTV01State, clusterCCTV1]);
+    
+    
   return (
     <div className="wrapper">
       <header>
@@ -832,6 +892,7 @@ const Test = () => {
           </div>
 
           <div className="map-control-item">
+            
             {/* 지도표시시 */}
             <div className="item" key="1">
               <Link
@@ -851,6 +912,7 @@ const Test = () => {
                 )}
               </Link>
             </div>
+            
             {/* 경계구역표시 */}
             <div className="item"  key="2">
               <Link
@@ -870,6 +932,7 @@ const Test = () => {
                 )}
               </Link>
             </div>
+            
             {/* 침수이미지 내수 setGeojsonLayerState */}
             <div className="item"  key="3">
               <Link
@@ -890,6 +953,7 @@ const Test = () => {
                 )}
               </Link>
             </div>
+            
             {/* 침수이미지 내수 setGeojsonLayerState */}
             <div className="item"  key="4">
                 <Link 
@@ -930,7 +994,28 @@ const Test = () => {
                 )}
               </Link>
             </div>
+            {/* 재난감시 CCTV   */}
             <div className="item"  key="6">
+              <Link
+                
+                onClick={(e) => {
+                  setCCTV01State(!CCTV01State);
+                }}
+              >
+                {CCTV01State ? (
+                  <span
+                    className="material-symbols-outlined"
+                    style={{  color: "#40FF00" }}
+                  >
+                   package_2
+                  </span>
+                ) : (
+                  <span className="material-symbols-outlined">package_2</span>
+                )}
+              </Link>
+            </div>
+
+            <div className="item"  key="7">
               <FloodingMapOverlay
                 map={map}
                 //침수지도
@@ -942,7 +1027,17 @@ const Test = () => {
                 setFloodingState={setFloodingState}
               />
             </div>
+
+
+
+ 
+
+
           </div>
+
+
+
+
 
           {/* 날씨표시 */}
           <div className="weather-item">
@@ -1088,7 +1183,6 @@ const Test = () => {
             
             </div>
 
-
             <div className="item"  key="4">
               {/* RN1 - 1시간 강수량   */}
               
@@ -1145,6 +1239,8 @@ const Test = () => {
           </div>
         </div>
         <div className="right">
+          
+          
           <div className="videoBlock" style={{ overflow: "hidden" }}>
             {selectedFLOODING ? (
               <FloodingPopupTEST
@@ -1154,6 +1250,7 @@ const Test = () => {
                 instl_pos={selectedFLOODING.instl_pos}
                 setSelectedFLOODING={setSelectedFLOODING}
               />
+
             ) : (
               <>
                 <div style={{ color: "white" }} className="empty">
@@ -1162,10 +1259,31 @@ const Test = () => {
               </>
             )}
           </div>
-          <div></div>
+          <div>
+  
+          </div>
         </div>
       </main>
+
+
+
+          {/* CCTVPOPUP*/}
+
+           {/* 재난감시 CCTV 팝업 */}
+           <div style={{width:"100%",height:"100%",position:"absolute",top:"0",left:"0"}}>
+            {selectedCCTV && (
+              <CCTVPopup
+                lat={selectedCCTV.lat}
+                lon={selectedCCTV.lon}
+                hlsAddr={selectedCCTV.hlsAddr}
+                onClose={() => setSelectedCCTV(null)}
+              />
+            )}
+          </div>
+
     </div>
+
+
   );
 };
 
