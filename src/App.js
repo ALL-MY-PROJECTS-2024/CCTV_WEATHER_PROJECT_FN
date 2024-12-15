@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.css";
 
 
 import Home from "./components/Home";
-import Test from "./components/Test";
+import Test from "./deploycomponent/Test";
 import Test2 from "./components/Test2";
 import TEST3 from "./components/TEST3"
 import "./App.scss"

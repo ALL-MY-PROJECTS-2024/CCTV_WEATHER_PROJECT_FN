@@ -1,120 +1,129 @@
-import React, { useEffect, useState } from 'react';
-import L from 'leaflet';
-import "proj4";
-import "proj4leaflet";
+import React, { useEffect, useState, useCallback } from 'react';
+
+
+import axios from 'axios';
+import cctv1Data from '../dataSet/CCTV1.json';
+import cctv2Data from '../dataSet/CCTV2.json';
+import floodingData from '../dataSet/FLOODING.json';
+
+import Aside from "./Aside/Aside.jsx";
+import TopController from "./Header/TopController.jsx";
+import CCTVPopup from "./CCTVPopup";
+import FloodingPopup from "./FloodingPopup";
+
+import "./Home.scss";
+
+//leaflet
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents,useMap  } from 'react-leaflet'; // 클릭 이벤트 추가를 위해 useMapEvents import
+import 'leaflet/dist/leaflet.css'; // Leaflet CSS import
+import 'leaflet.markercluster';
+import proj4 from 'proj4';
+import "proj4"
+import "proj4leaflet"
+import L, { CRS, bounds } from 'leaflet';
 import JSON_TEST from '../dataSet/침수위험 수치모델 이미지 데이터/내수/동래구/030yr_060/Dongnae_030_1_00019.json';
 
-const Test = () => {
+
+const TEST3 = () => {
+  
   const [map, setMap] = useState(null);
 
-  useEffect(() => {
-    if (!map) {
-      const mapInstance = L.map('map', {
-        center: [35.1795543, 129.0756416],
-        zoom: 7,
-      });
-
-      L.tileLayer(
-        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-        {
-          attribution: '&copy; OpenStreetMap contributors',
-        }
-      ).addTo(mapInstance);
-
-      setMap(mapInstance);
-    }
-  }, [map]);
+  const [centerPosition, setCenterPosition] = useState({ lat: 35.1795543, lng: 129.0756416 });
+  
 
   useEffect(() => {
-    if (map) {
-      const EPSG5179 = new L.Proj.CRS(
-        'EPSG:5179',
-        '+proj=tmerc +lat_0=38 +lon_0=127.5 +k=0.9996 +x_0=1000000 +y_0=2000000 +ellps=GRS80 +units=m +no_defs'
-      );
+    // EPSG:5181 좌표계 정의
+    const EPSG5181 = new L.Proj.CRS(
+      'EPSG:5181',
+      '+proj=tmerc +lat_0=38 +lon_0=127 +k=1 +x_0=200000 +y_0=500000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs',
+      {
+        resolutions: [2048, 1024, 512, 256, 128, 64, 32, 16, 8, 4, 2, 1, 0.5, 0.25],
+        origin: [-30000, -60000],
+        bounds: L.bounds(
+          [-30000 - Math.pow(2, 19) * 4, -60000],
+          [-30000 + Math.pow(2, 19) * 5, -60000 + Math.pow(2, 19) * 5]
+        ),
+      }
+    );
 
-      const coordinates = JSON_TEST.ANNOTATIONS.map(annotation =>
-        annotation.COORDINATE.map(([x, y]) => {
-          if (typeof x !== 'number' || typeof y !== 'number' || isNaN(x) || isNaN(y)) {
-            console.warn('Invalid coordinate:', x, y);
-            return null;
-          }
-          try {
-            const projected = EPSG5179.projection.unproject(L.point(x, y));
-            return [projected.lat, projected.lng]; // Convert to WGS84 (latitude, longitude)
-          } catch (error) {
-            console.error('Error converting coordinate:', x, y, error);
-            return null;
-          }
-        }).filter(coord => coord !== null) // Remove invalid coordinates
-      );
+    // 지도 초기화
+    const mapInstance = L.map('map', {
+      center: [35.1795543, 129.0756416], // 중심 좌표
+      crs: EPSG5181, // EPSG:5181 좌표계 사용
+      zoom: 9,
+    });
 
-      coordinates.forEach((polygonCoords, index) => {
-        if (polygonCoords.length > 0) {
-          console.log(`Adding polygon #${index + 1} with coordinates:`, polygonCoords);
-          L.polygon(polygonCoords, {
-            color: 'red',
-            weight: 2,
-            fillColor: 'orange',
-            fillOpacity: 0.6,
-          }).addTo(map);
-        } else {
-          console.warn(`Empty polygon #${index + 1} skipped.`);
-        }
-      });
-    }
-  }, [map]);
+    // 타일 레이어 추가
+    L.tileLayer('http://map{s}.daumcdn.net/map_2d/1807hsm/L{z}/{y}/{x}.png', {
+      minZoom: 1,
+      maxZoom: 13,
+      zoomReverse: true,
+      zoomOffset: 1,
+      subdomains: '0123',
+      continuousWorld: true,
+      tms: true,
+      attribution: '&copy; OpenStreetMap contributors',
+    }).addTo(mapInstance);
+
+    setMap(mapInstance);
+
+    return () => {
+      mapInstance.remove(); // 컴포넌트 언마운트 시 지도 제거
+    };
+  }, []);
+
 
   useEffect(() => {
     if (map) {
       // EPSG:5179 정의
-      const proj4def =
-        '+proj=tmerc +lat_0=38 +lon_0=127.5 +k=0.9996 +x_0=1000000 +y_0=2000000 +ellps=GRS80 +units=m +no_defs';
-      const EPSG5179 = new L.Proj.CRS('EPSG:5179', proj4def);
+      proj4.defs(
+        "EPSG:5179",
+        "+proj=tmerc +lat_0=38 +lon_0=127.5 +k=0.9996 +x_0=1000000 +y_0=2000000 +ellps=GRS80 +units=m +no_defs"
+      );
 
-      // GeoJSON FeatureCollection 생성
-      const geoJsonFeatures = JSON_TEST.ANNOTATIONS.map((annotation) => {
-        const coordinates = annotation.COORDINATE.map(([x, y]) => {
-          try {
-            // EPSG:5179 -> WGS84 변환
-            const point = EPSG5179.projection.unproject(L.point(x, y));
-            return [point.lng, point.lat]; // GeoJSON은 [lng, lat] 순서 사용
-          } catch (error) {
-            console.error('좌표 변환 오류:', x, y, error);
-            return null;
-          }
-        }).filter((coord) => coord !== null); // 유효하지 않은 좌표 제거
+      // JSON_TEST 데이터에서 폴리곤 좌표 읽기
+      const annotations = JSON_TEST.ANNOTATIONS;
 
-        return {
-          type: 'Feature',
-          properties: {}, // 필요시 속성 추가 가능
-          geometry: {
-            type: 'Polygon',
-            coordinates: [coordinates], // GeoJSON 형식의 폴리곤
-          },
-        };
+      annotations.forEach((annotation) => {
+        const rawCoordinates = annotation.COORDINATE;
+
+        // 부산광역시청 기준 오프셋 (EPSG:5179)
+        const offsetX = 1145000; // 부산광역시청의 X 좌표 (Easting)
+        const offsetY = 1688000; // 부산광역시청의 Y 좌표 (Northing)
+
+        // 오프셋 추가
+        const adjustedCoordinates = rawCoordinates.map(([x, y]) => {
+          return [x , y ];
+        });
+
+        // EPSG:5179 -> EPSG:4326 변환
+        const convertedCoordinates = adjustedCoordinates.map(([x, y]) => {
+          const [lng, lat] = proj4("EPSG:5179", "EPSG:4326", [x, y]);
+          console.log("Converted Coordinates:", [lat, lng]);
+          return [lat, lng];
+        });
+
+        // 폴리곤 추가
+        if (convertedCoordinates.length > 2) {
+          L.polygon(convertedCoordinates, {
+            color: "blue", // 경계선 색상
+            fillColor: "cyan", // 내부 채우기 색상
+            fillOpacity: 0.5, // 채우기 불투명도
+            weight: 55, // 경계선 두께
+          })
+            .addTo(map)
+            .bindPopup("Polygon Area");
+        }
       });
-
-      const geoJsonData = {
-        type: 'FeatureCollection',
-        features: geoJsonFeatures,
-      };
-
-      // GeoJSON 데이터를 지도에 추가
-      L.geoJSON(JSON_TEST, {
-        style: {
-          color: 'red',
-          weight: 2,
-          fillColor: 'orange',
-          fillOpacity: 0.6,
-        },
-      }).addTo(map);
-
-      console.log('GeoJSON 데이터 추가 완료:', geoJsonData);
     }
   }, [map]);
 
 
-  return <div id="map" style={{ width: '100%', height: '100vh' }} />;
+
+
+  return (
+      <div id="map" style={{ width: "100%", height: "100vh" }}></div>
+  );
 };
 
-export default Test;
+export default TEST3;

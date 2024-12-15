@@ -1,8 +1,9 @@
-$controlName1:"";
-$controlName2:"";
-$controlName3:"";
-$controlName4:"";
+$controlName1:"지도표시";
+$controlName2:"경계구역 표시";
+$controlName3:"침수이미지 내수";
+$controlName4:"침수이미지 외수";
 $controlName5:"침수위험 지역";
+
 
 
 
@@ -185,7 +186,7 @@ ul{
         }
       
         .map-control-item{
-          width : 350px;
+          width : 500px;
           height : 70px;
           position:absolute;
           left:10px;
@@ -205,7 +206,7 @@ ul{
             height: 100%;
             
             color : white;  
-            background-color: #393F4F;
+            background-color:#262C3C;
             display:flex;
             justify-content: center;
             align-items: center;
@@ -242,19 +243,23 @@ ul{
            
           }
           .item:nth-child(1) a::after{
-            content:"지도표시";
+            content:$controlName1;
             font-size : .8rem;
           }
           .item:nth-child(2) a::after{
-            content:"TEST2"
+            content:$controlName2;
+            font-size : .7rem;
           }
           .item:nth-child(3) a::after{
-            content:"TEST3"
+            content:$controlName3;
+            font-size : .7rem;
+          
           }
           .item:nth-child(4) a::after{
-            content:"TEST4"
+            content:$controlName4;
+            font-size : .7rem;
           }
-          .item:nth-child(5) a::after{
+          .item:nth-child(5) a::after {
             content:$controlName5;
             font-size : .7rem;
           }
@@ -286,10 +291,13 @@ ul{
             height : 100%;
             border : 1px solid ;
             padding : 5px;
+            background-color: #393F4F;
 
             display:flex;
             justify-content: center;
             align-items: center;
+
+            position:relative;
 
             .material-symbols-outlined{
               font-variation-settings:
@@ -380,4 +388,64 @@ ul{
 
       }
   }
+}
+
+
+
+/* 클러스터링 아이콘 공통 스타일 */
+.custom-cluster-icon {
+ 
+  color: white;
+  background-color: royalblue;
+  display:flex;
+  justify-content: center;
+  align-items: center;;
+  border-radius: 50%;
+  opacity: .6;
+  text-align: center;
+  transition: transform 0.3s ease;
+  font-size : 1.2rem;
+  width : 100%;
+  height : 100%;
+  font-weight:300;
+  
+}
+
+.marker-cluster-icon-small {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(144, 43, 34, 0.7); /* CCTV1 기본 색상 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.marker-cluster-icon-medium {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  background-color: rgba(144, 43, 34, 0.7); /* CCTV1 기본 색상 */
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.marker-cluster-icon-large {
+  width: 60px;
+  height: 60px;
+  background-color: rgba(144, 43, 34, 0.7); /* CCTV1 기본 색상 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+/* CCTV2 클러스터의 배경색 */
+.marker-cluster-icon-cctv2 {
+  background-color: rgba(65, 105, 225, 0.7); /* CCTV2 색상 */
+}
+
+.leaflet-control-zoom.leaflet-bar.leaflet-control{
+  display:none;
 }

@@ -339,6 +339,7 @@ const calculateWindDirection = (uuu, vvv) => {
                               const windSpeed = items.find(item => item.category === 'WSD')?.fcstValue;
 
                               return (
+                                
                                 <div style={{position: "relative", bottom: "0px", right: "0",  fontSize: "0.9rem",display:"flex",justifyContent:"space-between", flexGrow:1,alignItems:"center",padding:"3px"}}>
                                   <div style={{width:"100%",flexGrow:"1",display:"flex",justifyContent:"center",alignItems:"center",backgroundColor:'',}}>
                                     <img

@@ -218,6 +218,9 @@ const Weather = ({ lat, lon, hlsAddr, onClose }) => {
         return { icon: null, name: "강수 없음" }; // 기본 맑음
     }
   };
+
+
+  
   // 바람 방향 계산 함수(UUU, VVV) - 16방위 변환
   const calculateWindDirection = (uuu, vvv) => {
     console.log("uuu", uuu, "vvv", vvv);
