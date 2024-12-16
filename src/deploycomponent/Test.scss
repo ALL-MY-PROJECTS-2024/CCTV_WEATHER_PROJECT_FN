@@ -24,7 +24,7 @@ ul{
 
   header{
     position:absolute;
-    z-index: 3;
+    z-index: 9999;
     background-color:#262C3C;
 
     
@@ -158,7 +158,7 @@ ul{
         position:relative;
         padding : 0;
         $weatherWidth:100px;
-        z-index:9999;
+        z-index:999;
         .map-item{
           
           width : 100%;
