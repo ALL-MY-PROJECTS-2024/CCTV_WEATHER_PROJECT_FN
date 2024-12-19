@@ -43,3 +43,14 @@ $asideWidth: 0;
     background-color: #ed0c0c;
     color: white !important;
   }
+
+@media (max-width: 480px) {
+  .layerBtn {
+    .selectBox {
+      top: 70px;
+      left: auto;
+      right: -12px;
+    }
+  }
+
+}

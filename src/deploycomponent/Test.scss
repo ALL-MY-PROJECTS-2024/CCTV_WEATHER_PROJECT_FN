@@ -183,6 +183,10 @@ ul{
             position:relative;
            
           }
+
+          .zoom-controls {
+            display: none;
+          }
         }
       
         .map-control-item{
@@ -448,4 +452,224 @@ ul{
 
 .leaflet-control-zoom.leaflet-bar.leaflet-control{
   display:none;
+}
+
+
+@media (max-width: 480px) {
+  .wrapper{
+    height: 100vh !important;
+    width: 100% !important;
+    overflow: hidden;
+    header{
+      padding-right: 0 !important;
+      height: 70px;
+      width: 100% !important;
+      nav{
+        ul{
+          li{
+            &:last-child{
+            }
+          }
+          li.etc{
+            width: 20px !important;
+            background-color: #262C3C;
+            a{
+              .material-symbols-outlined{
+              }
+            }
+          }
+        }
+      }
+    }
+  
+    main{
+      padding: 0 !important;
+      gap: 0 !important;
+      flex-direction: column;
+      .left{
+        min-width: 480px;
+          .map-item{
+            .gaugeChart-block{
+              display: none;
+            }
+  
+            #map{
+              .leaflet-control-attribution {
+                bottom: 100px !important;
+                left: auto !important; 
+                right: 250px !important; 
+                font-size: 12px; 
+                background-color: #ddd;
+              }
+            }
+
+            .zoom-controls {
+              position: absolute;
+              bottom: 115px;
+              right: 20px;
+              display: flex;
+              flex-direction: column;
+              gap: 5px;
+              z-index: 1000;
+
+              button {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+                background-color: #fff;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                cursor: pointer;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+              }
+            }
+          }
+        
+          .map-control-item{
+            width: 480px;
+            left: 0;
+            top: 75px;
+            gap: 5px;
+            
+            .item{
+
+              
+              a{
+
+                }
+              }
+              a::after{
+
+              }
+              
+             
+            }
+            .item:nth-child(1) a::after{
+            }
+            .item:nth-child(2) a::after{
+            }
+            .item:nth-child(3) a::after{
+            
+            }
+            .item:nth-child(4) a::after{
+            }
+            .item:nth-child(5) a::after {
+            }
+            .item:nth-child(6) {
+              height: 80px;
+              top: 5px;
+              background-color:white;
+              border: 1px solid #393F4F;
+            }
+            
+          }
+  
+          .weather-item{
+            flex-direction: row !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            height: 100px !important;
+            width: 100% !important;
+            gap: 1px !important;
+            .item{
+              font-weight: 900;
+              .material-symbols-outlined{
+
+              }
+              
+              .responsive-text {
+                font-size: 0.9rem !important;
+              }
+              
+              .hide {
+                display: none;
+              }
+
+              .lined {
+                margin: 10px 0 !important;
+              }
+
+  
+            }
+            .item.title.location{
+              font-size: 1.2rem !important;
+              white-space: pre-wrap; 
+              word-break: keep-all;
+              text-align: center;
+            }
+            
+  
+          }
+        
+        .right{
+          display: none;
+          position: absolute;
+          top: 100px;
+          left: -330px;
+          width: 80%;
+          height: 80%;
+          background-color: rgba(0, 0, 0, 0.9);
+          z-index: 1000;
+          transform: translateX(100%);
+          transition: transform 0.3s ease-in-out;
+          
+          &.active {
+            display: block;
+            transform: translateX(0);
+          }
+  
+          div{
+
+          }
+  
+  
+          .videoBlock{
+ 
+          }
+  
+          div:nth-child(1){
+            
+            
+            .empty{
+                
+                span{
+
+                  .material-symbols-outlined{
+
+                  }
+  
+                }
+            }
+          }
+  
+        }
+      
+    }
+  }
+  
+  
+  
+  /* 클러스터링 아이콘 공통 스타일 */
+  .custom-cluster-icon {
+
+    
+  }
+  
+  .marker-cluster-icon-small {
+
+  }
+  
+  .marker-cluster-icon-medium {
+
+  }
+  
+  .marker-cluster-icon-large {
+  }
+  
+  /* CCTV2 클러스터의 배경색 */
+  .marker-cluster-icon-cctv2 {
+  }
+  
+  .leaflet-control-zoom.leaflet-bar.leaflet-control{
+  }
 }

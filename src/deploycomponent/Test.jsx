@@ -427,6 +427,21 @@ const Test = () => {
 
   }, [tileState]);
 
+  useEffect(() => {
+    if (map) {
+      // 모바일 환경에서 스크롤 줌 비활성화
+      if (window.matchMedia("(max-width: 480px)").matches) {
+        map.scrollWheelZoom.disable();
+        map.touchZoom.enable(); // 터치 확대/축소 활성화
+        map.dragging.enable();  // 지도 드래그 활성화
+      } else {
+        map.scrollWheelZoom.enable(); // 웹에서는 활성화
+        map.touchZoom.disable(); // 터치 확대/축소 비활성화
+        map.dragging.enable();  // 지도 드래그 활성화
+      }
+    }
+  }, [map]);
+
   //----------------------------
   //침수구역 표시여부
   //----------------------------
@@ -829,6 +844,11 @@ const Test = () => {
 
             {selectedShowMap && <ShowMap />}
 
+            <div className="zoom-controls">
+              <button onClick={() => map?.zoomIn()}>+</button>
+              <button onClick={() => map?.zoomOut()}>-</button>
+            </div>
+
           </div>
 
           <div className="map-control-item">
@@ -946,7 +966,7 @@ const Test = () => {
 
           {/* 날씨표시 */}
           <div className="weather-item">
-            <div className="item title" style={{height:"100px",color:'white',fontSize:".7rem",border:"0"}}>
+            <div className="item title location" style={{height:"100px",color:'white',fontSize:".7rem",border:"0"}}>
                 {todayLocation}
             </div>
             <div className="item"  key="1">
@@ -967,11 +987,11 @@ const Test = () => {
                       justifyContent: "space-between",
                     }}
                   >
-                    <span>
+                    <span className="responsive-text">
                       {PTY_LIST[Number(todayWeather.item[0].obsrValue)].text}
                     </span>
-                    <span style={{ margin: " 0 5px", color: "gray" }}>|</span>
-                    <span>{todayWeather.item[3].obsrValue}</span> ℃
+                    <span className="responsive-text" style={{ margin: " 0 5px", color: "gray" }}>|</span>
+                    <span className="responsive-text">{todayWeather.item[3].obsrValue}</span> ℃
                   </div>
                 </div>
               ) : (
@@ -1017,11 +1037,11 @@ const Test = () => {
                       justifyContent: "space-between",
                     }}
                   >
-                    <span>
+                    <span className="responsive-text">
                       {todayWeather.item[7].obsrValue}
                     </span>
-                    <span style={{ margin: " 0 px", color: "gray" }}></span>
-                    <span>m/s</span>
+                    <span className="responsive-text" style={{ margin: " 0 px", color: "gray" }}></span>
+                    <span className="responsive-text">m/s</span>
                   </div>
 
                 </div>
@@ -1031,7 +1051,7 @@ const Test = () => {
                     className="material-symbols-outlined"
                     style={{ color: "#40FF00" }}
                   >
-                    
+                    -
                   </span>
                   <div style={{ textAlign: "center", color: "white" }}>
                     <span>-</span> ℃
@@ -1046,7 +1066,7 @@ const Test = () => {
               {tileState && geojsonLayerState && todayWeather != null ? (
                 <div>
 
-                  <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+                  <div className="lined" style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
                     <span 
                     className="material-symbols-outlined"
                     style={{
@@ -1064,11 +1084,11 @@ const Test = () => {
                       justifyContent: "space-between",
                     }}
                   >
-                    <span>
+                    <span className="responsive-text">
                       습도
                     </span>
-                    <span style={{ margin: " 0 5px", color: "gray" }}>|</span>
-                    <span>{todayWeather.item[1].obsrValue}</span> %
+                    <span className="responsive-text" style={{ margin: " 0 5px", color: "gray" }}>|</span>
+                    <span className="responsive-text">{todayWeather.item[1].obsrValue}</span> %
                   </div>
                 </div>
               ) : (
@@ -1095,7 +1115,7 @@ const Test = () => {
               {tileState && geojsonLayerState && todayWeather != null ? (
                 <div>
 
-                  <div style={{display:"flex",justifyContent:"center",alignItems:"center",marginBottom:"10px"}}>
+                  <div className="lined" style={{display:"flex",justifyContent:"center",alignItems:"center",marginBottom:"10px"}}>
                     <span 
                     className="material-symbols-outlined"
                     style={{
@@ -1114,11 +1134,11 @@ const Test = () => {
                       alignItems:"center"
                     }}
                   >
-                    <span style={{fontSize:".8rem"}}>
-                      1H 강수량
+                    <span className="responsive-text" style={{fontSize:".8rem"}}>
+                      <span className="hide">1H</span> 강수량
                     </span>
-                    <span style={{ margin: " 0 5px", color: "gray",fontSize:".8rem" }}>|</span>
-                    <span style={{fontSize:".8rem"}}>{todayWeather.item[2].obsrValue}  mm</span>
+                    <span className="responsive-text" style={{ margin: " 0 5px", color: "gray",fontSize:".8rem" }}>|</span>
+                    <span className="responsive-text" style={{fontSize:".8rem"}}>{todayWeather.item[2].obsrValue}  mm</span>
                   </div>
                 </div>
               ) : (
